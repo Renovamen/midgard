@@ -1,0 +1,109 @@
+<template>
+  <div class="home-menu">
+
+    <div class="link" @click="goToMap()" :style="{'width': Math.floor(1 / (menu.length + 1) * 100) + '%'}">
+      <div class="title text-center">
+        <span>游</span>荡
+      </div>
+      <div class="e-title">Voyage</div>
+      <img :src="require('static/menu-fight.png')"/>
+    </div>
+    
+    <template v-for="item in menu">
+      <a class="link" :href="item[2]" target="_blank" :style="{'width': Math.floor(1 / (menu.length + 1) * 100) + '%'}">
+        <div class="title text-center">
+          <span>{{item[0][0]}}</span>{{item[0][1]}}
+        </div>
+        <div class="e-title">
+          {{item[1]}}
+        </div>
+        <img :src="item[3]"/>
+      </a>
+    </template>
+  </div>
+</template>
+
+<script>
+import MapInit from '../js/map-init';
+
+export default {
+  data () {
+    return {
+      menu : [
+        ['咸鱼', 'Github', 'https://github.com/Renovamen', require('static/menu-github.png')],
+        ['博客', 'Blog', 'https://renovamen.ink', require('static/menu-blog.png')],
+        ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('static/menu-email.png')],
+      ]
+    }
+  },
+  computed :{
+    mapList : function(){
+      return this.$store.state.MapStore.mapList;
+    }
+  },
+  methods : {
+    goToMap(){
+      console.log(this.mapList[0])
+      let map = this.mapList[0];
+      this.$store.state.MapStore.map = new MapInit(map);
+      location.href = '#/map-active';
+    }
+  }
+}
+</script>
+
+<style scoped lang="less">
+  .home-menu{
+    margin-top: -9px;
+    word-spacing:-4px;
+    display: table;
+    width: 100%;
+    height: 220px;
+    .link{
+      text-decoration: none;
+      position: relative;
+      vertical-align: top;
+      display: inline-block;
+      height: 100%;
+      min-height: 220px;
+      color: rgb(207, 210, 218);
+      padding-right: 6px;
+      overflow: hidden;
+      border: 1px solid #30343f;
+      border-radius: 5px;
+
+      .title{
+        margin-top: 10px;
+        text-align: right;
+        span:first-child{
+          font-size: 24px;
+        }
+      }
+      .e-title{
+        font-size: 10px;
+        text-align: right;
+      }
+      img{
+        opacity: 0;
+        position: absolute;
+        width: 100px;
+        top: 50px;
+        left: 50px;
+        transition: 0.2s;
+      }
+      transition: 0.2s;
+    }
+    .link:hover{
+      text-decoration: none;
+      background: #377bb5;
+      color: white;
+      transition: 0.3s;
+      img{
+        opacity: 1;
+        top: 80px;
+        left: 8px;
+        transition: 0.3s;
+      }
+    }
+  }
+</style>

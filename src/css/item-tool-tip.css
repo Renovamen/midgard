@@ -1,0 +1,28 @@
+.item-tool-tip-pover .name{
+  font-size: 20px;
+}
+
+.item-tool-tip-pover .equip{
+  color:#e7d0d0;
+  font-size: 17px;
+}
+
+.item-tool-tip-pover .dsc{
+  color: rgb(209, 209, 209);
+  margin-top: 5px;
+}
+
+.item-tool-tip-pover{
+  background: rgba(10, 32, 94, 0.9);
+  border-radius: 4px;
+  padding: 6px;
+  color: white;
+  text-shadow: black 1px 1px;
+  font-size: 14px;
+  z-index: 99;
+}
+
+.item-tool-tip-pover .btn{
+  margin-top: 10px;
+  color: white;
+}
