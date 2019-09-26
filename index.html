@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>  
+    <link rel="icon" href="src/assets/favicon.ico" type="image/x-icon" />
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+      body{
+        background:#252830;
+      }
+      .game-main-loading{
+        color:white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 550px;
+        height: 120px;
+        margin: auto;
+        font-weight: 200;
+        line-height: 30px;
+        text-align: center;
+        font-size: 24px;
+      }
+      .game-main-loading .warning {
+        margin-top: 10px;
+        font-size: 16px;
+      }
+      .game-main-loading .gif {
+        margin-top: -100px;
+        width: 180px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-main-loading">
+      <img class="gif" src="src/assets/load.gif" />
+      <div> Loading ... </div>
+      <div class="warning"> WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</div>
+ 
+    </div>
+    <div id="app"></div>
+    <script src="http://cdn.bootcss.com/babel-polyfill/7.0.0-alpha.7/polyfill.min.js"></script>
+    <script src="dist/build.js"></script>
+  </body>
+</html>
