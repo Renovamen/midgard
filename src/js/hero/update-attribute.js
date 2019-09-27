@@ -7,7 +7,7 @@ export default function updateAttribute(){
     $maxHp       : [0,0,0,0],    // 血量最大值
   }
 
-  let data = (this.$equipments || []);
+  let data = (this.$resumes || []);
 
   let action = {
     $default : function(key,v){

@@ -43,6 +43,9 @@ export default function(el, binding){
             </div>
           </div>
           <div class="dsc" v-for="dsc in item.dsc">{{dsc}}</div>
+          <div class="image" v-for="img in item.img">
+            <img :src='img' style="width: 200px"/>
+          </div>
           <div class="btn" v-if="item.linkInfo">{{item.linkInfo}}</div>
         `
       })

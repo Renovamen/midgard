@@ -1,9 +1,8 @@
 const MAP_TABLE = [
   {
     id: 8000001,
-    name: '村庄',
+    name: '世界',
     logo: '',
-    dsc: '一个几乎毫无危险的地方.',
     mapInitOption: {
       row : 20,
       col : 20,

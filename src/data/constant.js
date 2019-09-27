@@ -12,8 +12,8 @@ const CONSTANT = {
     "论文", "经历"
   ],
   UNIT_ATTR_NAME:{
-    $hp          : '当前生命值',
-    $maxHp       : '生命',
+    $hp          : '当前梦想值',
+    $maxHp       : '梦想',
   },
   ITEM_LEVEL: ['ghostwhite','springgreen','violet','orange'],
 }

@@ -7,13 +7,15 @@ import Vue from 'vue';
 const CreateGame = function(){
   // 生成默认测试英雄
   let letter = PGET(3000001);
-  letter.num = 10;
+  letter.num = 1;
+  let money = PGET(3000002);
+  money.num = 1;
 
   var hero = new Unit(
     {
       $showName : '愚蠢的人类',
       $type    : 'Hero',
-      $package : [letter].concat(_.cloneDeep(ITEM_TABLE).slice(1)).concat(new Array(33))
+      $package : [letter, money].concat(_.cloneDeep(ITEM_TABLE).slice(2)).concat(new Array(32))
     }
   );
   Vue.set(store.state.HeroStore,'hero', hero);

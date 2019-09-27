@@ -32,22 +32,24 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .home{
+  .home {
     word-spacing:-4px;
     display: table;
-    background: #252830;
-    .left{
+    padding-left: 20px;
+    background:#47485c;
+    .left {
+      margin-top: 4px;
       display: inline-block;
       width: 276px;
       overflow: hidden;
       vertical-align: top;
     }
-    .right{
+    .right {
+      margin-top: 4px;
       user-select :none;
       display: inline-block;
       vertical-align: top;
       width: 524px;
-      // border-left: 4px solid green;
     }
   }
 </style>

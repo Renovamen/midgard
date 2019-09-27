@@ -14,14 +14,14 @@ const destory = function(from, to){
 }
 
 const equip = function(from, to, hero){
-  if(to.position === '$equipments'){
+  if(to.position === '$resumes'){
     hero.equip(from.get(), from.index, from.position);
     return true;
   }
 }
 
 const demount = function(from, to, hero){
-  if(from.position === '$equipments'){
+  if(from.position === '$resumes'){
     if(to.get() && to.get().equipType === from.index){
       hero.equip(to.get(), to.index, to.position);
       return true;

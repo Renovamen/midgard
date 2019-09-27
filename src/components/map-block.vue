@@ -21,8 +21,7 @@
       },
       bgColor() {
         // indexOf("Apple")
-        let gray = "#5c5f67",
-            black = "#1e2127",
+        let gray = "#c3944e", black = "#51963d",
             opt = { 
               display: 'inline-block',
               background: black,
@@ -73,42 +72,42 @@
 
 <style scoped lang="less">
 
-  .map-block{
+  .map-block {
     display: inline-block;
     width: 40px;
     height: 40px;
     vertical-align: top;
   }
 
-  .road:hover{
-    box-shadow: 0px 0px 4px #e4d836 inset; 
+  .road:hover {
+    box-shadow: 0px 0px 4px #ffffff inset;
     cursor: pointer;
   }
 
-  .MapDialog,.Chest,.hero{
+  .MapDialog, .Chest, .hero {
     border-radius: 4px;
   }
 
-  .stick{
-    background: #1e2127;
+  .stick {
+    background-color: #51963d;
   }
 
-  .road{
-    background: #5c5f67;
+  .road {
+    background-color: #c3944e;
   }
 
-  .Chest{
+  .Chest {
     // background: url('../assets/fight.png') no-repeat;
     // background-size: 100%;
-    background-color: #1bc98e;
+    background-color: #6e4633;
   }
 
-  .MapDialog{
+  .MapDialog {
     background: #539ad8;
   }
   
-  .hero{
-    background: #9f86ff;
+  .hero {
+    background: #886bfa;
   }
 
   .MapDialog .fa {
@@ -126,16 +125,16 @@
     color: white;
   }
 
-  .r-1{
+  .r-1 {
     border-top-left-radius: 6px;
   }
-  .r-2{
+  .r-2 {
     border-top-right-radius: 6px;
   }
-  .r-3{
+  .r-3 {
     border-bottom-left-radius: 6px;
   }
-  .r-4{
+  .r-4 {
     border-bottom-right-radius: 6px;
   }
 </style>

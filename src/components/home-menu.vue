@@ -1,7 +1,7 @@
 <template>
   <div class="home-menu">
 
-    <div class="link" @click="goToMap()" :style="{'width': Math.floor(1 / (menu.length + 1) * 100) + '%'}">
+    <div class="link" @click="goToMap()" :style="{'width': '25%'}">
       <div class="title text-center">
         <span>游</span>荡
       </div>
@@ -10,7 +10,7 @@
     </div>
     
     <template v-for="item in menu">
-      <a class="link" :href="item[2]" target="_blank" :style="{'width': Math.floor(1 / (menu.length + 1) * 100) + '%'}">
+      <a class="link" :href="item[2]" target="_blank" :style="{'width': '25%'}">
         <div class="title text-center">
           <span>{{item[0][0]}}</span>{{item[0][1]}}
         </div>
@@ -53,37 +53,36 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .home-menu{
-    margin-top: -9px;
+  .home-menu {
+    margin-top: -16px;
     word-spacing:-4px;
     display: table;
     width: 100%;
     height: 220px;
-    .link{
+    .link {
       text-decoration: none;
       position: relative;
       vertical-align: top;
       display: inline-block;
-      height: 100%;
-      min-height: 220px;
       color: rgb(207, 210, 218);
       padding-right: 6px;
       overflow: hidden;
-      border: 1px solid #30343f;
+      border: 1px solid #535664;
       border-radius: 5px;
+      height: 100%;
 
-      .title{
+      .title {
         margin-top: 10px;
         text-align: right;
         span:first-child{
           font-size: 24px;
         }
       }
-      .e-title{
+      .e-title {
         font-size: 10px;
         text-align: right;
       }
-      img{
+      img {
         opacity: 0;
         position: absolute;
         width: 100px;
@@ -93,12 +92,12 @@ export default {
       }
       transition: 0.2s;
     }
-    .link:hover{
+    .link:hover {
       text-decoration: none;
       background: #377bb5;
       color: white;
       transition: 0.3s;
-      img{
+      img {
         opacity: 1;
         top: 80px;
         left: 8px;
