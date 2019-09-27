@@ -147,21 +147,21 @@ function equip(item, index, type = '$package'){
   // 0基本 1教育 2课程 3技能 4兴趣 5项目1 6项目2 7项目3 8项目4 
   // 9项目5 10研究1 11研究2 12论文 13经历
   let container = this[type],
-      $equipments = this.$equipments,
+      $resumes = this.$resumes,
       equip = item.equip;
   
-  if(!equip || !container || !$equipments){
+  if(!equip || !container || !$resumes){
     return false;
   }
 
   // 删除包裹中的装备, 如果已有装备, 卸载装备;
   container[index] = undefined;
 
-  if($equipments[item.equipType]){
+  if($resumes[item.equipType]){
     this.demount(item.equipType, index, type);
   }
 
-  $equipments[item.equipType] = item;
+  $resumes[item.equipType] = item;
 
   this.updateAttribute();
 
@@ -172,10 +172,10 @@ function equip(item, index, type = '$package'){
 
 function demount(equipType, index, type = '$package'){
   let container = this[type],
-      equipItem = this.$equipments[equipType],
-      $equipments = this.$equipments;
+      equipItem = this.$resumes[equipType],
+      $resumes = this.$resumes;
 
-  $equipments[equipType] = 0;
+  $resumes[equipType] = 0;
 
   if(!equipItem){
     return ;
@@ -186,7 +186,7 @@ function demount(equipType, index, type = '$package'){
   if(~index){
     container[index] = equipItem;
   }else{
-    $equipments[equipType] = equipItem;
+    $resumes[equipType] = equipItem;
     return false;
   }
 

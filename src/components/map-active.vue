@@ -110,13 +110,13 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .map-active{
+  .map-active {
     position: relative;
     overflow: hidden;
-    .backhome{
+    .backhome {
       position: absolute;
       z-index: 9;
-      left: 726px;
+      left: 746px;
       top: 446px;
       border-radius: 5px;
       width: 60px;
@@ -125,20 +125,28 @@ export default {
       font-size: 16px;
       font-weight: bold;
       border-width: 2px;
+      border-color: white;
+      color: white;
     }
-    .home-info{
+    .backhome:hover {
+      background-color: white;
+      color: #47485c;
+    }
+    .home-info {
       position: absolute;
-      background: #252830;
+      background:#47485c;
+      border-radius: 0px 0px 8px 0px;
       z-index: 2;
     }
-    .package{
+    .package {
       position: absolute;
       z-index: 2;
-      background: #252830;
+      background:#47485c;
+      border-radius: 0px 8px 0px 0px;
       top: 230px;
     }
-    .show-btn{
-      background: #9f86ff;
+    .show-btn {
+      background: #9c9eaa;
       position: absolute;
       z-index: 2;
       width: 20px;
@@ -146,18 +154,18 @@ export default {
       line-height: 38px;
       text-align: right;
       top: 197px;
-      border-radius: 0px 2px 2px 0px;
+      border-radius: 0px 5px 5px 0px;
       padding-right: 4px;
       transition: width 0.6s;
       cursor: pointer;
       color: white;
     }
-    .show-btn.opend{
+    .show-btn.opend {
       width: 40px;
       transition: 0.4s;
-      border-radius: 0px 2px 2px 0px;
+      border-radius: 0px 5px 5px 0px;
     }
-    .tip{
+    .tip {
       display: inline-block;
       color: white;
       position: absolute;
@@ -169,7 +177,7 @@ export default {
       padding: 6px;
       border-bottom-right-radius: 4px;
       background: rgba(0,0,0,0.4);
-      .tip-block{
+      .tip-block {
         display: inline-block;
         width: 30px;
         height: 30px;
@@ -179,29 +187,29 @@ export default {
         margin-top: 6px;
         border-radius: 4px;
       }
-      .Chest{
-        background: #1bc98e;
+      .Chest {
+        background: #6e4633;
       }
-      .hero{
-        background: #9f86ff;
+      .hero {
+        background: #886bfa;
       }
-      .DEvent{
+      .DEvent {
         background: #539ad8;
       }
     }
-    .map-data{
+    .map-data {
       position: relative;
       height: 500px;
       overflow: hidden;
-      background: #1e2127;
-      .map{
+      background-color: #51963d;
+      .map {
         line-height: 0;
         z-index: 1;
         position: absolute;
         width: 800px;
         height: 800px;
         transition: 0.2s;
-        background: #5c5f67;
+        background-color: #c3944e;
       }
     }
   }

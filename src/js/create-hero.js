@@ -4,7 +4,7 @@ const CreateHero = function(option = {}){
 
   opt.$package = opt.$package || new Array(90);
 
-  opt.$equipments = opt.$equipments || [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  opt.$resumes = opt.$resumes || [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
   opt.$attrGrow = {
     maxHp : 10,
