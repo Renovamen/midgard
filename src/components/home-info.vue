@@ -10,7 +10,7 @@
       </div>
       <div class="resume">
         <div class="left">
-          <div class="label-name">收集</div>
+          <div class="label-name" :class="{collect: isCollected}" @click="exchange()">{{this.collectTip}}</div>
           <component-item class="resume1" :item="hero.$resumes[0]" :position-index="'$resumes|0'"></component-item>
           <component-item class="resume2" :item="hero.$resumes[1]" :position-index="'$resumes|1'"></component-item>
         </div>
@@ -41,7 +41,12 @@
 export default {
   data () {
     return {
-      infoKeyList : [ '$maxHp']
+      infoKeyList : [ '$maxHp'],
+      isCollected : false,
+      collectTip: "收集",
+      // collectColor: {
+      //   background: '#c46272'
+      // }
     }
   },
   computed:{
@@ -52,11 +57,28 @@ export default {
   watch:{
     '$store.state.UPDATE' : function(item){
       this.$forceUpdate();
+
+      // 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
+      let resumes = this.$store.state.HeroStore.hero.$resumes, flag = 0;
+      for(let resume of resumes) {
+        if(resume == 0 || resume == null) flag = 1;
+      }
+      if(flag == 0) {
+        this.isCollected = true;
+        this.collectTip = "兑换";
+      }
+      else {
+        this.isCollected = false;
+        this.collectTip = "收集";
+      }
     },
   },
   methods : {
-    open(){
-
+    exchange(){
+      // 兑换完整版简历
+      if(this.isCollected == true) {
+        window.open("https://renovamen.ink/files/cv.pdf");
+      }
     }
   }
 }
@@ -69,6 +91,7 @@ export default {
     width: 276px;
     height: 280px;
     padding: 6px;
+    // background: #c46272;
     .left {
       display: inline-block;
       vertical-align: top;
@@ -87,6 +110,12 @@ export default {
       color: white;
       text-align: center;
       border-radius: 2px;
+    }
+    .collect {
+      background: #c46272;
+    }
+    .collect:hover {
+      box-shadow: 0px 0px 4px #eee inset;
     }
     .basic-info {
       margin-bottom: 4px;

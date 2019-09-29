@@ -88,6 +88,7 @@ export default function updateAttribute(){
     action[action[key] ? key : '$default'].apply(this, [key, promote[key]]);
   }
 
+  // hp < 0，游戏结束
   this.$hp = Math.floor(hp_per * this.$r.$maxHp) || 0;
 
   if(this.$hp < 0) {
