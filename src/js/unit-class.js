@@ -30,7 +30,6 @@ function Unit(obj = {}){
 
 Unit.prototype = {
   updateAttribute,
-  changeHp,
   getList,
   itemSort,
   getItem,
@@ -38,25 +37,6 @@ Unit.prototype = {
   demount,
   isEnoughInPackage,
   costItem,
-}
-
-/* --------------- */
-
-function changeHp(value) {
-
-  let v = parseInt(value);
-
-  if(!v || this.$hp <= 0) return false;      
-
-  let hp = Math.min(this.$hp + value, this.$r.$maxHp);  // update hp
-  
-  if(hp <= 0){ 
-    this.$hp = 0;
-    this.$alive = false;
-  } // hp < 0, dead
-  else this.$hp = hp;
-
-  return true;
 }
 
 function getList(key, opt, isIndex){

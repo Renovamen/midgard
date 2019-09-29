@@ -1,5 +1,7 @@
 import store from '../store';
 import Vue from 'vue';
+import CONSTANT from '../data/constant'
+import PGET from '../js/public-static-get';
 
 const DialogElementClassName = '.Map-Dialog-modal';
 const ShadowViewClassName = '.shadow-view';
@@ -56,6 +58,8 @@ function closeModal(callback){
   callback && callback();
 }
 
+const itemLevel = CONSTANT.ITEM_LEVEL;
+
 const MapDialog = function(event, callback){
   
   let info = createPopup();
@@ -70,13 +74,13 @@ const MapDialog = function(event, callback){
         {{this.record.msg}}
       </div>
       <div class="change m-b-4 radius-2" v-if="this.record.need && this.record.get">
-        <span>你愿意使用</span>
+        <span>要支付</span>
         <template v-for="item in this.record.need">
-          <span class="name">{{item[0] | itemKey('name')}}</span>*<span class="num">{{item[1]}}</span>
+          <span class="name" :style="getColor(item[0])">{{item[0] | itemKey('name')}}</span>*<span class="num">{{item[1]}}</span>
         </template>
-        <span>来交换</span>
+        <span>为代价，来交换</span>
         <template v-for="item in this.record.get">
-          <span class="name">{{item[0] | itemKey('name')}}</span>*<span class="num">{{item[1]}}</span>
+          <span class="name" :style="getColor(item[0])">{{item[0] | itemKey('name')}}</span>*<span class="num">{{item[1]}}</span>
         </template>
         <span>吗?</span>
       </div>
@@ -115,6 +119,12 @@ const MapDialog = function(event, callback){
       },
       close(){
         closeModal(callback);
+      },
+      getColor(itemID) {
+        let itemColor = {
+          color : itemLevel[PGET(itemID).grade || 0]
+        }
+        return itemColor;
       }
     }
   }).$mount(DialogElementClassName)
@@ -192,7 +202,7 @@ const MapGetItem = function(event, callback){
       <div class="change m-b-4 radius-2" v-if="this.record.get">
         <span>包裹中有</span>
         <template v-for="item in this.record.get">
-          <span class="name">{{item[0] | itemKey('name')}}</span>*<span class="num">{{item[1]}}</span>
+          <span class="name" :style="getColor(item[0])">{{item[0] | itemKey('name')}}</span>*<span class="num">{{item[1]}}</span>
         </template>
         <span>，要拾取吗?</span>
       </div>
@@ -231,6 +241,12 @@ const MapGetItem = function(event, callback){
       },
       close(){
         closeModal(callback);
+      },
+      getColor(itemID) {
+        let itemColor = {
+          color : itemLevel[PGET(itemID).grade || 0]
+        }
+        return itemColor;
       }
     }
   }).$mount(DialogElementClassName)

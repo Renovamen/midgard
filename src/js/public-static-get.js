@@ -1,6 +1,5 @@
 import { DIALOG_DATA } from '../data/event-data'
 import { ITEM_TABLE } from '../data/item-data'
-import MAP_TABLE from '../data/map-data'
 import CHEST_DATA from '../data/chest-data'
 
 const Data = {     
@@ -8,7 +7,7 @@ const Data = {
   '5' : CHEST_DATA, 
   // '6' : MISSION_TABLE, 
   '7' : DIALOG_DATA, 
-  '8' : MAP_TABLE,     
+  // '8' : MAP_TABLE,     
   // '9' : ACHIEVEMENT_TABLE, 
 }
 

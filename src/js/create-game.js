@@ -15,7 +15,7 @@ const CreateGame = function(){
     {
       $showName : '愚蠢的人类',
       $type    : 'Hero',
-      $package : [letter, money].concat(_.cloneDeep(ITEM_TABLE).slice(2)).concat(new Array(32))
+      $package : [letter, money].concat(new Array(88))
     }
   );
   Vue.set(store.state.HeroStore,'hero', hero);

@@ -4,7 +4,7 @@ const DIALOG_DATA = [
     type: 'MapDialog',
     data: [
       {
-        msg: '简历贩子：我只跟有钱人做生意',
+        msg: '我只跟有钱人做生意',
         buttons : [
           "[拒绝]{1,1}",
           "#[同意]{3,4,2,1}"
