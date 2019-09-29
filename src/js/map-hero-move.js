@@ -87,9 +87,11 @@ const HeroMoveEvent = function(map, $VueScope){
     //判断 初始化 执行事件
     switch(event_type){
       case 'Chest':
-        MapGetItem(event, () => this.start())
+        this.autoMove([]);
+        MapGetItem(event, () => this.start());
         break;
       case 'MapDialog':
+        this.autoMove([]);
         MapDialog(event, () => this.start())
         break;
     }

@@ -153,7 +153,7 @@ export default {
       height: 38px;
       line-height: 38px;
       text-align: right;
-      top: 197px;
+      top: 196px;
       border-radius: 0px 5px 5px 0px;
       padding-right: 4px;
       transition: width 0.6s;
