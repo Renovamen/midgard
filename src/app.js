@@ -1,7 +1,7 @@
 // public css
 require("./css/animate.css");
 require("./css/main.css");
-require("./css/map-dialog-modal.css");
+require("./css/dialog-modal.css");
 require("normalize.css");
 
 // require('babel-polyfill');
