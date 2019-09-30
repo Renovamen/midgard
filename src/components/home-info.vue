@@ -44,10 +44,10 @@ export default {
       infoKeyList : [ '$maxHp'],
       isCollected : false,
       collectTip: "收集",
-      // collectColor: {
-      //   background: '#c46272'
-      // }
     }
+  },
+  created(){
+    this.checkCollect();
   },
   computed:{
     hero: function(){
@@ -57,7 +57,11 @@ export default {
   watch:{
     '$store.state.UPDATE' : function(item){
       this.$forceUpdate();
-
+      this.checkCollect();
+    },
+  },
+  methods : {
+    checkCollect(){
       // 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
       let resumes = this.$store.state.HeroStore.hero.$resumes, flag = 0;
       for(let resume of resumes) {
@@ -72,8 +76,6 @@ export default {
         this.collectTip = "收集";
       }
     },
-  },
-  methods : {
     exchange(){
       // 兑换完整版简历
       if(this.isCollected == true) {

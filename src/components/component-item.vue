@@ -74,7 +74,7 @@ export default {
     width: 44px;
     height: 44px;
     color: white;
-    //  border: 1px solid gray;
+    // border: 1px solid gray;
     border-radius: 2px;
     overflow : hidden;
     cursor: pointer;
