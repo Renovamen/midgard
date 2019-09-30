@@ -1,5 +1,5 @@
 <template>
-  <div class="map-active">
+  <div class="map">
 
     <router-link class="btn backhome" to="/">HOME</router-link>
 
@@ -83,7 +83,7 @@ export default {
       this.$set(this.opt, 'info', !this.opt.info);
     },
     autoPisition (){
-      let $m = document.querySelector('.map-active'),
+      let $m = document.querySelector('.map'),
           $b = document.querySelector('.map-block'),
           Bx = $b.offsetWidth,
           By = $b.offsetHeight,
@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .map-active {
+  .map {
     position: relative;
     overflow: hidden;
     .backhome {

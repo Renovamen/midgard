@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {CreateGame} from "../js/create-game.js"
+import CreateGame from "../js/create-game.js"
 
 export default {
   data(){

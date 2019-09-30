@@ -6,23 +6,21 @@ import PGET from '../js/public-static-get';
 import Vue from 'vue';
 
 // prototype
-import updateAttribute from './hero/update-attribute'
+import updateHp from './update-hp'
 
 function Unit(obj = {}){
-  this.id = 1000 + (Math.random()* 1000).toFixed(0)  // 编号
+  
   this.$can_move_event = true; // 人物在地图上遇到事件时，在关闭对话框前不能移动
 
-  // attribute
   this.$hp          = 600;  // current hp
   this.$maxHp       = 600;  // max hp
-  this.$r           = {};
 
   CreateHero.call(this, obj);
-  this.updateAttribute(); 
+  this.updateHp(); 
 }
 
 Unit.prototype = {
-  updateAttribute,
+  updateHp,
   getList,
   itemSort,
   getItem,
@@ -87,14 +85,10 @@ function getItem(data, force, type = '$package'){
   }
 
   data.forEach(i => {
-    let item,
-        num = i[1];
+    let item, num = i[1];
 
-    if(typeof i[0] === 'object'){
-      item = i[0];
-    }else{
-      item = PGET(i[0]);
-    }
+    if(typeof i[0] === 'object') item = i[0];
+    else item = PGET(i[0]);
 
     let itemInPackage = this.getList(type, { id: item.id }),
         nextBlankPlace = container.findIndex(item => !item);
@@ -136,7 +130,7 @@ function equip(item, index, type = '$package'){
 
   $resumes[item.equipType] = item;
 
-  this.updateAttribute();
+  this.updateHp();
 
   store.commit('UPDATE');
 
@@ -163,7 +157,7 @@ function demount(equipType, index, type = '$package'){
     return false;
   }
 
-  this.updateAttribute();
+  this.updateHp();
 
   store.commit('UPDATE');
   
@@ -192,10 +186,7 @@ function costItem(list, type = '$package'){
 }
 
 function isEnoughInPackage(list, type = '$package'){
-  // [
-  //   [200001, 5]
-  //   [function(item){ return item.id === 200001}, function(item){ return 10; }, '测试物品1','10']
-  // ]
+
   let container = this[type];
 
   if(!container || !list || !list.length ){
