@@ -25,7 +25,7 @@ export default {
       this.setPosition();
     }
     this.setPosition();
-    CreateGame();
+    CreateGame(false);
   },
   methods:{
     setPosition : function(){
