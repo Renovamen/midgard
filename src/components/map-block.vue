@@ -2,8 +2,8 @@
   <div @click="autoMove" :style="bgColor()" >
     <span :class="blockClass()">
       <i v-if="blockClass()[2]=='Chest'" class="fa fa-cube fa-lg"></i>
-      <i v-else-if="blockClass()[2]=='MapDialog'" class="fa fa-question fa-lg"></i>
-      <i v-else-if="blockClass()[1]=='hero'" class="fa fa-blind fa-lg"></i>
+      <i v-else-if="blockClass()[2]=='MapDialog'" class="fa fa-info fa-lg"></i>
+      <i v-else-if="blockClass()[1]=='hero'" class="fa fa-user-secret fa-lg"></i>
     </span>
   </div>
 </template>
@@ -111,17 +111,17 @@
   }
 
   .MapDialog .fa {
-    padding: 13px;
+    padding: 13px 8px 13px 16px;
     color: white;
   }
 
   .Chest .fa {
-    padding: 13px 9px 10px 10px;
+    padding: 12px 9px 11px 10px;
     color: white;
   }
 
   .hero .fa {
-    padding: 13px 8px 11px 14px;
+    padding: 13px 10px 11px 12px;
     color: white;
   }
 

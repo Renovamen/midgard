@@ -97,7 +97,7 @@ export default function updateAttribute(){
         opt = info.opt, view = info.view;
 
     Object.assign(modal, {
-      className : [ opt.animated, '.restart-dialog'.slice(1) ].join(' '),
+      className : [ opt.animated, '.gameover-dialog'.slice(1) ].join(' '),
       innerHTML : `
         <div class="radius-2">
           <span>你失去了梦想，已经是一条咸鱼了。</span>

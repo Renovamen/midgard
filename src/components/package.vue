@@ -29,7 +29,6 @@ export default {
     }
   },
   created() {
-    // 实例创建完毕, 获取战斗信息;
     this.hero = this.$store.state.HeroStore.hero;
   },
   watch: {
