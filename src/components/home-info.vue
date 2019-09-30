@@ -29,22 +29,18 @@
         <div class="label-name">梦想</div>
       </div>
       <div class="right">
-        <div :class="['attr', i > 5 ? 'last' : '']" v-for="(key,i) in this.infoKeyList">
-          <!-- <span class="name">{{key | heroAttrKey}}</span> -->
-          <span class="value">{{hero.$r[key].toFixed(1)}}</span>
-        </div>
+        <div class="attr">{{hero.$hp.toFixed(1)}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {CreateGame} from "../js/create-game.js"
+import CreateGame from "../js/create-game.js"
 
 export default {
   data () {
     return {
-      infoKeyList : [ '$maxHp'],
       isCollected : false,
       collectTip: "收集",
       isCheat: false,
@@ -110,7 +106,6 @@ export default {
     width: 276px;
     height: 280px;
     padding: 6px;
-    // background: #c46272;
     .left {
       display: inline-block;
       vertical-align: top;
@@ -222,21 +217,14 @@ export default {
       .right {
         padding-left: 3px;
         .attr {
-          font-size: 10px;
-          display: inline-block;
           width: 63px;
           padding: 6px 2px;
           margin-bottom: 4px;
-          .value {
-            font-size: 18px;
-            display: block;
-            margin-left: 4px;
-            margin-top: -2px;
-            color: #f16565;
-          }
-        }
-        .attr.last {
-          margin-bottom: 0px;
+          font-size: 18px;
+          display: block;
+          margin-left: 4px;
+          margin-top: -2px;
+          color: #f16565;
         }
       }
     }

@@ -6,12 +6,7 @@ const CreateHero = function(option = {}){
 
   opt.$resumes = opt.$resumes || [0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-  opt.$attrGrow = {
-    maxHp : 10,
-  }
-
   _.assign(this, opt);
-
 };
 
 export default CreateHero;

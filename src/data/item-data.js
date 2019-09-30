@@ -39,7 +39,7 @@ let Equipment = [
       '基本'
     ],
     equip : {
-      $maxHp : [-10,1],
+      $changeHp : -60,
     },
     dsc : ['姓名：邹笑寒', '籍贯：中国 重庆', '电话：18321968867', '邮箱：renovamenzxh@gmail.com',
             'Facebook：renovamen.zou', 'Github：Renovamen', 
@@ -53,7 +53,7 @@ let Equipment = [
       '教育'
     ],
     equip : {
-      $maxHp : -85,
+      $changeHp : -85,
     },
     dsc : ['同济大学，软件学院，软件工程', '2016-2020（预期）']
   },
@@ -65,7 +65,7 @@ let Equipment = [
       '课程'
     ],
     equip : {
-      $maxHp : -75,
+      $changeHp : -75,
     },
     dsc : ['软件工程', '软件测试', '用户交互技术', 'Web 系统与技术', 'Web 服务与 SOA', '... 等']
   },
@@ -77,7 +77,7 @@ let Equipment = [
       '技能'
     ],
     equip : {
-      $maxHp : -90,
+      $changeHp : -90,
     },
     dsc : ['· 编程语言（按熟悉程度从高到低粗略排序）：Python，MATLAB，JavaScript，HTML，CSS，C/C++，Java',
             '· 语言：中文（重庆话和普通话，母语）、英文（四六级、托福 100-、GRE 320+）', 
@@ -92,7 +92,7 @@ let Equipment = [
       '兴趣'
     ],
     equip : {
-      $maxHp : -60,
+      $changeHp : -60,
     },
     dsc : ['· 研究兴趣：NLP（自然语言处理）、Knowledge Representation & Reasoning（知识表示及知识推理）',
             '· 其他兴趣：游戏、吃、睡', '· 毫无兴趣：鹦鹉']
@@ -105,7 +105,7 @@ let Equipment = [
       '项目1'
     ],
     equip : {
-      $maxHp : -200,
+      $changeHp : -200,
     },
     dsc : ['八分音符飞船 + VR 飞船（Web 系统与技术期末项目）：', '1. 八分音符飞船：控制⼀艘飞船躲避红⾊块并捕获蓝色块，支持鼠标控制和声音控制飞船高度（分贝越高飞船飞得越高， 通过 Web Audio API 实现）。',
             '2. VR 飞船：控制一艘飞船尽可能从不断旋转的障碍物的孔中穿过去，支持鼠标控制和 VR 控制飞船方向（需要支持重力感应的移动设备和类似 Google Cardbard 的 VR 眼镜，头部跟踪通过 DeviceOrientationEvent 接⼝实现）。', 
@@ -121,7 +121,7 @@ let Equipment = [
       '项目2'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['魔方', '· 使用 Three.js 实现可交互的魔方', 
             '· 支持打乱、重置及复原并输出公式（层先法和 Two-Phase 算法）',],
@@ -136,7 +136,7 @@ let Equipment = [
       '项目3'
     ],
     equip : {
-      $maxHp : -30,
+      $changeHp : -30,
     },
     dsc : ['沙雕安卓光能手电筒', '· 支持正常模式、SOS 模式和屏幕白光模式', 
             '· 在有光的地方亮，没有光的地方绝对不亮（通过 Light Sensor 传感器实现）',
@@ -152,7 +152,7 @@ let Equipment = [
       '项目4'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['五子棋人工智障', , '· C 语言程序设计期末项目', '· 极大极小值搜索 + Alpha-beta 剪枝'],
     linkInfo: '点击物品查看源码',
@@ -166,7 +166,7 @@ let Equipment = [
       '项目5'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['《塞尔达传说：荒野之息》介绍网页（用户交互技术课程作业）'],
     linkInfo: '点击物品查看网页',
@@ -180,7 +180,7 @@ let Equipment = [
       '研究1'
     ],
     equip : {
-      $maxHp : -60,
+      $changeHp : -60,
     },
     dsc : ['语音情感识别（2019.3 - 2019.6）', 
             '· 使用 Opensmile 提取语音音频中的特征，并进行特征处理', 
@@ -197,7 +197,7 @@ let Equipment = [
       '研究2'
     ],
     equip : {
-      $maxHp : -50,
+      $changeHp : -50,
     },
     dsc : ['问答系统（2018.11 - 2019.1）', 
             '· 基于 Rasa NLU 实现的能提供股票和天气信息的问答系统', 
@@ -216,7 +216,7 @@ let Equipment = [
       '论文'
     ],
     equip : {
-      $maxHp : -80,
+      $changeHp : -80,
     },
     dsc : ['Xiaohan Zou. "A Survey on Application of Knowledge Graph". Under Review.'],
   },
@@ -228,7 +228,7 @@ let Equipment = [
       '经历'
     ],
     equip : {
-      $maxHp : -40,
+      $changeHp : -40,
     },
     dsc : ['1. 微软俱乐部（2017.9 - 2019.6）',
             '· 技术部副部长（2018.9 - 2019.6）',
@@ -245,7 +245,7 @@ let Equipment = [
       '基本'
     ],
     equip : {
-      $maxHp : [-8,1],
+      $changeHp : -48,
     },
     dsc : ['更稀有了一些', '姓名：邹笑寒', '籍贯：中国 重庆', '电话：18321968867', 
             '邮箱：renovamenzxh@gmail.com',
@@ -261,7 +261,7 @@ let Equipment = [
       '教育'
     ],
     equip : {
-      $maxHp : -75,
+      $changeHp : -75,
     },
     dsc : ['更稀有了一些', '同济大学，软件学院，软件工程', '2016-2020（预期）']
   },
@@ -274,7 +274,7 @@ let Equipment = [
       '课程'
     ],
     equip : {
-      $maxHp : -65,
+      $changeHp : -65,
     },
     dsc : ['更稀有了一些', '软件工程', '软件测试', '用户交互技术', 'Web 系统与技术', 'Web 服务与 SOA', '... 等']
   },
@@ -287,7 +287,7 @@ let Equipment = [
       '技能'
     ],
     equip : {
-      $maxHp : -85,
+      $changeHp : -85,
     },
     dsc : ['更稀有了一些', 
             '· 编程语言（按熟悉程度从高到低粗略排序）：Python，MATLAB，JavaScript，HTML，CSS，C/C++，Java',
@@ -304,7 +304,7 @@ let Equipment = [
       '兴趣'
     ],
     equip : {
-      $maxHp : -55,
+      $changeHp : -55,
     },
     dsc : ['更稀有了一些', 
             '· 研究兴趣：NLP（自然语言处理）、Knowledge Representation & Reasoning（知识表示及知识推理）',
@@ -319,7 +319,7 @@ let Equipment = [
       '项目1'
     ],
     equip : {
-      $maxHp : -165,
+      $changeHp : -165,
     },
     dsc : ['更稀有了一些', 
             '八分音符飞船 + VR 飞船（Web 系统与技术期末项目）：', '1. 八分音符飞船：控制⼀艘飞船躲避红⾊块并捕获蓝色块，支持鼠标控制和声音控制飞船高度（分贝越高飞船飞得越高， 通过 Web Audio API 实现）。',
@@ -337,7 +337,7 @@ let Equipment = [
       '项目2'
     ],
     equip : {
-      $maxHp : 8,
+      $changeHp : 8,
     },
     dsc : ['更稀有了一些', '魔方', '· 使用 Three.js 实现可交互的魔方', 
             '· 支持打乱、重置及复原并输出公式（层先法和 Two-Phase 算法）',],
@@ -353,7 +353,7 @@ let Equipment = [
       '项目3'
     ],
     equip : {
-      $maxHp : -25,
+      $changeHp : -25,
     },
     dsc : ['更稀有了一些', 
             '沙雕安卓光能手电筒', '· 支持正常模式、SOS 模式和屏幕白光模式', 
@@ -371,7 +371,7 @@ let Equipment = [
       '项目4'
     ],
     equip : {
-      $maxHp : 8,
+      $changeHp : 8,
     },
     dsc : ['更稀有了一些', '五子棋人工智障', , '· C 语言程序设计期末项目', '· 极大极小值搜索 + Alpha-beta 剪枝'],
     linkInfo: '点击物品查看源码',
@@ -386,7 +386,7 @@ let Equipment = [
       '项目5'
     ],
     equip : {
-      $maxHp : 8,
+      $changeHp : 8,
     },
     dsc : ['更稀有了一些', '《塞尔达传说：荒野之息》介绍网页（用户交互技术课程作业）'],
     linkInfo: '点击物品查看网页',
@@ -401,7 +401,7 @@ let Equipment = [
       '研究1'
     ],
     equip : {
-      $maxHp : -45,
+      $changeHp : -45,
     },
     dsc : ['更稀有了一些', 
             '语音情感识别（2019.3 - 2019.6）', 
@@ -420,7 +420,7 @@ let Equipment = [
       '研究2'
     ],
     equip : {
-      $maxHp : -35,
+      $changeHp : -35,
     },
     dsc : ['更稀有了一些', 
             '问答系统（2018.11 - 2019.1）', 
@@ -441,7 +441,7 @@ let Equipment = [
       '论文'
     ],
     equip : {
-      $maxHp : -65,
+      $changeHp : -65,
     },
     dsc : ['更稀有了一些', 'Xiaohan Zou. "A Survey on Application of Knowledge Graph". Under Review.'],
   },
@@ -454,7 +454,7 @@ let Equipment = [
       '经历'
     ],
     equip : {
-      $maxHp : -30,
+      $changeHp : -30,
     },
     dsc : ['更稀有了一些', 
             '1. 微软俱乐部（2017.9 - 2019.6）',
@@ -472,7 +472,7 @@ let Equipment = [
       '基本'
     ],
     equip : {
-      $maxHp : [-3,1],
+      $changeHp : -18,
     },
     dsc : ['更更稀有了一些', '姓名：邹笑寒', '籍贯：中国 重庆', '电话：18321968867', 
             '邮箱：renovamenzxh@gmail.com',
@@ -488,7 +488,7 @@ let Equipment = [
       '教育'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更稀有了一些', '同济大学，软件学院，软件工程', '2016-2020（预期）']
   },
@@ -501,7 +501,7 @@ let Equipment = [
       '课程'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更稀有了一些', '软件工程', '软件测试', '用户交互技术', 'Web 系统与技术', 'Web 服务与 SOA', '... 等']
   },
@@ -514,7 +514,7 @@ let Equipment = [
       '技能'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更稀有了一些', 
             '· 编程语言（按熟悉程度从高到低粗略排序）：Python，MATLAB，JavaScript，HTML，CSS，C/C++，Java',
@@ -531,7 +531,7 @@ let Equipment = [
       '兴趣'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更稀有了一些', 
             '· 研究兴趣：NLP（自然语言处理）、Knowledge Representation & Reasoning（知识表示及知识推理）',
@@ -546,7 +546,7 @@ let Equipment = [
       '项目1'
     ],
     equip : {
-      $maxHp : -100,
+      $changeHp : -100,
     },
     dsc : ['更更稀有了一些', 
             '八分音符飞船 + VR 飞船（Web 系统与技术期末项目）：', '1. 八分音符飞船：控制⼀艘飞船躲避红⾊块并捕获蓝色块，支持鼠标控制和声音控制飞船高度（分贝越高飞船飞得越高， 通过 Web Audio API 实现）。',
@@ -564,7 +564,7 @@ let Equipment = [
       '项目2'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更稀有了一些', '魔方', '· 使用 Three.js 实现可交互的魔方', 
             '· 支持打乱、重置及复原并输出公式（层先法和 Two-Phase 算法）',],
@@ -580,7 +580,7 @@ let Equipment = [
       '项目3'
     ],
     equip : {
-      $maxHp : -5,
+      $changeHp : -5,
     },
     dsc : ['更更稀有了一些', 
             '沙雕安卓光能手电筒', '· 支持正常模式、SOS 模式和屏幕白光模式', 
@@ -598,7 +598,7 @@ let Equipment = [
       '项目4'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更稀有了一些', '五子棋人工智障', , '· C 语言程序设计期末项目', '· 极大极小值搜索 + Alpha-beta 剪枝'],
     linkInfo: '点击物品查看源码',
@@ -613,7 +613,7 @@ let Equipment = [
       '项目5'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更稀有了一些', '《塞尔达传说：荒野之息》介绍网页（用户交互技术课程作业）'],
     linkInfo: '点击物品查看网页',
@@ -628,7 +628,7 @@ let Equipment = [
       '研究1'
     ],
     equip : {
-      $maxHp : -5,
+      $changeHp : -5,
     },
     dsc : ['更更稀有了一些', 
             '语音情感识别（2019.3 - 2019.6）', 
@@ -647,7 +647,7 @@ let Equipment = [
       '研究2'
     ],
     equip : {
-      $maxHp : -10,
+      $changeHp : -10,
     },
     dsc : ['更更稀有了一些', 
             '问答系统（2018.11 - 2019.1）', 
@@ -668,7 +668,7 @@ let Equipment = [
       '论文'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更稀有了一些', 'Xiaohan Zou. "A Survey on Application of Knowledge Graph". Under Review.'],
   },
@@ -681,7 +681,7 @@ let Equipment = [
       '经历'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更稀有了一些', 
             '1. 微软俱乐部（2017.9 - 2019.6）',
@@ -699,7 +699,7 @@ let Equipment = [
       '基本'
     ],
     equip : {
-      $maxHp : [5,1],
+      $changeHp : 30,
     },
     dsc : ['更更更稀有了一些', '姓名：邹笑寒', '籍贯：中国 重庆', '电话：18321968867', 
             '邮箱：renovamenzxh@gmail.com',
@@ -715,7 +715,7 @@ let Equipment = [
       '教育'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更更稀有了一些', '同济大学，软件学院，软件工程', '2016-2020（预期）']
   },
@@ -728,7 +728,7 @@ let Equipment = [
       '课程'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更更稀有了一些', '软件工程', '软件测试', '用户交互技术', 'Web 系统与技术', 'Web 服务与 SOA', '... 等']
   },
@@ -741,7 +741,7 @@ let Equipment = [
       '技能'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更更稀有了一些', 
             '· 编程语言（按熟悉程度从高到低粗略排序）：Python，MATLAB，JavaScript，HTML，CSS，C/C++，Java',
@@ -758,7 +758,7 @@ let Equipment = [
       '兴趣'
     ],
     equip : {
-      $maxHp : 10,
+      $changeHp : 10,
     },
     dsc : ['更更更稀有了一些', 
             '· 研究兴趣：NLP（自然语言处理）、Knowledge Representation & Reasoning（知识表示及知识推理）',
@@ -773,7 +773,7 @@ let Equipment = [
       '项目1'
     ],
     equip : {
-      $maxHp : -50,
+      $changeHp : -50,
     },
     dsc : ['更更更稀有了一些', 
             '八分音符飞船 + VR 飞船（Web 系统与技术期末项目）：', '1. 八分音符飞船：控制⼀艘飞船躲避红⾊块并捕获蓝色块，支持鼠标控制和声音控制飞船高度（分贝越高飞船飞得越高， 通过 Web Audio API 实现）。',
@@ -791,7 +791,7 @@ let Equipment = [
       '项目2'
     ],
     equip : {
-      $maxHp : 15,
+      $changeHp : 15,
     },
     dsc : ['更更更稀有了一些', '魔方', '· 使用 Three.js 实现可交互的魔方', 
             '· 支持打乱、重置及复原并输出公式（层先法和 Two-Phase 算法）',],
@@ -807,7 +807,7 @@ let Equipment = [
       '项目3'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更更稀有了一些', 
             '沙雕安卓光能手电筒', '· 支持正常模式、SOS 模式和屏幕白光模式', 
@@ -825,7 +825,7 @@ let Equipment = [
       '项目4'
     ],
     equip : {
-      $maxHp : 15,
+      $changeHp : 15,
     },
     dsc : ['更更更稀有了一些', '五子棋人工智障', , '· C 语言程序设计期末项目', '· 极大极小值搜索 + Alpha-beta 剪枝'],
     linkInfo: '点击物品查看源码',
@@ -840,7 +840,7 @@ let Equipment = [
       '项目5'
     ],
     equip : {
-      $maxHp : 15,
+      $changeHp : 15,
     },
     dsc : ['更更更稀有了一些', '《塞尔达传说：荒野之息》介绍网页（用户交互技术课程作业）'],
     linkInfo: '点击物品查看网页',
@@ -855,7 +855,7 @@ let Equipment = [
       '研究1'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更更稀有了一些', 
             '语音情感识别（2019.3 - 2019.6）', 
@@ -874,7 +874,7 @@ let Equipment = [
       '研究2'
     ],
     equip : {
-      $maxHp : 5,
+      $changeHp : 5,
     },
     dsc : ['更更更稀有了一些', 
             '问答系统（2018.11 - 2019.1）', 
@@ -895,7 +895,7 @@ let Equipment = [
       '论文'
     ],
     equip : {
-      $maxHp : 15,
+      $changeHp : 15,
     },
     dsc : ['更更更稀有了一些', 'Xiaohan Zou. "A Survey on Application of Knowledge Graph". Under Review.'],
   },
@@ -908,7 +908,7 @@ let Equipment = [
       '经历'
     ],
     equip : {
-      $maxHp : 15,
+      $changeHp : 15,
     },
     dsc : ['更更更稀有了一些', 
             '1. 微软俱乐部（2017.9 - 2019.6）',

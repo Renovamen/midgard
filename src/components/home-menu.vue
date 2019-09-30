@@ -42,10 +42,12 @@ export default {
       var chestList = [];
       for(let i=1; i<=10; i++) {
         var level, chestID;
+        
         // 包裹中物品种类
         let itemID = Math.floor(Math.random()*14) + 1;
         // 包裹中物品等级 R:50% SR:30% SSR:15% UR:5%
         let levelID = Math.floor(Math.random()*100) + 1;
+
         if(levelID <= 50) level = 0;
         else if(levelID > 50 && levelID <= 80) level = 1;
         else if(levelID > 80 && levelID <= 95) level = 2;
@@ -63,15 +65,12 @@ export default {
           mapInitOption: {
             row : 20,
             col : 20,
-            lines : 10,    // 分支量;
-            inflex : 0.5  // 曲折度;
+            lines : 10,    // 分支量
+            inflex : 0.5  // 曲折度
           },
           chestList: chestList,
-          eventList: [
-            7000001
-          ],    // 特殊事件触发点;
-          rule: {          // 生成规则;
-          }
+          eventList: [7000001],  // 事件
+          rule: {} // 生成规则
         }
       ];
       // console.log(map_table)
@@ -84,7 +83,7 @@ export default {
     goToMap(){
       let map = this.mapList[0];
       this.$store.state.MapStore.map = new MapInit(map);
-      location.href = '#/map-active';
+      location.href = '#/map';
     }
   }
 }

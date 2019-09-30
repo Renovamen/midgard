@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from "vue-router";
 
-import GameHome from './components/home.vue'
-import GameMapActive from './components/map-active.vue'
+import Home from './components/home.vue'
+import Map from './components/map.vue'
 
 Vue.use(VueRouter)
 
@@ -10,16 +10,17 @@ const routes = [
   { 
     path: '/', 
     name: 'home',
-    component: GameHome
-  },{
-    path: '/map-active',
-    name: 'mapActive',
-    component: GameMapActive
+    component: Home
+  },
+  {
+    path: '/map',
+    name: 'map',
+    component: Map
   }
 ]
 
 const router = new VueRouter({
-  routes ,
+  routes,
 })
 
 router.beforeEach((to, from, next) => {

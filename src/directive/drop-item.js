@@ -22,7 +22,8 @@ export default function (el, binding){
       event.dataTransfer.setData("text", position);
       try {
         event.dataTransfer.setDragImage(!~event.target.className.indexOf("component-item") ? event.target.parentNode : event.target, 20, 20);
-      } catch (error) {
+      } 
+      catch (error) {
         // pass
       }
       let itemPover = document.querySelector('.item-tool-tip-pover');
@@ -37,10 +38,9 @@ export default function (el, binding){
         hero
       );
 
-      hero.updateAttribute();
+      hero.updateHp();
 
       store.commit('UPDATE');
-
     }
   }
 
@@ -48,11 +48,9 @@ export default function (el, binding){
   {
     let block = new moveClass(position).get();
 
-    if(block){
-      el.setAttribute('draggable','true');
-    }else{
-      el.removeAttribute('draggable');
-    }
+    if(block) el.setAttribute('draggable','true');
+    else el.removeAttribute('draggable');
+
     block = null;
   }
 
@@ -64,5 +62,4 @@ export default function (el, binding){
     el.addEventListener(key, value);
     el[keyNameInElement] = value;
   }
-
 };

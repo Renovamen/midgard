@@ -17,18 +17,13 @@ const CreateGame = function(isCheat){
         $package : [letter, money].concat(new Array(88))
       }
     );
+    Vue.set(store.state.HeroStore,'hero', hero);
   }
   // 输入作弊码说的所有简历碎片
   else {
-    var hero = new Unit(
-      {
-        $package : [letter, money].concat(_.cloneDeep(ITEM_TABLE).slice(2)).concat(new Array(32))
-      }
-    );
+    let newPackage = [letter, money].concat(_.cloneDeep(ITEM_TABLE).slice(2)).concat(new Array(32))
+    Vue.set(store.state.HeroStore.hero,'$package', newPackage);
   }
-  Vue.set(store.state.HeroStore,'hero', hero);
 }
 
-export {
-  CreateGame
-}
+export default CreateGame

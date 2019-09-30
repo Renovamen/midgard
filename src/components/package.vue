@@ -1,8 +1,5 @@
 <template>
   <div class="package shadow-box">
-    <!-- <div class="block-name">
-      背包
-    </div> -->
     <div class="info-list">
       <div class="label-name">背包</div>
       <component-item class="dustbin" position-index="$destory|0">
@@ -23,16 +20,8 @@
 <script>
 
 export default {
-  data () {
-    return {
-      hero: {},
-    }
-  },
-  created() {
-    this.hero = this.$store.state.HeroStore.hero;
-  },
   computed:{
-    heroStore: function(){
+    hero: function(){
       return this.$store.state.HeroStore.hero;
     }
   },
@@ -40,13 +29,10 @@ export default {
     '$store.state.UPDATE' : function(){
       this.$forceUpdate();
     },
-    heroStore: function(){
-      this.hero = this.$store.state.HeroStore.hero;
-    }
   },
   methods: {
     sort() {
-      this.hero.itemSort('$package');
+      this.$store.state.HeroStore.hero.itemSort('$package');
     }
   }
 }
@@ -57,14 +43,6 @@ export default {
     padding: 5px;
     height: 100%;
     width: 520px;
-    // .block-name {
-    //   margin: 2px 8px 0px 8px;
-    //   background: #232731;
-    //   border-radius: 2px;
-    //   color: white;
-    //   padding-left: 6px;
-    //   line-height: 26px;
-    // }
     .info-list {
       padding: 5px 8px;
       font-size: 10px;
