@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import CONSTANT from '../data/constant'
-import PGET from '../js/public-static-get'
 
 require('../css/item-tool-tip.css');
 
@@ -37,10 +36,8 @@ export default function(el, binding){
             {{this.item.name}}
           </div>
           <div class="equip m-b-10">
-            <div v-for="v in this.attr" class="m-b-4">
-              <span :class="['attr-name', v[3], v[2] ? 'down' : '']">{{v[0]}}</span>
-              <span :class="['attr-data', v[3], v[2] ? 'down' : '']">{{v[1]}}</span>
-            </div>
+            <span class="attr-name">{{this.hpName}}</span>
+            <span class="attr-data">{{this.changeHp}}</span>
           </div>
           <div class="dsc" v-for="dsc in item.dsc">{{dsc}}</div>
           <div class="image" v-for="img in item.img">
@@ -58,22 +55,18 @@ export default function(el, binding){
           this.itemColor = {
             color : itemLevel[this.item.grade || 0]
           }
-          this.attr = _.map(this.item.equip, (v,k) => {
-            let record = {v}, i = v;
-  
-            if(Object.prototype.toString.call(v) === '[object Array]' && v[1] === 1 || v[1] === 3){
-              record.v = v[0] + '%';
-              i = v[0];
-            }
 
-            if(i > 0) record.v = "+" + record.v;
-            else record.down = true;
-
-            return [keyName[k], record.v, record.down, k.slice(1)];
-          })
+          if(this.item.equip) {
+            this.changeHp = this.item.equip.$changeHp;
+            this.hpName = '梦想';
+          }
+          else {
+            this.changeHp = null;
+            this.hpName = null;
+          }
+          if(this.changeHp>0) this.changeHp = '+' + this.changeHp;
         }
       }).$mount(tipClassName);
-
     },
     mouseleave : function(){
       let old = document.querySelector(tipClassName);
@@ -95,7 +88,5 @@ export default function(el, binding){
       el.addEventListener(key, value);
       el[keyNameInElement] = value;
     }
-
   }
-
 }

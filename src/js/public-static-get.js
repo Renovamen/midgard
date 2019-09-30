@@ -5,10 +5,7 @@ import CHEST_DATA from '../data/chest-data'
 const Data = {     
   '3' : ITEM_TABLE,  
   '5' : CHEST_DATA, 
-  // '6' : MISSION_TABLE, 
   '7' : DIALOG_DATA, 
-  // '8' : MAP_TABLE,     
-  // '9' : ACHIEVEMENT_TABLE, 
 }
 
 const PublicStaticGet = function(key){
