@@ -92,7 +92,7 @@ export default {
       else this.isCheat = true;
     },
     checkCheatCode() {
-      if(this.cheatCode == 'a') CreateGame(true);
+      if(this.cheatCode == 'zouxiaohanissocool') CreateGame(true);
       else this.cheatCode = '作弊码错误！';
     }
   }
