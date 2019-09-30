@@ -31,13 +31,21 @@ export default {
   created() {
     this.hero = this.$store.state.HeroStore.hero;
   },
-  watch: {
-     '$store.state.UPDATE' : function(){
-       this.$forceUpdate();
-     }
+  computed:{
+    heroStore: function(){
+      return this.$store.state.HeroStore.hero;
+    }
   },
-  methods :{
-    sort (){
+  watch: {
+    '$store.state.UPDATE' : function(){
+      this.$forceUpdate();
+    },
+    heroStore: function(){
+      this.hero = this.$store.state.HeroStore.hero;
+    }
+  },
+  methods: {
+    sort() {
       this.hero.itemSort('$package');
     }
   }

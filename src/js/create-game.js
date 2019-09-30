@@ -4,18 +4,28 @@ import PGET from '../js/public-static-get';
 import store from '../store';
 import Vue from 'vue';
 
-const CreateGame = function(){
-  // 初始背包装有龙的信和氪金信
+const CreateGame = function(isCheat){
   let letter = PGET(3000001);
   letter.num = 1;
   let money = PGET(3000002);
   money.num = 1;
 
-  var hero = new Unit(
-    {
-      $package : [letter, money].concat(new Array(88))
-    }
-  );
+  // 初始背包装有龙的信和氪金信
+  if(isCheat == false){
+    var hero = new Unit(
+      {
+        $package : [letter, money].concat(new Array(88))
+      }
+    );
+  }
+  // 输入作弊码说的所有简历碎片
+  else {
+    var hero = new Unit(
+      {
+        $package : [letter, money].concat(_.cloneDeep(ITEM_TABLE).slice(2)).concat(new Array(32))
+      }
+    );
+  }
   Vue.set(store.state.HeroStore,'hero', hero);
 }
 

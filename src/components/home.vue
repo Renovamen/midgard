@@ -23,9 +23,9 @@ export default {
     this.hero = this.$store.state.HeroStore.hero;
   },
   watch: {
-     '$store.state.UPDATE' : function(){
-       this.$forceUpdate();
-     }
+    '$store.state.UPDATE' : function(){
+      this.$forceUpdate();
+    }
   },
 }
 

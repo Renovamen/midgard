@@ -2,11 +2,14 @@
   <div class="home-info">
     <div class="hero-info">
       <div class="basic-info">
-        <div class="avatar">
+        <div class="avatar" @click="cheat()">
           <img :src="require('static/hero.png')"/>
           <div class="level">0</div>
         </div>
-        <div class="name">去找简历吧勇士</div>
+        <div class="name">
+          <input class="cheatInput" v-show="isCheat" v-model="cheatCode" @keyup.enter="checkCheatCode()"/>
+          去找简历吧勇士
+        </div>
       </div>
       <div class="resume">
         <div class="left">
@@ -36,7 +39,7 @@
 </template>
 
 <script>
-
+import {CreateGame} from "../js/create-game.js"
 
 export default {
   data () {
@@ -44,6 +47,8 @@ export default {
       infoKeyList : [ '$maxHp'],
       isCollected : false,
       collectTip: "收集",
+      isCheat: false,
+      cheatCode: '',
     }
   },
   created(){
@@ -81,6 +86,18 @@ export default {
       if(this.isCollected == true) {
         window.open("https://renovamen.ink/files/cv.pdf");
       }
+    },
+    // 作弊码弹窗
+    cheat() {
+      if(this.isCheat) {
+        this.isCheat = false;
+        this.cheatCode = '';
+      }
+      else this.isCheat = true;
+    },
+    checkCheatCode() {
+      if(this.cheatCode == 'zouxiaohanissocool') CreateGame(true);
+      else this.cheatCode = '作弊码错误！';
     }
   }
 }
@@ -148,6 +165,9 @@ export default {
           left: 24px;
         }
       }
+      .avatar:hover {
+        box-shadow: 0px 0px 2px #eee inset;
+      }
       .name {
         background-color: #6d7083;
         border-radius: 2px;
@@ -162,6 +182,19 @@ export default {
         text-align: center;
         max-width: 202px;
         text-overflow: ellipsis;
+      }
+      .cheatInput {
+        position: absolute;
+        width: 180px;
+        height: 30px;
+        margin-left: -13px;
+        margin-top: 5px;
+        background-color: #6d7083;
+        color: white;
+        outline: none;
+        border: 1px solid white;
+        border-radius: 5px;
+        padding-left: 4px;
       }
     }
 
