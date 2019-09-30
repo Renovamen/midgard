@@ -17,4 +17,3 @@ window._ = {
   assign : Object.assign,
   shuffle : require('lodash/shuffle'),
 }
-
