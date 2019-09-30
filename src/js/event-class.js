@@ -51,6 +51,8 @@ const createPopup = function() {
 }
 
 function closeModal(callback){
+  // 对话窗口关闭后，恢复移动
+  Vue.set(store.state.HeroStore.hero, '$can_move_event', true);
   let modal = document.querySelector(DialogElementClassName),
       shadow = document.querySelector(ShadowViewClassName);
   modal && modal.parentNode.removeChild(modal);

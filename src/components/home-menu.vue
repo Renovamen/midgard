@@ -82,7 +82,6 @@ export default {
   },
   methods : {
     goToMap(){
-      console.log(this.mapList[0])
       let map = this.mapList[0];
       this.$store.state.MapStore.map = new MapInit(map);
       location.href = '#/map-active';
