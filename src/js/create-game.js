@@ -5,7 +5,7 @@ import store from '../store';
 import Vue from 'vue';
 
 const CreateGame = function(){
-  // 生成默认测试英雄
+  // 初始背包装有龙的信和氪金信
   let letter = PGET(3000001);
   letter.num = 1;
   let money = PGET(3000002);
@@ -13,8 +13,6 @@ const CreateGame = function(){
 
   var hero = new Unit(
     {
-      $showName : '愚蠢的人类',
-      $type    : 'Hero',
       $package : [letter, money].concat(new Array(88))
     }
   );

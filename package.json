@@ -4,7 +4,7 @@
   "author": "renovamen <renovamenzxh@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --open --inline --hot --host 0.0.0.0",
+    "dev": "webpack-dev-server --open --inline --hot --host 127.0.0.1",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {

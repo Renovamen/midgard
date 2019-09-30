@@ -10,21 +10,14 @@ import updateAttribute from './hero/update-attribute'
 
 function Unit(obj = {}){
   this.id = 1000 + (Math.random()* 1000).toFixed(0)  // 编号
-  this.$type = 'Hero';      // 单位类型
-  this.$showName = 'unit' // 展示名称
-  this.$alive = true;
+  this.$can_move_event = true; // 人物在地图上遇到事件时，在关闭对话框前不能移动
 
   // attribute
   this.$hp          = 600;  // current hp
   this.$maxHp       = 600;  // max hp
   this.$r           = {};
 
-  switch(obj.$type){
-    case 'Hero' : 
-      CreateHero.call(this, obj);
-      break;
-  }
-
+  CreateHero.call(this, obj);
   this.updateAttribute(); 
 }
 

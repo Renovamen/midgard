@@ -1,13 +1,15 @@
 import CONSTANT from '../data/constant';
 import { MapDialog, MapGetItem } from '../js/event-class';
+import store from '../store';
+import Vue from 'vue';
 
 const HeroMoveEvent = function(map, $VueScope){
   let key_up    = 38,
       key_down  = 40,
       key_left  = 37,
       key_right = 39,
-      move_delay = 300,
-      can_move = true,
+      move_delay = 280,
+      can_move_delay = true,
       block_type = CONSTANT.MAP_BLOCK_TYPE;
 
   this.start = function(){
@@ -27,33 +29,35 @@ const HeroMoveEvent = function(map, $VueScope){
   };
 
   this.move = function(direction){
-    if(!can_move){
+    if(!can_move_delay){
       return ;
     }
 
-    can_move = false;
+    can_move_delay = false;
 
     setTimeout(()=>{
-      can_move = true;
+      can_move_delay = true;
     },move_delay)
     
     let next_block,
         x = map.hero.x,
         y = map.hero.y
 
-    switch(direction){
-      case key_up    :
-        x--;
-        break;
-      case key_down  :
-        x++;
-        break;
-      case key_left  :
-        y--;
-        break;
-      case key_right :
-        y++;
-        break;
+    if(store.state.HeroStore.hero.$can_move_event) {
+      switch(direction){
+        case key_up    :
+          x--;
+          break;
+        case key_down  :
+          x++;
+          break;
+        case key_left  :
+          y--;
+          break;
+        case key_right :
+          y++;
+          break;
+      }
     }
 
     try{
@@ -84,18 +88,21 @@ const HeroMoveEvent = function(map, $VueScope){
     // 设置新的英雄位置;
     map.hero = next_block;
 
-    //判断 初始化 执行事件
+    // 执行事件
     switch(event_type){
       case 'Chest':
+        // 遇到事件时，在关闭对话框前不能移动
         this.autoMove([]);
+        Vue.set(store.state.HeroStore.hero, '$can_move_event', false);
         MapGetItem(event, () => this.start());
         break;
       case 'MapDialog':
+        // 遇到事件时，在关闭对话框前不能移动
         this.autoMove([]);
+        Vue.set(store.state.HeroStore.hero, '$can_move_event', false);
         MapDialog(event, () => this.start())
         break;
     }
-
   }
 
   this.autoMoveTimer = null;
