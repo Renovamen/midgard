@@ -56,8 +56,7 @@ export default function (el, binding){
 
   // 创建事件,并销毁已销毁的事件;
   for(let key in event){
-    let value = event[key],
-        keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_BLOCK`;
+    let value = event[key], keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_BLOCK`;
     el.removeEventListener(key, el[keyNameInElement]);
     el.addEventListener(key, value);
     el[keyNameInElement] = value;

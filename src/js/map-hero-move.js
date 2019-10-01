@@ -62,7 +62,8 @@ const HeroMoveEvent = function(map, $VueScope){
 
     try{
       next_block = map.$data.mapData[x][y];
-    }catch(e){
+    }
+    catch(e){
       /*Pass*/
     }
 
@@ -80,8 +81,8 @@ const HeroMoveEvent = function(map, $VueScope){
 
     let {event_type, event} = next_block.event || {};
 
-    // 战斗事件不应该被保留;
-    if(event_type === 'Chest'){
+    // 事件不会保留
+    if(event_type === 'Chest' || event_type === 'MapDialog'){
       delete next_block.event;
     }
     

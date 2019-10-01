@@ -38,6 +38,10 @@ const merge = function(from, to){
 }
 
 const change = function(from, to){
+  // 类型不一样的装备栏和背包中的简历不能交换位置
+  if(from.position != to.position && from.get() && to.get() && 
+    from.get().equipType != to.get().equipType) return false;
+  
   let T = from.get();
   from.set(to.get());
   to.set(T);
