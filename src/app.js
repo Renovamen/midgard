@@ -4,8 +4,6 @@ require("./css/main.css");
 require("./css/dialog-modal.css");
 require("normalize.css");
 
-// require('babel-polyfill');
-
 // public js
 import public_function from './js/public-function.js';
 
@@ -14,7 +12,6 @@ import Vuex from 'vuex'
 import router from './router'
 import filter from './filter'
 import store from './store'
-// import axios from 'axios'
 
 // components
 import App from './components/App.vue'
@@ -30,14 +27,8 @@ Vue.config.errorHandler = function (err, vm) {
   router.replace('/');
 }
 
-// Object.assign(axios.defaults,{
-//   baseURL : 'http://127.0.0.1:8000',
-// })
-
 const app = new Vue({
   store,
   router,
   template: `<App/>`
 }).$mount('#app')
-
-

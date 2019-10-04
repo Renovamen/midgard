@@ -19,7 +19,7 @@ const CreateGame = function(isCheat){
     );
     Vue.set(store.state.HeroStore,'hero', hero);
   }
-  // 输入作弊码说的所有简历碎片
+  // 输入作弊码获得所有简历碎片
   else {
     let newPackage = [letter, money].concat(_.cloneDeep(ITEM_TABLE).slice(2)).concat(new Array(32))
     Vue.set(store.state.HeroStore.hero,'$package', newPackage);

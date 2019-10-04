@@ -2,7 +2,6 @@
   "name": "endless-resume",
   "description": "My resume for banana interactive",
   "author": "renovamen <renovamenzxh@gmail.com>",
-  "private": true,
   "scripts": {
     "dev": "webpack-dev-server --open --inline --hot --host 127.0.0.1",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
