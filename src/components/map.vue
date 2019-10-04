@@ -16,10 +16,10 @@
       <span class="arrow" v-else><i class="fa fa-caret-right"></i></span>
     </div>
 
-    <transition enter-active-class="animated slideInLeft slow" leave-active-class="animated slideOutLeft slow">
+    <transition enter-active-class="animated slideInRight slow" leave-active-class="animated slideOutRight slow">
       <div class="tip" v-if="opt.tip">
-        <span class="map-name">{{map.$opt.name}}</span>
-        <div>
+        <div class="map-name">{{map.$opt.name}}</div>
+        <div class="tip-blocklist">
           <span class="tip-block Chest">包裹</span>
           <span class="tip-block DEvent">事件</span>
           <span class="tip-block hero">你</span>
@@ -170,31 +170,41 @@ export default {
       color: white;
       position: absolute;
       top: 0px;
-      left: 0px;
+      right: 0px;
       z-index: 10;
       width: 150px;
       height: 70px;
       padding: 6px;
-      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 4px;
       background: rgba(0,0,0,0.4);
-      .tip-block {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-        text-align: center;
-        line-height: 30px;
-        margin-top: 6px;
-        border-radius: 4px;
+      .map-name {
+        float: right;
+        margin-right: 0px;
+        width: 30%;
       }
-      .Chest {
-        background: #6e4633;
-      }
-      .hero {
-        background: #886bfa;
-      }
-      .DEvent {
-        background: #539ad8;
+      .tip-blocklist {
+        float: right;
+        margin-right: 0px;
+        width: 78%;
+        .tip-block {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          font-size: 12px;
+          text-align: center;
+          line-height: 30px;
+          margin-top: 6px;
+          border-radius: 4px;
+        }
+        .Chest {
+          background: #6e4633;
+        }
+        .hero {
+          background: #886bfa;
+        }
+        .DEvent {
+          background: #539ad8;
+        }
       }
     }
     .map-data {
