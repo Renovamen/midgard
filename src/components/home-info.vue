@@ -4,7 +4,6 @@
       <div class="basic-info">
         <div class="avatar" @click="cheat()">
           <img :src="require('static/hero.png')"/>
-          <div class="level">0</div>
         </div>
         <div class="name">
           <input class="cheatInput" v-show="isCheat" v-model="cheatCode" @keyup.enter="checkCheatCode()"/>
@@ -145,19 +144,6 @@ export default {
           display: inline-block;
           width: 40px;
           height: 40px;
-        }
-        .level {
-          position: absolute;
-          width: 18px;
-          height: 18px;
-          line-height: 18px;
-          border-radius: 50%;
-          text-align: center;
-          background: #6d7083;
-          color: white;
-          font-size: 10px;
-          top: 24px;
-          left: 24px;
         }
       }
       .avatar:hover {
