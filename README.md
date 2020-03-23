@@ -2,7 +2,7 @@
 
 Hmm, interesting resume :)
 
-[Have a look](https://renovamen.ink/Endless-Resume/)
+[Have a look](http://endless-resume.renovamen.ink)
 
 &nbsp;
 ## Usage
