@@ -11,7 +11,12 @@
     </div>
     <div class="list">
       <template v-for="(item, index) in hero.$package">
-        <component-item class="item" :item="item" :position-index="'$package|' + index"></component-item>
+        <component-item
+          class="item"
+          :key="`package-item-${index}`"
+          :item="item"
+          :position-index="'$package|' + index"
+        ></component-item>
       </template>
     </div>
   </div>

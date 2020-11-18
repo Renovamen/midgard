@@ -1,65 +1,68 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: './src/app.js',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: 'dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   resolve: {
     alias:{
       vue: 'vue/dist/vue.js',
-      static : '../assets'
+      static: '../assets'
     }
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loader: 'style!css'
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /.less$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'less-loader'
+        ]
       },
       {
         test: /\.vue$/,
-        loader: 'vue'
+        use: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.(png|jpg|gif|svg|wav|ogg|wma|otf)$/,
-        loader: 'file',
-        query: {
-          name: '[name].[ext]?[hash]'
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: '[name].[ext]?[hash]',
+            esModule: false
+          }
         }
       }
     ]
   },
-  devServer: {
-    historyApiFallback: false,
-    noInfo: true
-  },
+  plugins: [
+    new VueLoaderPlugin()
+  ],
   devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ])
+  module.exports.devtool = '#source-map',
+  module.exports.mode = 'production'
 }

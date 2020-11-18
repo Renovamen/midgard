@@ -18,7 +18,13 @@
         </div>
         <div class="right">
           <template v-for="(item, index) in hero.$resumes">
-            <component-item class="item" v-if="index > 1" :item="item" :position-index="'$resumes|' + index"></component-item>
+            <component-item
+              class="item"
+              v-if="index > 1"
+              :key="`resume-item-${index}`"
+              :item="item"
+              :position-index="'$resumes|' + index"
+            ></component-item>
           </template>
         </div>
       </div>
@@ -79,7 +85,7 @@ export default {
     exchange(){
       // 兑换完整版简历
       if(this.isCollected == true) {
-        window.open("https://renovamen.ink/files/cv.pdf");
+        window.open("https://renovamen.ink/files/cv/en.pdf");
       }
     },
     // 作弊码弹窗
@@ -91,7 +97,7 @@ export default {
       else this.isCheat = true;
     },
     checkCheatCode() {
-      if(this.cheatCode == 'zouxiaohanissocool') CreateGame(true);
+      if(this.cheatCode == 'xiaohanzouissocool') CreateGame(true);
       else this.cheatCode = '作弊码错误！';
     }
   }

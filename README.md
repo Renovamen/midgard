@@ -5,17 +5,18 @@ Hmm, interesting resume :)
 [Have a look](http://endless-resume.renovamen.ink)
 
 &nbsp;
+
 ## Usage
 ```bash
 git clone https://github.com/Renovamen/Endless-Resume.git
 cd Endless-Resume
 
 # install dependencies
-npm install
+yarn install
 
-# serve with hot reload at 127.0.0.1:8080
-npm run dev
+# serve with hot reload at localhost:8080
+yarn dev
 
 # build for production with minification
-npm run-script build
+yarn build
 ```

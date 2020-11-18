@@ -28,7 +28,7 @@ export default {
     CreateGame(false);
   },
   methods:{
-    setPosition : function(){
+    setPosition() {
       let height = window.innerHeight - 10;
       let height_original = 500;
       this.scale = height / height_original; 

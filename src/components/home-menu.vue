@@ -9,8 +9,14 @@
       <img :src="require('static/menu-fight.png')"/>
     </div>
     
-    <template v-for="item in menu">
-      <a class="link" :href="item[2]" target="_blank" :style="{'width': '25%'}">
+    <template v-for="(item, index) in menu">
+      <a
+        class="link"
+        :key="`menu-item-${index}`"
+        :href="item[2]"
+        target="_blank"
+        :style="{'width': '25%'}"
+      >
         <div class="title text-center">
           <span>{{item[0][0]}}</span>{{item[0][1]}}
         </div>

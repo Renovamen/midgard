@@ -29,10 +29,12 @@
 
     <div class="map-data">
       <div class="map">
-        <div v-for="(line,x) in map.$data.mapData">
+        <div v-for="(line, x) in map.$data.mapData" :key="`line-${x}`">
           <map-block 
-            v-for="(block,y) in line" 
-            :block="block" :map="map" 
+            v-for="(block, y) in line"
+            :key="`block-${y}`"
+            :block="block"
+            :map="map" 
             @autoMove="autoMove(block)">
           </map-block>
         </div>
