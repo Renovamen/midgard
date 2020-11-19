@@ -35,7 +35,7 @@ export default {
   word-spacing:-4px
   display table
   padding-left 20px
-  background:#47485c
+  background #47485c
   .left
     margin-top 4px
     display inline-block

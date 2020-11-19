@@ -41,13 +41,6 @@ export default {
 }
 </script>
 
-<style>
-body {
-  /* background-image: url('../assets/hero-1.png'); */
-  background: #47485c;
-}
-</style>
-
 <style scoped lang="stylus">
 .container
   margin auto

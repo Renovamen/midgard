@@ -4,14 +4,14 @@ import PGET from '../js/public-static-get'
 import store from '../store'
 import Vue from 'vue'
 
-const CreateGame = function(isCheat){
+const CreateGame = function(isCheat) {
   let letter = PGET(3000001)
   letter.num = 1
   let money = PGET(3000002)
   money.num = 1
 
   // 初始背包装有龙的信和氪金信
-  if(isCheat == false){
+  if(isCheat == false) {
     var hero = new Unit({
       $package : [letter, money].concat(new Array(88))
     })

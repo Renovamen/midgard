@@ -26,7 +26,7 @@ const HeroMoveEvent = function(map, $VueScope) {
     clearInterval(this.autoMoveTimer)
   }
 
-  this.move = function(direction){
+  this.move = function(direction) {
     if(!can_move_delay) return
 
     can_move_delay = false

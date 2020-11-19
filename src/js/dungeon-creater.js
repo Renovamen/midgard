@@ -113,7 +113,7 @@ const DungeonCreater = function(opt) {
     function getRandomPosition(x, y) {
         return {
             x: getRandom(0, x - 1),
-            y: getRandom(0, y - 1),
+            y: getRandom(0, y - 1)
         }
     }
     

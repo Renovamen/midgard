@@ -1,5 +1,4 @@
 const CreateHero = function(option = {}) {
-
   let opt = _.cloneDeep(option)
 
   opt.$package = opt.$package || new Array(90)

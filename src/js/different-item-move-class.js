@@ -1,20 +1,19 @@
 import store from '../store'
 
 const eventList = {
-  $default : {
-    get: function(){
+  $default: {
+    get: function() {
       let hero = store.state.HeroStore.hero
       return hero && hero[this.position] && hero[this.position][this.index]
     },
-    set: function(obj){
+    set: function(obj) {
       let hero = store.state.HeroStore.hero
       hero[this.position][this.index] = obj
     }
   }
 }
 
-const moveClass = function(option){
-
+const moveClass = function(option) {
   let opt = option.split('|')
 
   this.position = opt[0]

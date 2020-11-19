@@ -1,6 +1,6 @@
 <template>
   <div class="map">
-    <router-link class="btn backhome" to="/">HOME</router-link>
+    <router-link class="btn backhome" to="/">回城</router-link>
 
     <transition
       enter-active-class="animate__animated animate__faster animate__slideInUp"
@@ -133,7 +133,7 @@ export default {
     line-height 28px
     font-size 16px
     font-weight bold
-    border-width 2px
+    border-width 1px
     border-color white
     color white
     &:hover
@@ -147,7 +147,7 @@ export default {
   .package
     position absolute
     z-index 2
-    background:#47485c
+    background #47485c
     border-radius 0px 8px 0px 0px
     top 230px
   .show-btn
