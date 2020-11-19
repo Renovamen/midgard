@@ -1,15 +1,16 @@
-# Endless-Resume
+# Midgard
 
-Hmm, interesting resume :)
+Hey, adventurer! ~~A cool~~ An eval dragon just tore up my curriculum vitae. So why not help me with retrieving my CV fragments scattered widely on Midgard back!
 
-[Have a look](http://endless-resume.renovamen.ink)
+[Start Your Adventure!](http://midgard.renovamen.ink)
 
 &nbsp;
 
 ## Usage
+
 ```bash
-git clone https://github.com/Renovamen/Endless-Resume.git
-cd Endless-Resume
+git clone https://github.com/Renovamen/midgard.git
+cd midgard
 
 # install dependencies
 yarn install
