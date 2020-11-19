@@ -28,10 +28,12 @@ let Material = [
       '提示'
     ],
     dsc: [
-      '· 氪金 2 亿即可获得所有简历碎片',
-      '· 扫码付款：'
+      '氪金两亿即可获得所有简历碎片',
+      '扫码付款：'
     ],
-    img: ['src/assets/wechat.jpg']
+    img: [
+      require('assets/wechat.jpg')
+    ]
   }
 ]
 

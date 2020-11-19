@@ -10,7 +10,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "animate.css": "^4.1.1",
-    "axios": "^0.21.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9",

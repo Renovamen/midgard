@@ -3,7 +3,7 @@
     <div class="hero-info">
       <div class="basic-info">
         <div class="avatar" @click="cheat()">
-          <img :src="require('static/hero.svg')"/>
+          <img :src="require('assets/hero.svg')"/>
         </div>
         <div class="name">
           <input class="cheatInput" v-show="isCheat" v-model="cheatCode" @keyup.enter="checkCheatCode()"/>

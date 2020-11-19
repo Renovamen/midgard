@@ -5,7 +5,7 @@
         <span>游</span>荡
       </div>
       <div class="e-title">Voyage</div>
-      <img :src="require('static/ui/fight.svg')"/>
+      <img :src="require('assets/ui/fight.svg')"/>
     </div>
     
     <template v-for="(item, index) in menu">
@@ -35,9 +35,9 @@ export default {
   data () {
     return {
       menu : [
-        ['咸鱼', 'Github', 'https://github.com/Renovamen', require('static/ui/github.svg')],
-        ['博客', 'Blog', 'https://renovamen.ink', require('static/ui/blog.svg')],
-        ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('static/ui/email.svg')],
+        ['咸鱼', 'Github', 'https://github.com/Renovamen', require('assets/ui/github.svg')],
+        ['博客', 'Blog', 'https://renovamen.ink', require('assets/ui/blog.svg')],
+        ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('assets/ui/email.svg')],
       ]
     }
   },

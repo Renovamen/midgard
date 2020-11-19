@@ -3,16 +3,16 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: './src/app.js',
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: 'dist/',
     filename: 'build.js'
   },
   resolve: {
-    alias:{
+    alias: {
       vue: 'vue/dist/vue.js',
-      static: '../assets'
+      assets: path.resolve(__dirname, './src/assets')
     }
   },
   module: {
@@ -59,5 +59,11 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin()
   ],
-  devtool: process.env.NODE_ENV === 'production' ? '#source-map' : '#eval-source-map'
+  devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map',
+  module.exports.mode = 'production',
+  module.exports.output.publicPath = 'https://cdn.jsdelivr.net/gh/Renovamen/midgard@master/dist/'
 }
