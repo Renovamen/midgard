@@ -1,4 +1,4 @@
-const CHEST = 'Chest';
+const CHEST = 'Chest'
 
 const CHEST_DATA = [
   {  
@@ -952,7 +952,7 @@ const CHEST_DATA = [
       '你的背包放不下了，下次再来吧。',
       '你失去它了。'
     ]
-  },
+  }
 ]
 
-export default CHEST_DATA;
+export default CHEST_DATA

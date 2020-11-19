@@ -1,27 +1,27 @@
 import Vue from 'vue'
 import CONSTANT from '../data/constant'
 
-require('../css/item-tool-tip.css');
+require('../css/item-tool-tip.css')
 
-export default function(el, binding){
+export default function(el, binding) {
   let keyName = CONSTANT.UNIT_ATTR_NAME,
       itemLevel = CONSTANT.ITEM_LEVEL,
       tipClassName = '.item-tool-tip-pover',
-      item = binding.value;
+      item = binding.value
       
   let event = {
-    click :  function(){
+    click: function() {
       if(item.link) {
         window.open(item.link)
       }
     },
 
-    mouseenter :  function(e){
+    mouseenter: function(e) {
 
-      event.mouseleave();
+      event.mouseleave()
 
-      let tip = document.createElement('div');
-      let {right, top} = e.target.getBoundingClientRect();
+      let tip = document.createElement('div')
+      let {right, top} = e.target.getBoundingClientRect()
 
       Object.assign(tip.style, {
         position : 'absolute',
@@ -47,46 +47,46 @@ export default function(el, binding){
         `
       })
 
-      document.body.appendChild(tip);
+      document.body.appendChild(tip)
 
       new Vue({
         created(){
-          this.item = item;
+          this.item = item
           this.itemColor = {
-            color : itemLevel[this.item.grade || 0]
+            color: itemLevel[this.item.grade || 0]
           }
 
           if(this.item.equip) {
-            this.changeHp = this.item.equip.$changeHp;
-            this.hpName = '梦想';
+            this.changeHp = this.item.equip.$changeHp
+            this.hpName = '梦想'
           }
           else {
-            this.changeHp = null;
-            this.hpName = null;
+            this.changeHp = null
+            this.hpName = null
           }
-          if(this.changeHp>0) this.changeHp = '+' + this.changeHp;
+          if(this.changeHp > 0) this.changeHp = '+' + this.changeHp
         }
-      }).$mount(tipClassName);
+      }).$mount(tipClassName)
     },
-    mouseleave : function(){
-      let old = document.querySelector(tipClassName);
-      // 移除已经存在的tip;
+    mouseleave: function() {
+      let old = document.querySelector(tipClassName)
+      // 移除已经存在的 tip
       if(old){
-        old.parentNode.removeChild(old);
+        old.parentNode.removeChild(old)
       }
     }
   }
 
-  for(let key in event){
+  for(let key in event) {
 
     let value = event[key],
-        keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_TOOL_TIP`;
+        keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_TOOL_TIP`
 
-    el.removeEventListener(key, el[keyNameInElement]);
+    el.removeEventListener(key, el[keyNameInElement])
 
-    if(item){
-      el.addEventListener(key, value);
-      el[keyNameInElement] = value;
+    if(item) {
+      el.addEventListener(key, value)
+      el[keyNameInElement] = value
     }
   }
 }

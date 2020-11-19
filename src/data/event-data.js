@@ -22,4 +22,4 @@ const DIALOG_DATA = [
 
 export {
   DIALOG_DATA
-};
+}

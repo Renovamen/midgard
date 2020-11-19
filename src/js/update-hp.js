@@ -1,18 +1,17 @@
 const createPopup = function() {
-  
-  let modal = document.createElement('div');
-  let shadowView = document.createElement('div');
-  let view = document.querySelector('#router-view');
+  let modal = document.createElement('div')
+  let shadowView = document.createElement('div')
+  let view = document.querySelector('#router-view')
   let opt = {
     height    : 300,
     width     : 120,
     animated  : 'animated zoomIn',
-    backForce : 0.2,
+    backForce : 0.2
   }
 
-  shadowView.className = '.shadow-view'.slice(1);
+  shadowView.className = '.shadow-view'.slice(1)
 
-  // 背景层 创建;
+  // 背景层 创建
   Object.assign(shadowView.style, {
     position   : 'absolute',
     background : `rgba(0,0,0,${opt.backForce})`,
@@ -23,7 +22,7 @@ const createPopup = function() {
     zIndex     : '5'
   })
 
-  // 模态框 创建;
+  // 模态框 创建
   Object.assign(modal.style, {
     position  : 'absolute',
     width     : `${opt.height}px`,
@@ -34,32 +33,31 @@ const createPopup = function() {
   })
 
   let info = {
-                "modal": modal, 
-                "shadowView": shadowView,
-                "opt": opt,
-                "view": view
-              }
+    "modal": modal, 
+    "shadowView": shadowView,
+    "opt": opt,
+    "view": view
+  }
   return info
 }
 
-export default function updateHp(){
+export default function updateHp() {
 
-  let data = (this.$resumes || []);
+  let data = (this.$resumes || [])
 
   // 根据装备计算生命值
-  this.$hp = this.$maxHp;
+  this.$hp = this.$maxHp
   for(let item of data){
-    if(!item) continue;
+    if(!item) continue
     if(item.equip) {
-      let v = item.equip['$changeHp'];
-      this.$hp += v;
+      let v = item.equip['$changeHp']
+      this.$hp += v
     }
-  };
+  }
 
   if(this.$hp < 0) {
-    let info = createPopup();
-    let modal = info.modal, shadowView = info.shadowView,
-        opt = info.opt, view = info.view;
+    let info = createPopup()
+    let modal = info.modal, shadowView = info.shadowView, opt = info.opt, view = info.view
 
     Object.assign(modal, {
       className : [ opt.animated, '.gameover-dialog'.slice(1) ].join(' '),
@@ -72,8 +70,7 @@ export default function updateHp(){
         </div>
       `
     })
-
-    view.appendChild(modal);
-    view.appendChild(shadowView);
+    view.appendChild(modal)
+    view.appendChild(shadowView)
   }
 }

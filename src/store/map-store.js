@@ -1,8 +1,8 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
 const state = {
   // mapList: _.cloneDeep(MAP_TABLE),
-  map: null,
+  map: null
 }
 
 const mutations = {

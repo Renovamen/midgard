@@ -1,39 +1,39 @@
-  *{
-    box-sizing: border-box;
-    user-select: none;
-    list-style: none;
-    -ms-box-sizing: border-box; 	/* IE 9 */
-    -moz-box-sizing: border-box; 	/* Firefox */
-    -webkit-box-sizing: border-box; /* Safari 和 Chrome */
-    -o-box-sizing: border-box; 	/* Opera */
-  }
+*{
+  box-sizing: border-box;
+  user-select: none;
+  list-style: none;
+  -ms-box-sizing: border-box; 	/* IE 9 */
+  -moz-box-sizing: border-box; 	/* Firefox */
+  -webkit-box-sizing: border-box; /* Safari 和 Chrome */
+  -o-box-sizing: border-box; 	/* Opera */
+}
 
-  ul{
-    margin:0px;
-    padding: 0px;
-  }
+ul{
+  margin:0px;
+  padding: 0px;
+}
 
-  *::-webkit-scrollbar{
-    display: none;
-  }
+*::-webkit-scrollbar{
+  display: none;
+}
 
-  @font-face {
-    font-family: 'mainfont';
-    src: url('../assets/font/mainfont.otf');
-    font-weight: normal;
-    font-style: normal;
-  }
+@font-face {
+  font-family: 'mainfont';
+  src: url('../assets/font/mainfont.otf');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  body{
-    font-family: mainfont;
-    padding: 0px;
-    margin: 0px;
-    font-weight: 200;
-    -ms-overflow-style: none;
-    -moz-overflow-style: none;
-    -webkit-overflow-style: none;
-    -o-overflow-style: none;
-  }
+body{
+  font-family: mainfont;
+  padding: 0px;
+  margin: 0px;
+  font-weight: 200;
+  -ms-overflow-style: none;
+  -moz-overflow-style: none;
+  -webkit-overflow-style: none;
+  -o-overflow-style: none;
+}
 
 .btn{
   display: inline-block;

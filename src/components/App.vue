@@ -14,20 +14,20 @@
 import CreateGame from "../js/create-game.js"
 
 export default {
-  data(){
+  data() {
     return {
       scale: 1,
       margin: 0,
     }
   },
-  created(){
-    window.onresize = ()=>{
+  created() {
+    window.onresize = () => {
       this.setPosition();
     }
     this.setPosition();
     CreateGame(false);
   },
-  methods:{
+  methods: {
     setPosition() {
       let height = window.innerHeight - 10;
       let height_original = 500;
@@ -46,26 +46,26 @@ export default {
 </style>
 
 <style scoped lang="less">
-  .container{
-    margin: auto;
-    width: 830px;
-    border-radius: 2px;
-    height: 500px;
-  }
-  .main{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-  }
-  .router-view{
-    position: relative;
-    height: 500px;
-    background: #252830;
-    border-radius: 2px;
-  }
-  .router-view > div{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
+.container{
+  margin: auto;
+  width: 830px;
+  border-radius: 2px;
+  height: 500px;
+}
+.main{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.router-view{
+  position: relative;
+  height: 500px;
+  background: #252830;
+  border-radius: 2px;
+}
+.router-view > div{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
 </style>

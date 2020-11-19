@@ -42,24 +42,24 @@ export default {
       ]
     }
   },
-  computed :{
-    mapList : function(){
+  computed: {
+    mapList() {
       // 随机生成包裹
-      var chestList = [];
-      for(let i=1; i<=10; i++) {
-        var level, chestID;
+      var chestList = []
+      for(let i = 1; i <= 10; i++) {
+        var level, chestID
         
         // 包裹中物品种类
-        let itemID = Math.floor(Math.random()*14) + 1;
+        let itemID = Math.floor(Math.random()*14) + 1
         // 包裹中物品等级 R:50% SR:30% SSR:15% UR:5%
-        let levelID = Math.floor(Math.random()*100) + 1;
+        let levelID = Math.floor(Math.random()*100) + 1
 
-        if(levelID <= 50) level = 0;
-        else if(levelID > 50 && levelID <= 80) level = 1;
-        else if(levelID > 80 && levelID <= 95) level = 2;
-        else level = 3;
+        if(levelID <= 50) level = 0
+        else if(levelID > 50 && levelID <= 80) level = 1
+        else if(levelID > 80 && levelID <= 95) level = 2
+        else level = 3
 
-        chestID = 5000000 + level * 14 + itemID;
+        chestID = 5000000 + level * 14 + itemID
         chestList.push(chestID)
       }
 
@@ -69,83 +69,82 @@ export default {
           name: '世界',
           logo: '',
           mapInitOption: {
-            row : 20,
-            col : 20,
-            lines : 10,    // 分支量
-            inflex : 0.5  // 曲折度
+            row: 20,
+            col: 20,
+            lines: 10,  // 分支量
+            inflex: 0.5  // 曲折度
           },
           chestList: chestList,
           eventList: [7000001],  // 事件
-          rule: {} // 生成规则
+          rule: {}  // 生成规则
         }
-      ];
-      // console.log(map_table)
+      ]
 
       this.$store.state.MapStore.mapList = _.cloneDeep(map_table)
-      return this.$store.state.MapStore.mapList;
+      return this.$store.state.MapStore.mapList
     }
   },
-  methods : {
-    goToMap(){
-      let map = this.mapList[0];
-      this.$store.state.MapStore.map = new MapInit(map);
-      location.href = '#/map';
+  methods: {
+    goToMap() {
+      let map = this.mapList[0]
+      this.$store.state.MapStore.map = new MapInit(map)
+      location.href = '#/map'
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-  .home-menu {
-    margin-top: -16px;
-    word-spacing:-4px;
-    display: table;
-    width: 100%;
-    height: 220px;
-    .link {
-      text-decoration: none;
-      position: relative;
-      vertical-align: top;
-      display: inline-block;
-      color: rgb(207, 210, 218);
-      padding-right: 6px;
-      overflow: hidden;
-      border: 1px solid #535664;
-      border-radius: 5px;
-      height: 100%;
+.home-menu {
+  margin-top: -16px;
+  word-spacing:-4px;
+  display: table;
+  width: 100%;
+  height: 220px;
+  .link {
+    text-decoration: none;
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+    color: rgb(207, 210, 218);
+    padding-right: 6px;
+    overflow: hidden;
+    border: 1px solid #535664;
+    border-radius: 5px;
+    height: 100%;
 
-      .title {
-        margin-top: 10px;
-        text-align: right;
-        span:first-child{
-          font-size: 24px;
-        }
+    .title {
+      margin-top: 10px;
+      text-align: right;
+      span:first-child{
+        font-size: 24px;
       }
-      .e-title {
-        font-size: 10px;
-        text-align: right;
-      }
-      img {
-        opacity: 0;
-        position: absolute;
-        width: 100px;
-        top: 50px;
-        left: 50px;
-        transition: 0.2s;
-      }
+    }
+    .e-title {
+      font-size: 10px;
+      text-align: right;
+    }
+    img {
+      opacity: 0;
+      position: absolute;
+      width: 100px;
+      top: 50px;
+      left: 50px;
       transition: 0.2s;
     }
-    .link:hover {
-      text-decoration: none;
-      background: #377bb5;
-      color: white;
+    transition: 0.2s;
+  }
+  .link:hover {
+    text-decoration: none;
+    background: #377bb5;
+    color: white;
+    transition: 0.3s;
+    img {
+      opacity: 1;
+      top: 80px;
+      left: 8px;
       transition: 0.3s;
-      img {
-        opacity: 1;
-        top: 80px;
-        left: 8px;
-        transition: 0.3s;
-      }
     }
   }
+}
 </style>
