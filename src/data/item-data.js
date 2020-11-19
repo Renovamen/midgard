@@ -31,7 +31,7 @@ let Material = [
       '· 氪金2亿即可获得所有简历碎片',
       '· 扫码付款：'
     ],
-    img: ['src/assets/money.jpg']
+    img: ['src/assets/wechat.jpg']
   }
 ]
 

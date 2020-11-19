@@ -1,10 +1,6 @@
 <template>
-  <div @click="autoMove" :style="bgColor()" >
-    <span :class="blockClass()">
-      <i v-if="blockClass()[2]=='Chest'" class="fa fa-cube fa-lg"></i>
-      <i v-else-if="blockClass()[2]=='MapDialog'" class="fa fa-info fa-lg"></i>
-      <i v-else-if="blockClass()[1]=='hero'" class="fa fa-user-secret fa-lg"></i>
-    </span>
+  <div @click="autoMove" :style="bgColor()">
+    <span :class="blockClass()"></span>
   </div>
 </template>
 
@@ -81,25 +77,30 @@ export default {
     cursor pointer
 .stick
   background-color #51963d
-.MapDialog, .Chest, .hero
+.map-dialog, .map-chest, .hero
   border-radius 4px
-.MapDialog
-  background #539ad8
-  .fa
-    padding 13px 8px 13px 16px
-    color white
-.Chest
-  // background url('../assets/fight.png') no-repeat
-  // background-size 100%
+  position relative
+  &::before
+    color #fff
+    position absolute
+    width 26px
+    height 26px
+    top 50%
+    left 50%
+    margin-top -13px
+    margin-left -13px
+.map-dialog
+  background-color #539ad8
+  &::before
+    content url('../assets/world/info.svg')
+.map-chest
   background-color #6e4633
-  .fa
-    padding 12px 9px 11px 10px
-    color white
+  &::before
+    content url('../assets/world/chest.svg')
 .hero
   background #886bfa
-  .fa
-    padding 13px 10px 11px 12px
-    color white
+  &::before
+    content url('../assets/world/hero.svg')
 .r-1
   border-top-left-radius 6px
 .r-2

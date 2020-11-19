@@ -1,14 +1,14 @@
 <template>
   <div v-item-tool-tip="item" v-drop-item="dropData" class="component-item">
-    <div v-if="item" :style="{'color':gradeColor[item.grade || 0]}">
+    <div v-if="item" :style="{'color': gradeColor[item.grade || 0]}">
       <slot name="item-name">
-        <span class="item-name" v-if="item.name">{{item.name}}</span>
+        <span class="item-name" v-if="item.name">{{ item.name }}</span>
       </slot>
       <slot name="badges">
         <span class="badges" v-if="item.num">
           {{ item.num }}
         </span>
-        <span class="badges equip" v-if="item.equipType > -1" >
+        <span class="badges equip" v-if="item.equipType > -1">
           {{ equipCname[item.equipType] }}
         </span>
       </slot>
@@ -111,14 +111,4 @@ export default {
     cursor pointer
     text-align center
     width 100%
-
-.dustbin
-  height 30px
-  margin-top 6px
-  float right
-  background-color #507c59
-  .fa
-    color white
-  .blank
-    line-height 36px
 </style>

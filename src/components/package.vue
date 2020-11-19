@@ -3,9 +3,7 @@
     <div class="info-list">
       <div class="label-name">背包</div>
       <component-item class="dustbin" position-index="$destory|0">
-        <span slot="item-name" class="item-name">
-          <i class="fa fa-recycle fa-2x"></i>
-        </span>
+        <span slot="item-name" class="item-name"></span>
       </component-item>
       <div class="btn f-r sort" @click="sort">整理</div>
     </div>
@@ -88,6 +86,22 @@ export default {
         padding 2px 4px
         border-radius 0px 2px 2px 0px
         color beige
+    .dustbin
+      height 30px
+      margin-top 6px
+      float right
+      background-color #507c59
+      .blank
+        line-height 36px
+      span
+        content url('../assets/ui/recycle.svg')
+        position absolute
+        width 20px
+        height 20px
+        top 50%
+        left 50%
+        margin-top -9px
+        margin-left -10px
   .list
     height 40%
     overflow scroll

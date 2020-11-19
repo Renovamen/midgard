@@ -76,7 +76,7 @@ const HeroMoveEvent = function(map, $VueScope) {
     let {event_type, event} = next_block.event || {}
 
     // 事件不会保留
-    if(event_type === 'Chest' || event_type === 'MapDialog') {
+    if(event_type === 'map-chest' || event_type === 'map-dialog') {
       delete next_block.event
     }
     
@@ -85,13 +85,13 @@ const HeroMoveEvent = function(map, $VueScope) {
 
     // 执行事件
     switch(event_type) {
-      case 'Chest':
+      case 'map-chest':
         // 遇到事件时，在关闭对话框前不能移动
         this.autoMove([])
         Vue.set(store.state.HeroStore.hero, '$can_move_event', false)
         MapGetItem(event, () => this.start())
         break
-      case 'MapDialog':
+      case 'map-dialog':
         // 遇到事件时，在关闭对话框前不能移动
         this.autoMove([])
         Vue.set(store.state.HeroStore.hero, '$can_move_event', false)

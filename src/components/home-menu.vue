@@ -1,12 +1,11 @@
 <template>
   <div class="home-menu">
-
     <div class="link" @click="goToMap()" :style="{'width': '25%'}">
       <div class="title text-center">
         <span>游</span>荡
       </div>
       <div class="e-title">Voyage</div>
-      <img :src="require('static/menu-fight.png')"/>
+      <img :src="require('static/ui/fight.svg')"/>
     </div>
     
     <template v-for="(item, index) in menu">
@@ -36,9 +35,9 @@ export default {
   data () {
     return {
       menu : [
-        ['咸鱼', 'Github', 'https://github.com/Renovamen', require('static/menu-github.png')],
-        ['博客', 'Blog', 'https://renovamen.ink', require('static/menu-blog.png')],
-        ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('static/menu-email.png')],
+        ['咸鱼', 'Github', 'https://github.com/Renovamen', require('static/ui/github.svg')],
+        ['博客', 'Blog', 'https://renovamen.ink', require('static/ui/blog.svg')],
+        ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('static/ui/email.svg')],
       ]
     }
   },
@@ -117,7 +116,7 @@ export default {
       text-align right
       span:first-child
         font-size 24px
-    .e-title 
+    .e-title
       font-size 10px
       text-align right
     img

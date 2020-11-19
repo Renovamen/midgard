@@ -17,12 +17,8 @@
     </transition>
 
     <div :class="['show-btn', opt.info ? 'opened' : 'closed']" @click="showInfo">
-      <span class="arrow" v-if="opt.info">
-        <i class="fa fa-caret-left"></i>
-      </span>
-      <span class="arrow" v-else>
-        <i class="fa fa-caret-right"></i>
-      </span>
+      <span class="arrow-left" v-if="opt.info"></span>
+      <span class="arrow-right" v-else></span>
     </div>
 
     <transition
@@ -32,8 +28,8 @@
       <div class="tip" v-if="opt.tip">
         <div class="map-name">{{map.$opt.name}}</div>
         <div class="tip-blocklist">
-          <span class="tip-block Chest">包裹</span>
-          <span class="tip-block DEvent">事件</span>
+          <span class="tip-block map-chest">包裹</span>
+          <span class="tip-block map-dialog">事件</span>
           <span class="tip-block hero">你</span>
         </div>
       </div>
@@ -172,6 +168,18 @@ export default {
       width 40px
       transition 0.4s
       border-radius 0px 5px 5px 0px
+    .arrow-left, .arrow-right
+      position absolute
+      width 16px
+      height 16px
+      right 0
+      margin-right -1px
+      top 50%
+      margin-top -8px
+    .arrow-left
+      content url('../assets/ui/left.svg')
+    .arrow-right
+      content url('../assets/ui/right.svg')
   .tip
     display inline-block
     color white
@@ -201,11 +209,11 @@ export default {
         line-height 30px
         margin-top 6px
         border-radius 4px
-      .Chest
+      .map-chest
         background #6e4633
       .hero
         background #886bfa
-      .DEvent
+      .map-dialog
         background #539ad8
   .map-data
     position relative

@@ -1,6 +1,6 @@
 # Midgard
 
-Hey, adventurer! ~~A cool~~ An eval dragon just tore up my curriculum vitae. So why not help me with retrieving my CV fragments scattered widely on Midgard back!
+Hey adventurer! ~~A cool~~ An evil dragon just tore up my curriculum vitae. So why not help me with retrieving my CV fragments scattered widely on Midgard back!
 
 [Start Your Adventure!](http://midgard.renovamen.ink)
 
