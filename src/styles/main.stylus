@@ -1,0 +1,124 @@
+*
+  box-sizing border-box
+  user-select none
+  list-style none
+  -ms-box-sizing border-box 	/* IE 9 */
+  -moz-box-sizing border-box 	/* Firefox */
+  -webkit-box-sizing border-box /* Safari 和 Chrome */
+  -o-box-sizing border-box 	/* Opera */
+  &::-webkit-scrollbar
+    display none
+
+body
+  font-family mainfont
+  padding 0px
+  margin 0px
+  font-weight 200
+  -ms-overflow-style none
+  -moz-overflow-style none
+  -webkit-overflow-style none
+  -o-overflow-style none
+
+ul
+  margin 0px
+  padding 0px
+
+@font-face
+  font-family 'mainfont'
+  src url('../assets/font/mainfont.otf')
+  font-weight normal
+  font-style normal
+
+.btn
+  display inline-block
+  text-align center
+  padding 2px 4px
+  background none
+  color #1997c6
+  border 1px solid #1997c6
+  border-radius 2px
+  cursor pointer
+  text-decoration none
+  outline none
+  transition all 0.3s ease-in-out
+  &:hover
+    background #1997c6
+    color white
+    transition all 0.3s ease-in-out
+  &.disabled, &.disabled:hover
+    color gray
+    border-color gray
+    background none
+    cursor no-drop
+  &.red
+    color red
+    border-color red
+    &:hover
+      background red
+      color white
+
+.font-min
+  font-size 12px
+
+.m-t-10
+  margin-top 10px
+.m-b-10
+  margin-bottom 10px
+.m-b-4
+  margin-bottom 4px
+/*
+.m-l-10
+  margin-bottom 10px
+.m-r-10
+  margin-bottom 10px
+*/
+
+.text-c
+  text-align center
+.text-l
+  text-align left
+.text-r
+  text-align right
+
+.f-r
+  float right
+
+.radius-4
+  border-radius 4px
+.radius-2
+  border-radius 2px
+
+.p-abs
+  position absolute
+.p-rel
+  position relative
+
+.d-ib
+  display inline-block
+.d-b
+  display block
+
+.color-red
+  color #d44950
+.color-green
+  color #1bc98e
+.color-yellow
+  color #e4d836
+.color-purple
+  color #9f86ff
+.color-darkblue
+  color #1997c6
+
+.bg-red
+  background #d44950
+.bg-green
+  background #1bc98e
+.bg-yellow
+  background #e4d836
+.bg-purple
+  background #9f86ff
+.bg-darkblue
+  background #1997c6
+
+.game-main-loading
+  display none

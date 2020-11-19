@@ -1,17 +1,22 @@
 <template>
   <div class="map">
-
     <router-link class="btn backhome" to="/">HOME</router-link>
 
-    <transition enter-active-class="animated slideInUp" leave-active-class="animated slideOutDown">
+    <transition
+      enter-active-class="animated faster slideInUp"
+      leave-active-class="animated faster slideOutDown"
+    >
       <package class="v-package" v-show="opt.info"></package>
     </transition>
 
-    <transition enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp">
+    <transition
+      enter-active-class="animated faster slideInDown"
+      leave-active-class="animated faster slideOutUp"
+    >
       <home-info class="right-info" v-show="opt.info" transition="bounce"></home-info>
     </transition>
 
-    <div :class="['show-btn', opt.info ? 'opend' : 'closed']" @click="showInfo">
+    <div :class="['show-btn', opt.info ? 'opened' : 'closed']" @click="showInfo">
       <span class="arrow" v-if="opt.info">
         <i class="fa fa-caret-left"></i>
       </span>
@@ -20,7 +25,7 @@
       </span>
     </div>
 
-    <transition enter-active-class="animated slideInRight slow" leave-active-class="animated slideOutRight slow">
+    <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
       <div class="tip" v-if="opt.tip">
         <div class="map-name">{{map.$opt.name}}</div>
         <div class="tip-blocklist">
@@ -69,7 +74,7 @@ export default {
         tip: true  // 地图左上提示框
       },
       map: null,  // 地图数据对象
-      moveEvent: null,  // 单位移动事件监听,触发
+      moveEvent: null  // 单位移动事件监听,触发
     }
   },
   created() {
@@ -114,118 +119,102 @@ export default {
 
 </script>
 
-<style scoped lang="less">
-.map {
-  position: relative;
-  overflow: hidden;
-  .backhome {
-    position: absolute;
-    z-index: 9;
-    left: 746px;
-    top: 446px;
-    border-radius: 5px;
-    width: 60px;
-    height: 35px;
-    line-height: 28px;
-    font-size: 16px;
-    font-weight: bold;
-    border-width: 2px;
-    border-color: white;
-    color: white;
-  }
-  .backhome:hover {
-    background-color: white;
-    color: #47485c;
-  }
-  .home-info {
-    position: absolute;
-    background:#47485c;
-    border-radius: 0px 0px 8px 0px;
-    z-index: 2;
-  }
-  .package {
-    position: absolute;
-    z-index: 2;
-    background:#47485c;
-    border-radius: 0px 8px 0px 0px;
-    top: 230px;
-  }
-  .show-btn {
-    background: #9c9eaa;
-    position: absolute;
-    z-index: 2;
-    width: 20px;
-    height: 38px;
-    line-height: 38px;
-    text-align: right;
-    top: 196px;
-    border-radius: 0px 5px 5px 0px;
-    padding-right: 4px;
-    transition: width 0.6s;
-    cursor: pointer;
-    color: white;
-  }
-  .show-btn.opend {
-    width: 40px;
-    transition: 0.4s;
-    border-radius: 0px 5px 5px 0px;
-  }
-  .tip {
-    display: inline-block;
-    color: white;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 10;
-    width: 150px;
-    height: 70px;
-    padding: 6px;
-    border-bottom-left-radius: 4px;
-    background: rgba(0,0,0,0.4);
-    .map-name {
-      float: right;
-      margin-right: 0px;
-      width: 30%;
-    }
-    .tip-blocklist {
-      float: right;
-      margin-right: 0px;
-      width: 78%;
-      .tip-block {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-        text-align: center;
-        line-height: 30px;
-        margin-top: 6px;
-        border-radius: 4px;
-      }
-      .Chest {
-        background: #6e4633;
-      }
-      .hero {
-        background: #886bfa;
-      }
-      .DEvent {
-        background: #539ad8;
-      }
-    }
-  }
-  .map-data {
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-    background-color: #51963d;
-    .map {
-      line-height: 0;
-      z-index: 1;
-      position: absolute;
-      width: 800px;
-      height: 800px;
-      transition: 0.2s;
-      background-color: #c3944e;
-    }
-  }
-}
+<style scoped lang="stylus">
+.map
+  position relative
+  overflow hidden
+  .backhome
+    position absolute
+    z-index 9
+    left 746px
+    top 446px
+    border-radius 5px
+    width 60px
+    height 35px
+    line-height 28px
+    font-size 16px
+    font-weight bold
+    border-width 2px
+    border-color white
+    color white
+    &:hover
+      background-color white
+      color #47485c
+  .home-info
+    position absolute
+    background:#47485c
+    border-radius 0px 0px 8px 0px
+    z-index 2
+  .package
+    position absolute
+    z-index 2
+    background:#47485c
+    border-radius 0px 8px 0px 0px
+    top 230px
+  .show-btn
+    background #9c9eaa
+    position absolute
+    z-index 2
+    width 20px
+    height 38px
+    line-height 38px
+    text-align right
+    top 196px
+    border-radius 0px 5px 5px 0px
+    padding-right 4px
+    transition width 0.6s
+    cursor pointer
+    color white
+    &.opened
+      width 40px
+      transition 0.4s
+      border-radius 0px 5px 5px 0px
+  .tip
+    display inline-block
+    color white
+    position absolute
+    top 0px
+    right 0px
+    z-index 10
+    width 150px
+    height 70px
+    padding 6px
+    border-bottom-left-radius 4px
+    background rgba(0,0,0,0.4)
+    .map-name
+      float right
+      margin-right 0px
+      width 30%
+    .tip-blocklist
+      float right
+      margin-right 0px
+      width 78%
+      .tip-block
+        display inline-block
+        width 30px
+        height 30px
+        font-size 12px
+        text-align center
+        line-height 30px
+        margin-top 6px
+        border-radius 4px
+      .Chest
+        background #6e4633
+      .hero
+        background #886bfa
+      .DEvent
+        background #539ad8
+  .map-data
+    position relative
+    height 500px
+    overflow hidden
+    background-color #51963d
+    .map
+      line-height 0
+      z-index 1
+      position absolute
+      width 800px
+      height 800px
+      transition 0.2s
+      background-color #c3944e
 </style>

@@ -1,8 +1,10 @@
-// public css
-require("./css/animate.css")
-require("./css/main.css")
-require("./css/dialog-modal.css")
-require("normalize.css")
+// css libraries
+import 'normalize.css/normalize.css'
+import 'animate.css/animate.min.css'
+
+// public styles
+import './styles/main.stylus'
+import './styles/dialog-modal.stylus'
 
 // public js
 import public_function from './js/public-function.js'

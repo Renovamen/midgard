@@ -3,7 +3,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: './src/app.js',
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: 'dist/',
@@ -25,11 +25,11 @@ module.exports = {
         ]
       },
       {
-        test: /.less$/,
+        test: /\.styl(us)?$/,
         use: [
           'vue-style-loader',
           'css-loader',
-          'less-loader'
+          'stylus-loader'
         ]
       },
       {
@@ -59,10 +59,5 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin()
   ],
-  devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map',
-  module.exports.mode = 'production'
+  devtool: process.env.NODE_ENV === 'production' ? '#source-map' : '#eval-source-map'
 }

@@ -3,7 +3,7 @@ import Vue from 'vue'
 import CONSTANT from '../data/constant'
 import PGET from '../js/public-static-get'
 
-const DialogElementClassName = '.Map-Dialog-modal'
+const DialogElementClassName = '.map-dialog-modal'
 const ShadowViewClassName = '.shadow-view'
 
 const createPopup = function() {
@@ -13,7 +13,7 @@ const createPopup = function() {
   let opt = {
     height    : 300,
     width     : 200,
-    animated  : 'animated zoomIn',
+    animated  : 'animated faster zoomIn',
     backForce : 0.2
   }
 
@@ -194,8 +194,8 @@ const MapGetItem = function(event, callback) {
       opt = info.opt, view = info.view
       
   Object.assign(modal, {
-    className : [ opt.animated, DialogElementClassName.slice(1) ].join(' '),
-    innerHTML : `
+    className: [ opt.animated, DialogElementClassName.slice(1) ].join(' '),
+    innerHTML: `
       <div class="close" @click="this.close">+</div>
       <div class="msg m-b-4 radius-2">
         {{this.record.msg}}

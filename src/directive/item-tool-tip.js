@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import CONSTANT from '../data/constant'
-
-require('../css/item-tool-tip.css')
+import '../styles/item-tool-tip.stylus'
 
 export default function(el, binding) {
   let keyName = CONSTANT.UNIT_ATTR_NAME,
@@ -15,9 +14,7 @@ export default function(el, binding) {
         window.open(item.link)
       }
     },
-
     mouseenter: function(e) {
-
       event.mouseleave()
 
       let tip = document.createElement('div')
@@ -78,7 +75,6 @@ export default function(el, binding) {
   }
 
   for(let key in event) {
-
     let value = event[key],
         keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_TOOL_TIP`
 

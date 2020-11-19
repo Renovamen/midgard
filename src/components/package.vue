@@ -31,7 +31,7 @@ export default {
     }
   },
   watch: {
-    '$store.state.UPDATE' : function() {
+    '$store.state.UPDATE': function() {
       this.$forceUpdate()
     },
   },
@@ -43,66 +43,55 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-.package {
-  padding: 5px;
-  height: 100%;
-  width: 520px;
-  .info-list {
-    padding: 5px 8px;
-    font-size: 10px;
-    .label-name {
-      height: 40px;
-      line-height: 40px;
-      width: 60px;
-      background: #6d7083;
-      color: white;
-      text-align: center;
-      border-radius: 2px;
-      font-size: 16px;
-      margin-top: -4px;
-      margin-bottom: 4px;
-      display: inline-block;
-    }
-    .sort {
-      float: right;
-      margin-right: 6px;
-      width: 44px;
-      height: 30px;
-      line-height: 25px;
-      margin-top: 6px;
-      border-color: #6d7083;
-      color: white;
-    }
-    .sort:hover {
-      background-color: #6d7083;
-    }
-    .item {
-      width: 60px;
-      margin-right: 8px;
-      display: inline-block;
-      .title {
-        background: #5cb85c;
-        border-radius: 2px;
-        padding: 2px 4px;
-        color: white;
-      }
-      .num {
-        background: #6d7083;
-        padding: 2px 4px;
-        border-radius: 0px 2px 2px 0px;
-        color: beige;
-      }
-    }
-  }
-
-  .list {
-    height: 40%;
-    overflow: scroll;
-    padding-left: 8px;
-    .item {
-      margin: 0px 6px 4px 0px;
-    }
-  }
-}
+<style scoped lang="stylus">
+.package
+  padding 5px
+  height 100%
+  width 520px
+  .info-list
+    padding 5px 8px
+    font-size 10px
+    .label-name
+      height 40px
+      line-height 40px
+      width 60px
+      background #6d7083
+      color white
+      text-align center
+      border-radius 2px
+      font-size 16px
+      margin-top -4px
+      margin-bottom 4px
+      display inline-block
+    .sort
+      float right
+      margin-right 6px
+      width 44px
+      height 30px
+      line-height 25px
+      margin-top 6px
+      border-color #6d7083
+      color white
+      &:hover
+        background-color #6d7083
+    .item
+      width 60px
+      margin-right 8px
+      display inline-block
+      .title
+        background #5cb85c
+        border-radius 2px
+        padding 2px 4px
+        color white
+      .num
+        background #6d7083
+        padding 2px 4px
+        border-radius 0px 2px 2px 0px
+        color beige
+  .list
+    height 40%
+    overflow scroll
+    padding-left 8px
+    .item
+      margin 0px 6px 4px 0px
 </style>

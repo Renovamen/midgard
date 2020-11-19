@@ -24,9 +24,9 @@ export default {
       let gray = "#c3944e", black = "#51963d"
       let type = this.block.block_type, bt = CONSTANT.MAP_BLOCK_TYPE
       let opt = { 
-            display: 'inline-block',
-            background: black,
-          }
+        display: 'inline-block',
+        background: black
+      }
 
       if(type != bt.ROAD || type == bt.HERO || this.block.event) {
         opt.background = gray
@@ -68,70 +68,44 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-.map-block {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  vertical-align: top;
-}
-
-.road:hover {
-  box-shadow: 0px 0px 4px #ffffff inset;
-  cursor: pointer;
-}
-
-.MapDialog, .Chest, .hero {
-  border-radius: 4px;
-}
-
-.stick {
-  background-color: #51963d;
-}
-
-.road {
-  background-color: #c3944e;
-}
-
-.Chest {
-  // background: url('../assets/fight.png') no-repeat;
-  // background-size: 100%;
-  background-color: #6e4633;
-}
-
-.MapDialog {
-  background: #539ad8;
-}
-
-.hero {
-  background: #886bfa;
-}
-
-.MapDialog .fa {
-  padding: 13px 8px 13px 16px;
-  color: white;
-}
-
-.Chest .fa {
-  padding: 12px 9px 11px 10px;
-  color: white;
-}
-
-.hero .fa {
-  padding: 13px 10px 11px 12px;
-  color: white;
-}
-
-.r-1 {
-  border-top-left-radius: 6px;
-}
-.r-2 {
-  border-top-right-radius: 6px;
-}
-.r-3 {
-  border-bottom-left-radius: 6px;
-}
-.r-4 {
-  border-bottom-right-radius: 6px;
-}
+<style scoped lang="stylus">
+.map-block
+  display inline-block
+  width 40px
+  height 40px
+  vertical-align top
+.road
+  background-color #c3944e
+  &:hover
+    box-shadow 0px 0px 4px #ffffff inset
+    cursor pointer
+.stick
+  background-color #51963d
+.MapDialog, .Chest, .hero
+  border-radius 4px
+.MapDialog
+  background #539ad8
+  .fa
+    padding 13px 8px 13px 16px
+    color white
+.Chest
+  // background url('../assets/fight.png') no-repeat
+  // background-size 100%
+  background-color #6e4633
+  .fa
+    padding 12px 9px 11px 10px
+    color white
+.hero
+  background #886bfa
+  .fa
+    padding 13px 10px 11px 12px
+    color white
+.r-1
+  border-top-left-radius 6px
+.r-2
+  border-top-right-radius 6px
+.r-3
+  border-bottom-left-radius 6px
+.r-4
+  border-bottom-right-radius 6px
 </style>

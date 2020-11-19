@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import MapInit from '../js/map-init';
+import MapInit from '../js/map-init'
 
 export default {
   data () {
@@ -79,7 +79,6 @@ export default {
           rule: {}  // 生成规则
         }
       ]
-
       this.$store.state.MapStore.mapList = _.cloneDeep(map_table)
       return this.$store.state.MapStore.mapList
     }
@@ -94,57 +93,48 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-.home-menu {
-  margin-top: -16px;
-  word-spacing:-4px;
-  display: table;
-  width: 100%;
-  height: 220px;
-  .link {
-    text-decoration: none;
-    position: relative;
-    vertical-align: top;
-    display: inline-block;
-    color: rgb(207, 210, 218);
-    padding-right: 6px;
-    overflow: hidden;
-    border: 1px solid #535664;
-    border-radius: 5px;
-    height: 100%;
-
-    .title {
-      margin-top: 10px;
-      text-align: right;
-      span:first-child{
-        font-size: 24px;
-      }
-    }
-    .e-title {
-      font-size: 10px;
-      text-align: right;
-    }
-    img {
-      opacity: 0;
-      position: absolute;
-      width: 100px;
-      top: 50px;
-      left: 50px;
-      transition: 0.2s;
-    }
-    transition: 0.2s;
-  }
-  .link:hover {
-    text-decoration: none;
-    background: #377bb5;
-    color: white;
-    transition: 0.3s;
-    img {
-      opacity: 1;
-      top: 80px;
-      left: 8px;
-      transition: 0.3s;
-    }
-  }
-}
+<style scoped lang="stylus">
+.home-menu
+  margin-top -16px
+  word-spacing:-4px
+  display table
+  width 100%
+  height 220px
+  .link
+    text-decoration none
+    position relative
+    vertical-align top
+    display inline-block
+    color rgb(207, 210, 218)
+    padding-right 6px
+    overflow hidden
+    border 1px solid #535664
+    border-radius 5px
+    height 100%
+    transition 0.2s
+    .title
+      margin-top 10px
+      text-align right
+      span:first-child
+        font-size 24px
+    .e-title 
+      font-size 10px
+      text-align right
+    img
+      opacity 0
+      position absolute
+      width 100px
+      top 50px
+      left 50px
+      transition 0.2s
+    &:hover
+      text-decoration none
+      background #377bb5
+      color white
+      transition 0.3s
+      img
+        opacity 1
+        top 80px
+        left 8px
+        transition 0.3s
 </style>

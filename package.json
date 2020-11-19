@@ -1,14 +1,15 @@
 {
   "name": "endless-resume",
-  "description": "My interesting resume for banana interactive",
+  "description": "Hmm, an 'interesting' version of my resume.",
   "author": "renovamen <renovamenzxh@gmail.com>",
   "scripts": {
-    "dev": "webpack-dev-server --open --inline --hot",
+    "dev": "webpack-dev-server --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "preview": "http-server"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "animate.css": "^3.7.2",
     "axios": "^0.21.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.12",
@@ -22,8 +23,8 @@
     "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
     "file-loader": "^6.2.0",
-    "less": "^3.12.2",
-    "less-loader": "^7.1.0",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^4.3.0",
     "lodash": "4.17.20",
     "url-loader": "^4.1.1",
     "vue-loader": "^15.9.5",
