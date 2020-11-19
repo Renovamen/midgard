@@ -5,7 +5,7 @@ const createPopup = function() {
   let opt = {
     height    : 300,
     width     : 120,
-    animated  : 'animated faster zoomIn',
+    animated  : 'animate__animated animate__faster animate__zoomIn',
     backForce : 0.2
   }
 

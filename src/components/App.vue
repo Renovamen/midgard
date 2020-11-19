@@ -5,7 +5,7 @@
   >
     <div class="main">
       <div class="router-view" id="router-view">
-        <transition enter-active-class="animated fadeIn">
+        <transition enter-active-class="animate__animated animate__fadeIn">
           <router-view></router-view>
         </transition>
       </div>

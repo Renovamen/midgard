@@ -3,15 +3,15 @@
     <router-link class="btn backhome" to="/">HOME</router-link>
 
     <transition
-      enter-active-class="animated faster slideInUp"
-      leave-active-class="animated faster slideOutDown"
+      enter-active-class="animate__animated animate__faster animate__slideInUp"
+      leave-active-class="animate__animated animate__faster animate__slideOutDown"
     >
       <package class="v-package" v-show="opt.info"></package>
     </transition>
 
     <transition
-      enter-active-class="animated faster slideInDown"
-      leave-active-class="animated faster slideOutUp"
+      enter-active-class="animate__animated animate__faster animate__slideInDown"
+      leave-active-class="animate__animated animate__faster animate__slideOutUp"
     >
       <home-info class="right-info" v-show="opt.info" transition="bounce"></home-info>
     </transition>
@@ -25,7 +25,10 @@
       </span>
     </div>
 
-    <transition enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+    <transition
+      enter-active-class="animate__animated animate__slideInRight"
+      leave-active-class="animate__animated animate__slideOutRight"
+    >
       <div class="tip" v-if="opt.tip">
         <div class="map-name">{{map.$opt.name}}</div>
         <div class="tip-blocklist">

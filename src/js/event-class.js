@@ -13,7 +13,7 @@ const createPopup = function() {
   let opt = {
     height    : 300,
     width     : 200,
-    animated  : 'animated faster zoomIn',
+    animated  : 'animate__animated animate__faster animate__zoomIn',
     backForce : 0.2
   }
 
@@ -68,7 +68,7 @@ const MapDialog = function(event, callback) {
   let info = createPopup()
   let modal = info.modal, shadowView = info.shadowView,
       opt = info.opt, view = info.view
-
+  
   Object.assign(modal, {
     className: [ opt.animated, DialogElementClassName.slice(1) ].join(' '),
     innerHTML: `
