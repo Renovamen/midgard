@@ -6,14 +6,14 @@
       enter-active-class="animate__animated animate__faster animate__slideInUp"
       leave-active-class="animate__animated animate__faster animate__slideOutDown"
     >
-      <package class="v-package" v-show="opt.info"></package>
+      <Package class="v-package" v-show="opt.info" />
     </transition>
 
     <transition
       enter-active-class="animate__animated animate__faster animate__slideInDown"
       leave-active-class="animate__animated animate__faster animate__slideOutUp"
     >
-      <home-info class="right-info" v-show="opt.info" transition="bounce"></home-info>
+      <HomeInfo class="right-info" v-show="opt.info" transition="bounce" />
     </transition>
 
     <div :class="['show-btn', opt.info ? 'opened' : 'closed']" @click="showInfo">
@@ -26,7 +26,7 @@
       leave-active-class="animate__animated animate__slideOutRight"
     >
       <div class="tip" v-if="opt.tip">
-        <div class="map-name">{{map.$opt.name}}</div>
+        <div class="map-name">{{ map.$opt.name }}</div>
         <div class="tip-blocklist">
           <span class="tip-block map-chest">包裹</span>
           <span class="tip-block map-dialog">事件</span>
@@ -38,13 +38,12 @@
     <div class="map-data">
       <div class="map">
         <div v-for="(line, x) in map.$data.mapData" :key="`line-${x}`">
-          <map-block 
+          <MapBlock
             v-for="(block, y) in line"
             :key="`block-${y}`"
             :block="block"
             :map="map" 
-            @autoMove="autoMove(block)">
-          </map-block>
+            @autoMove="autoMove(block)" />
         </div>
       </div>
     </div>
@@ -55,16 +54,14 @@
 <script>
 import Astar from '../js/astar'
 import HeroMoveEvent from '../js/map-hero-move'
-import Menu from './home-menu.vue'
-import Info from './home-info.vue'
-import MapBlock from './map-block.vue'
 import MapInit from '../js/map-init'
+import MapBlock from '../components/MapBlock'
+import HomeInfo from '../components/HomeInfo'
 
 export default {
   components: {
-    'home-menu': Menu,
-    'home-info': Info,
-    'map-block': MapBlock
+    MapBlock,
+    HomeInfo
   },
   data() {
     return {
@@ -119,6 +116,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@require '../styles/palette.styl'
 .map
   position relative
   overflow hidden
@@ -138,16 +136,16 @@ export default {
     color white
     &:hover
       background-color white
-      color #47485c
+      color $bgColor
   .home-info
     position absolute
-    background:#47485c
+    background $bgColor
     border-radius 0px 0px 8px 0px
     z-index 2
   .package
     position absolute
     z-index 2
-    background #47485c
+    background $bgColor
     border-radius 0px 8px 0px 0px
     top 230px
   .show-btn
@@ -191,7 +189,7 @@ export default {
     height 70px
     padding 6px
     border-bottom-left-radius 4px
-    background rgba(0,0,0,0.4)
+    background rgba(0, 0, 0, 0.4)
     .map-name
       float right
       margin-right 0px
@@ -210,16 +208,16 @@ export default {
         margin-top 6px
         border-radius 4px
       .map-chest
-        background #6e4633
+        background $chestColor
       .hero
-        background #886bfa
+        background $heroColor
       .map-dialog
-        background #539ad8
+        background $eventColor
   .map-data
     position relative
     height 500px
     overflow hidden
-    background-color #51963d
+    background-color $stickColor
     .map
       line-height 0
       z-index 1
@@ -227,5 +225,5 @@ export default {
       width 800px
       height 800px
       transition 0.2s
-      background-color #c3944e
+      background-color $roadColor
 </style>

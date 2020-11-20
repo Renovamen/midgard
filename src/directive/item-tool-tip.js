@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import CONSTANT from '../data/constant'
-import '../styles/item-tool-tip.stylus'
+import '../styles/item-tool-tip'
 
 export default function(el, binding) {
   let keyName = CONSTANT.UNIT_ATTR_NAME,

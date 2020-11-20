@@ -2,7 +2,6 @@ const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
-  entry: './src/app.js',
   mode: 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -10,6 +9,7 @@ module.exports = {
     filename: 'build.js'
   },
   resolve: {
+    extensions: ['.js', '.vue', '.styl'],
     alias: {
       vue: 'vue/dist/vue.js',
       assets: path.resolve(__dirname, './src/assets')

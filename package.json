@@ -3,7 +3,7 @@
   "description": "Hmm, an 'interesting' version of my resume.",
   "author": "renovamen <renovamenzxh@gmail.com>",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack-dev-server --progress --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "preview": "http-server"
   },

@@ -19,26 +19,26 @@
           >
             {{ this.collectTip }}
           </div>
-          <component-item
+          <PackageItem
             class="resume1"
             :item="hero.$resumes[0]"
-            :position-index="'$resumes|0'">
-          </component-item>
-          <component-item
+            :position-index="'$resumes|0'"
+          />
+          <PackageItem
             class="resume2"
             :item="hero.$resumes[1]"
-            :position-index="'$resumes|1'">
-          </component-item>
+            :position-index="'$resumes|1'"
+          />
         </div>
         <div class="right">
           <template v-for="(item, index) in hero.$resumes">
-            <component-item
+            <PackageItem
               class="item"
               v-if="index > 1"
               :key="`resume-item-${index}`"
               :item="item"
               :position-index="'$resumes|' + index"
-            ></component-item>
+            />
           </template>
         </div>
       </div>
@@ -119,6 +119,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@require '../styles/palette.styl'
 .home-info
   word-spacing -4px
   display table
@@ -137,21 +138,21 @@ export default {
     height 40px
     line-height 40px
     width 60px
-    background #6d7083
+    background $bgLabelColor
     color white
     text-align center
     border-radius 2px
   .collect
-    background #c46272
+    background $redColor
     &:hover
-      box-shadow 0px 0px 4px #eee inset
+      box-shadow $hoverShadow
   .basic-info
     margin-bottom 4px
     .avatar
       display inline-block
       width 40px
       height 40px
-      background-color #6d7083
+      background-color $bgLabelColor
       border-radius 2px
       vertical-align top
       position relative
@@ -160,9 +161,9 @@ export default {
         width 40px
         height 40px
       &:hover
-        box-shadow 0px 0px 2px #eee inset
+        box-shadow $hoverShadowSmall
     .name
-      background-color #6d7083
+      background-color $bgLabelColor
       border-radius 2px
       color white
       display inline-block
@@ -181,7 +182,7 @@ export default {
       height 30px
       margin-left -13px
       margin-top 5px
-      background-color #6d7083
+      background-color $bgLabelColor
       color white
       outline none
       border 1px solid white
@@ -213,7 +214,7 @@ export default {
         display block
         margin-left 4px
         margin-top -2px
-        color #f16565
+        color $redColor
 
 .home-info.right-info
   height 168px

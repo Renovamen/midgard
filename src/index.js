@@ -3,8 +3,8 @@ import 'normalize.css/normalize.css'
 import 'animate.css/animate.min.css'
 
 // public styles
-import './styles/main.stylus'
-import './styles/dialog-modal.stylus'
+import './styles/main'
+import './styles/dialog'
 
 // public js
 import public_function from './js/public-function.js'
@@ -16,13 +16,13 @@ import filter from './filter'
 import store from './store'
 
 // components
-import App from './components/App.vue'
-import Package from './components/package.vue'
-import ComponentItem from './components/component-item.vue'
+import App from './App'
+import Package from './components/Package'
+import PackageItem from './components/PackageItem'
 
 Vue.component('App', App)
-Vue.component('package', Package)
-Vue.component('component-item', ComponentItem)
+Vue.component('Package', Package)
+Vue.component('PackageItem', PackageItem)
 
 Vue.config.errorHandler = function (err, vm) {
   console.warn(err,vm)
@@ -32,5 +32,5 @@ Vue.config.errorHandler = function (err, vm) {
 const app = new Vue({
   store,
   router,
-  template: `<App/>`
+  render: h => h(App)
 }).$mount('#app')

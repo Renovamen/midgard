@@ -16,16 +16,14 @@ export default {
       this.$emit('autoMove')
     },
     bgColor() {
-      // indexOf("Apple")
-      let gray = "#c3944e", black = "#51963d"
+      let roadColor = "#c3944e", stickColor = "#51963d"
       let type = this.block.block_type, bt = CONSTANT.MAP_BLOCK_TYPE
       let opt = { 
         display: 'inline-block',
-        background: black
+        background: stickColor
       }
-
       if(type != bt.ROAD || type == bt.HERO || this.block.event) {
-        opt.background = gray
+        opt.background = roadColor
       }
       return opt
     },
@@ -65,18 +63,19 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@require '../styles/palette.styl'
 .map-block
   display inline-block
   width 40px
   height 40px
   vertical-align top
 .road
-  background-color #c3944e
+  background-color $roadColor
   &:hover
-    box-shadow 0px 0px 4px #ffffff inset
+    box-shadow $hoverShadow
     cursor pointer
 .stick
-  background-color #51963d
+  background-color $stickColor
 .map-dialog, .map-chest, .hero
   border-radius 4px
   position relative
@@ -90,15 +89,15 @@ export default {
     margin-top -13px
     margin-left -13px
 .map-dialog
-  background-color #539ad8
+  background-color $eventColor
   &::before
     content url('../assets/world/info.svg')
 .map-chest
-  background-color #6e4633
+  background-color $chestColor
   &::before
     content url('../assets/world/chest.svg')
 .hero
-  background #886bfa
+  background $heroColor
   &::before
     content url('../assets/world/hero.svg')
 .r-1

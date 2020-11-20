@@ -1,22 +1,23 @@
 <template>
   <div class="home">
     <div class="left">
-      <home-info></home-info>
-      <home-menu></home-menu>
+      <HomeInfo />
+      <HomeMenu />
     </div>
     <div class="right">
-      <package></package>
+      <Package />
     </div>
   </div>
 </template>
 
 <script>
-import Menu from './home-menu.vue'
-import Info from './home-info.vue'
+import HomeMenu from '../components/HomeMenu'
+import HomeInfo from '../components/HomeInfo'
+
 export default {
   components: {
-    'home-menu' : Menu,
-    'home-info' : Info
+    HomeMenu,
+    HomeInfo
   },
   created() {
     // 获取角色信息
@@ -31,11 +32,12 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@require '../styles/palette.styl'
 .home
   word-spacing:-4px
   display table
   padding-left 20px
-  background #47485c
+  background $bgColor
   .left
     margin-top 4px
     display inline-block

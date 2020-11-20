@@ -2,19 +2,19 @@
   <div class="package shadow-box">
     <div class="info-list">
       <div class="label-name">背包</div>
-      <component-item class="dustbin" position-index="$destory|0">
+      <PackageItem class="dustbin" position-index="$destory|0">
         <span slot="item-name" class="item-name"></span>
-      </component-item>
+      </PackageItem>
       <div class="btn f-r sort" @click="sort">整理</div>
     </div>
     <div class="list">
       <template v-for="(item, index) in hero.$package">
-        <component-item
+        <PackageItem
           class="item"
           :key="`package-item-${index}`"
           :item="item"
           :position-index="'$package|' + index"
-        ></component-item>
+        />
       </template>
     </div>
   </div>
@@ -42,6 +42,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@require '../styles/palette.styl'
 .package
   padding 5px
   height 100%
@@ -53,7 +54,7 @@ export default {
       height 40px
       line-height 40px
       width 60px
-      background #6d7083
+      background $bgLabelColor
       color white
       text-align center
       border-radius 2px
@@ -68,29 +69,15 @@ export default {
       height 30px
       line-height 25px
       margin-top 6px
-      border-color #6d7083
+      border-color $bgLabelColor
       color white
       &:hover
-        background-color #6d7083
-    .item
-      width 60px
-      margin-right 8px
-      display inline-block
-      .title
-        background #5cb85c
-        border-radius 2px
-        padding 2px 4px
-        color white
-      .num
-        background #6d7083
-        padding 2px 4px
-        border-radius 0px 2px 2px 0px
-        color beige
+        background-color $bgLabelColor
     .dustbin
       height 30px
       margin-top 6px
       float right
-      background-color #507c59
+      background-color $delColor
       .blank
         line-height 36px
       span

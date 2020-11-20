@@ -93,6 +93,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@require '../styles/palette.styl'
 .home-menu
   margin-top -16px
   word-spacing:-4px
@@ -128,7 +129,7 @@ export default {
       transition 0.2s
     &:hover
       text-decoration none
-      background #377bb5
+      background $primaryColor
       color white
       transition 0.3s
       img

@@ -1,10 +1,10 @@
 const CONSTANT = {
   MAP_BLOCK_TYPE: {
-    STICK : '2',  // 障碍
     ROAD  : '0',  // 可行走
-    PATH  : '4',  // 路径
     HERO  : '1',  // 英雄
-    END   : '3'  // 寻路终点
+    STICK : '2',  // 障碍
+    END   : '3',  // 寻路终点
+    PATH  : '4'   // 路径
   },
   EQUIP_ID: [
     "基本", "教育", "课程", "技能", "兴趣", "项目1", 

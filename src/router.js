@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from "vue-router"
-import Home from './components/home.vue'
-import Map from './components/map.vue'
+import Home from './pages/Home.vue'
+import Map from './pages/Map.vue'
 
 Vue.use(VueRouter)
 

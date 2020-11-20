@@ -21,7 +21,7 @@ export default function(el, binding) {
     dragstart(event) {
       event.dataTransfer.setData("text", position)
       try {
-        event.dataTransfer.setDragImage(!~event.target.className.indexOf("component-item") ? event.target.parentNode : event.target, 20, 20)
+        event.dataTransfer.setDragImage(!~event.target.className.indexOf("package-item") ? event.target.parentNode : event.target, 20, 20)
       } 
       catch(error) {
         // pass
@@ -44,7 +44,7 @@ export default function(el, binding) {
     }
   }
 
-  // 如果是格子是空的则禁用拖动;
+  // 如果是格子是空的则禁用拖动
   {
     let block = new moveClass(position).get()
 
@@ -54,7 +54,7 @@ export default function(el, binding) {
     block = null
   }
 
-  // 创建事件,并销毁已销毁的事件;
+  // 创建事件，并销毁已销毁的事件
   for(let key in event) {
     let value = event[key], keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_BLOCK`
     el.removeEventListener(key, el[keyNameInElement])

@@ -1,5 +1,5 @@
 <template>
-  <div v-item-tool-tip="item" v-drop-item="dropData" class="component-item">
+  <div v-item-tool-tip="item" v-drop-item="dropData" class="package-item">
     <div v-if="item" :style="{'color': gradeColor[item.grade || 0]}">
       <slot name="item-name">
         <span class="item-name" v-if="item.name">{{ item.name }}</span>
@@ -65,35 +65,25 @@ export default {
 </script>
 
 <style lang="stylus">
-.notice-item
-  top 8px
-  right 8px
-
-.component-item
+@require '../styles/palette.styl'
+.package-item
   position relative
-  background  #232731
+  background $bgItemColor
   display inline-block
   vertical-align top
   width 44px
   height 44px
   color white
-  // border 1px solid gray
   border-radius 2px
-  overflow  hidden
+  overflow hidden
   cursor pointer
-  .blank
-    cursor pointer
-    text-align center
-    line-height 40px
-    .item-name
-      color #cfd2da
   &:hover
-    box-shadow 0px 0px 4px #eee inset
+    box-shadow $hoverShadow
   .badges
     position absolute
     width 38px
     margin 0px 3px
-    border-top 1px solid rgba(255,255,255,0.5)
+    border-top 1px solid rgba(255, 255, 255, 0.5)
     height 16px
     line-height 16px
     text-align center
