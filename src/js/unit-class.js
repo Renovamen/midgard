@@ -1,4 +1,3 @@
-import { ITEM_TABLE } from "../data/item-data"
 import store from '../store'
 import CreateHero from './create-hero'
 import { GetRange, GetRandom } from './public-random-range'

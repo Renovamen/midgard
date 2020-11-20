@@ -1,5 +1,5 @@
 import Unit from '../js/unit-class'
-import {ITEM_TABLE} from '../data/item-data'
+import ITEM_TABLE from '../data/item-data'
 import PGET from '../js/public-static-get'
 import store from '../store'
 import Vue from 'vue'

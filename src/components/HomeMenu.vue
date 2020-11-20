@@ -49,9 +49,9 @@ export default {
         var level, chestID
         
         // 包裹中物品种类
-        let itemID = Math.floor(Math.random()*14) + 1
-        // 包裹中物品等级 R:50% SR:30% SSR:15% UR:5%
-        let levelID = Math.floor(Math.random()*100) + 1
+        let itemID = Math.ceil(Math.random() * 14)
+        // 包裹中物品等级 R: 50%, SR: 30%, SSR:15%, UR: 5%
+        let levelID = Math.ceil(Math.random() * 100)
 
         if(levelID <= 50) level = 0
         else if(levelID > 50 && levelID <= 80) level = 1
@@ -61,6 +61,10 @@ export default {
         chestID = 5000000 + level * 14 + itemID
         chestList.push(chestID)
       }
+
+      // 随机生成事件
+      var eventList = []
+      for(let i = 1; i <= 3; i++) eventList.push(7000000 + Math.ceil(Math.random() * 10))
 
       var map_table = [
         {
@@ -74,7 +78,7 @@ export default {
             inflex: 0.5  // 曲折度
           },
           chestList: chestList,
-          eventList: [7000001],  // 事件
+          eventList: eventList,  // 事件
           rule: {}  // 生成规则
         }
       ]

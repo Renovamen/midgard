@@ -261,7 +261,7 @@ const MapGetItem = function(event, callback) {
       }
     }
 
-    let buttons = _.map(record.buttons,function(str) {
+    let buttons = _.map(record.buttons, function(str) {
       if(typeof str === 'object') return str
 
       let strc = str
@@ -288,10 +288,10 @@ const MapGetItem = function(event, callback) {
           let get = opt.get || []
           let unit = this.$store.state.HeroStore.hero
           let left = unit.getItem(get)
-          if(left.length) this.$i = i[0]
+          if(left.length) this.$i = Number(i[0])
           else {
             unit.getItem(get, true)
-            this.$i = i[1]
+            this.$i = Number(i[1])
           }
           this.next()
           if(Number(isEnd)) this.isEnd = true
