@@ -21,3 +21,19 @@ yarn dev
 # build for production with minification
 yarn build
 ```
+
+&nbsp;
+
+## To Do
+
+- [ ] Responsive design
+- [ ] English version
+- [ ] Language switcher
+
+
+&nbsp;
+
+## Acknowledgement
+
+- This project is inspired by [bastarder/vue-endless-h5-game](https://github.com/bastarder/vue-endless-h5-game).
+- Some of the icons are modified from [Freepik](https://www.flaticon.com/authors/freepik) and [Smashicons](https://www.flaticon.com/authors/smashicons)'s work from [Flaticon](www.flaticon.com).

@@ -1,4 +1,6 @@
-const DIALOG = 'map-dialog'
+import { RESUME_ITEMS_TABLE } from '../data/item-data'
+
+const DIALOG = 'map-dialog', FIRST_ID = RESUME_ITEMS_TABLE[0].id
 
 const getDialogData = function() {
   let dialogList = []
@@ -13,8 +15,8 @@ const getDialogData = function() {
             "[拒绝]{1,1}",
             "#[同意]{3,4,2,1}"
           ],
-          need: [[3000002 + Math.ceil(Math.random() * 56), 1]],
-          get: [[3000002 + Math.ceil(Math.random() * 56), 1]]
+          need: [[FIRST_ID + Math.ceil(Math.random() * 56) - 1, 1]],
+          get: [[FIRST_ID + Math.ceil(Math.random() * 56) - 1, 1]]
         },
         '穷鬼滚开。',
         '我有你想要的任何简历，只要你有钱。',
@@ -23,7 +25,6 @@ const getDialogData = function() {
       ]
     })
   }
-  console.log(dialogList)
   return dialogList
 }
 

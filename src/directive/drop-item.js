@@ -26,7 +26,7 @@ export default function(el, binding) {
       catch(error) {
         // pass
       }
-      let itemPover = document.querySelector('.item-tool-tip-pover')
+      let itemPover = document.querySelector('.item-tip-pover')
       itemPover && itemPover.parentNode.removeChild(itemPover)
     },
     drop(event) {

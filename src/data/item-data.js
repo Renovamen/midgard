@@ -1,18 +1,18 @@
-const Materials = [
+const MATERIAL_TABLE = [
   {
     id: 3000001,
     name: '印着龙爪的信',
     pile: true,
     label: ['提示'],
+    num: 1,
     dsc: [
       '信的内容：',
-      '· 我是龙，世界上最帅的龙。',
+      '· 我是龙，世界上坠帅的龙。',
       '· 我把邹笑寒的简历撕碎了，把碎片扔到了世界各地。',
       '· 我还揍了她一顿，现在她失忆了，所以不能重新写一份简历出来。',
       '· 我真强，哈哈哈哈哈哈哈哈哈。',
       '· 想看简历吗，那就去找那些简历碎片吧，邹笑寒说集齐所有碎片就能让她想起来她是谁。',
-      '· 但我觉得她永远都想不起来了，因为我吃掉了她的脑子。',
-      '· 真难吃 : )',
+      '· 但我觉得她永远都想不起来了，毕竟她看上去好傻。',
       '—— 世界上坠帅的龙'
     ]
   },
@@ -20,9 +20,8 @@ const Materials = [
     id: 3000002,
     name: '氪金吗朋友',
     pile: true,
-    label: [
-      '提示'
-    ],
+    label: ['提示'],
+    num: 1,
     dsc: [
       '氪金两亿即可获得所有简历碎片',
       '扫码付款：'
@@ -30,12 +29,26 @@ const Materials = [
     img: [
       require('assets/wechat.jpg')
     ]
+  },
+  {
+    id: 3000003,
+    name: '关于',
+    pile: true,
+    label: ['提示'],
+    num: 1,
+    dsc: [
+      '代码托管地址：github.com/Renovamen/midgard'
+    ],
+    link: {
+      text: '点击物品查看源码',
+      url: 'https://github.com/Renovamen/midgard'
+    }
   }
 ]
 
-const BaseItems = [
+const baseResumeItems = [
   {
-    id: 3000003,
+    id: 3000004,
     name: '基本个人信息',
     equipType: 0,
     label: [
@@ -46,16 +59,15 @@ const BaseItems = [
     },
     dsc: [
       '姓名：邹笑寒',
-      '籍贯：中国 重庆',
-      '电话：18321968867',
-      '邮箱：renovamenzxh@gmail.com',
+      '电话：(+86) 18321968867',
+      '邮箱：xiaohan.zou@foxmail.com',
       'Facebook：renovamen.zou',
       'Github：Renovamen',
-      'Blog：renovamen.ink'
+      '博客：renovamen.ink'
     ]
   },
   {
-    id: 3000004,
+    id: 3000005,
     name: '教育经历',
     equipType: 1,
     label: [
@@ -65,13 +77,13 @@ const BaseItems = [
       $changeHp: -85,
     },
     dsc: [
-      '同济大学，软件学院，软件工程',
-      '2016-2020（预期）'
+      '同济大学，软件工程，工学学士',
+      '2016.09 - 2020.07'
     ]
   },
   {
-    id: 3000005,
-    name: '相关课程',
+    id: 3000006,
+    name: '核心课程',
     equipType: 2,
     label: [
       '课程'
@@ -80,17 +92,24 @@ const BaseItems = [
       $changeHp: -75,
     },
     dsc: [
-      '软件工程',
-      '软件测试',
-      '用户交互技术',
-      'Web 系统与技术',
+      '概率论',
+      '线性代数',
+      '高等数学',
+      '数据结构',
+      '算法设计与分析',
+      '数据库原理与应用',
+      '操作系统',
+      '编译原理',
+      '面向对象程序设计',
+      'Web 应用与开发',
       'Web 服务与 SOA',
+      '分布式计算',
       '... 等'
     ]
   },
   {
-    id: 3000006,
-    name: '技能点',
+    id: 3000007,
+    name: '技能树',
     equipType: 3,
     label: [
       '技能'
@@ -99,14 +118,13 @@ const BaseItems = [
       $changeHp: -90,
     },
     dsc: [
-      '· 编程语言（按熟悉程度从高到低粗略排序）：Python，MATLAB，JavaScript，HTML，CSS，C/C++，Java',
-      '· 语言：中文（重庆话和普通话，母语）、英文（四六级、托福 100-、GRE 320+）',
-      '· 算法框架：Tensorflow，Keras，scikit-learn',
-      '· 开发框架：Vue，Django'
+      '· 编程语言：Python、JavaScript、HTML/CSS、C/C++、Java、MATLAB',
+      '· 语言：中文（重庆话和普通话，母语）、英文（四六级、托福 106、GRE 322）',
+      '· 工具与框架： Git、PyTorch、Keras、Linux、Vue、Django、LaTeX'
     ]
   },
   {
-    id: 3000007,
+    id: 3000008,
     name: '兴趣',
     equipType: 4,
     label: [
@@ -116,154 +134,158 @@ const BaseItems = [
       $changeHp: -60,
     },
     dsc: [
-      '· 研究兴趣：NLP（自然语言处理）、Knowledge Representation & Reasoning（知识表示及知识推理）',
+      '· 研究兴趣：',
+      '\xa0\xa0\xa0· Continual Learning（持续学习）',
+      '\xa0\xa0\xa0· Meta Learning（元学习）',
+      '\xa0\xa0\xa0· Nature Language Processing（自然语言处理）',
       '· 其他兴趣：游戏、吃、睡',
       '· 毫无兴趣：鹦鹉'
     ]
   },
   {
-    id: 3000008,
-    name: 'Galaxy Voyage',
+    id: 3000009,
+    name: '元学习',
     equipType: 5,
     label: [
-      '项目1'
+      '研究1'
     ],
     equip: {
       $changeHp: -200,
     },
     dsc: [
-      '八分音符飞船 + VR 飞船（Web 系统与技术期末项目）：',
-      '1. 八分音符飞船：控制⼀艘飞船躲避红⾊块并捕获蓝色块，支持鼠标控制和声音控制飞船高度（分贝越高飞船飞得越高， 通过 Web Audio API 实现）。',
-      '2. VR 飞船：控制一艘飞船尽可能从不断旋转的障碍物的孔中穿过去，支持鼠标控制和 VR 控制飞船方向（需要支持重力感应的移动设备和类似 Google Cardbard 的 VR 眼镜，头部跟踪通过 DeviceOrientationEvent 接⼝实现）。',
-      '获得的赞誉：被誉为“能让人失去梦想的游戏”'
-    ],
-    linkInfo: '点击物品查看源码、详细说明及进行试玩',
-    link: 'https://github.com/Renovamen/Galaxy-Voyager'
+      '正在北京大学进行的工作：',
+      '\xa0· 开发基于 PyTorch 的元学习和持续学习工具包，包括主流基准数据集的数据加载模块和对前沿算法的复现；',
+      '\xa0· 进行元学习和持续学习的相关研究。'
+    ]
   },
   {
-    id: 3000009,
-    name: 'Cube',
+    id: 3000010,
+    name: '图像美感描述',
     equipType: 6,
     label: [
-      '项目2'
+      '研究2'
     ],
     equip: {
       $changeHp: 5
     },
     dsc: [
-      '魔方',
-      '· 使用 Three.js 实现可交互的魔方',
-      '· 支持打乱、重置及复原并输出公式（层先法和 Two-Phase 算法）'
+      '为食物图像自动生成美学层面的文字评价，该工作已被 ICTAI 接收：',
+      '\xa0· 提出了一种新颖的模型来为食物图片生成全面的美学评价，该模型由两个模块组成，一个模块用于生成单个美学角度的评价，而另一个模块会对来自所有角度的评价进行无监督文本摘要；',
+      '\xa0· 为这个新任务构建了一个数据集，该数据集中每张食物图片都附带来自最多六个美学角度的描述；',
+      '\xa0· 提出了两种新的客观评估指标，用于评估模型生成的描述的新颖性和多样性；',
+      '\xa0· 在上述数据集上的实验显示，我们的方法在生成句子的多样性、新颖性和连贯性上都优于基线模型和现有方法。'
     ],
-    linkInfo: '点击物品查看源码、详细说明及进行试玩',
-    link: 'https://github.com/Renovamen/Just-a-Cube'
+    link: {
+      text: '点击物品查看论文',
+      url: 'https://renovamen.ink/files/papers/ictai2020/food-iac.pdf'
+    }
   },
   {
-    id: 3000010,
-    name: 'Stupid Torch',
+    id: 3000011,
+    name: '故障诊断系统',
     equipType: 7,
     label: [
-      '项目3'
+      '研究3'
     ],
     equip: {
       $changeHp: -30
     },
     dsc: [
-      '沙雕安卓光能手电筒',
-      '· 支持正常模式、SOS 模式和屏幕白光模式',
-      '· 在有光的地方亮，没有光的地方绝对不亮（通过 Light Sensor 传感器实现）',
-      '· Java + Android Studio 开发'
-    ],
-    linkInfo: '点击物品查看源码及说明',
-    link: 'https://github.com/Renovamen/Stupid-Torch'
+      '为微服务架构构建故障诊断系统：',
+      '\xa0· 根据当前时刻监测到的云原生平台的性能指标，动态地用 PC 算法构建出因果图。图中节点表示每个微服务，有向边表示微服务之间的因果关系；',
+      '\xa0· 当出现异常时，利用随机漫步算法在因果图上搜索出可能引发该异常的故障服务；',
+      '\xa0· 故障注入实验显示，在不需要任何专家知识的情况下，相比传统方法，我们的方法能达到更高的准确率和更快的诊断速度。'
+    ]
   },
   {
-    id: 3000011,
-    name: 'Gomoku',
+    id: 3000012,
+    name: '机器翻译',
     equipType: 8,
     label: [
-      '项目4'
+      '研究4'
     ],
     equip: {
       $changeHp: 5
     },
     dsc: [
-      '五子棋人工智障',
-      '· C 语言程序设计期末项目',
-      '· 极大极小值搜索 + Alpha-beta 剪枝'
-    ],
-    linkInfo: '点击物品查看源码',
-    link: 'https://github.com/Renovamen/Gomoku'
-  },
-  {
-    id: 3000012,
-    name: 'Zelda',
-    equipType: 9,
-    label: [
-      '项目5'
-    ],
-    equip: {
-      $changeHp: 5
-    },
-    dsc: ['《塞尔达传说：荒野之息》介绍网页（用户交互技术课程作业）'],
-    linkInfo: '点击物品查看网页',
-    link: 'http://renovamen.ink/Legend-of-Zeld/index.html'
+      '利用结构对偶性来进行半监督机器翻译，在北京大学期间完成的工作：',
+      '\xa0· 提出了一个基于共享隐空间的对偶学习框架，利用机器翻译模型的结构对偶性来同时提高双向任务的性能；',
+      '\xa0· 基于传统的序列到序列的神经机器翻译模型，利用不同方向的翻译器的编码器和解码器组建了额外的重构器，从而利用无标签数据；',
+      "\xa0· 在数据集 IWSLT'15（英语-越南语）和 WMT'14（英语-德语）上的实验显示，我们的方法相比基线方法取得了 1.0 - 2.9 个 BLEU 值的性能提升。提升在成对数据非常少的时候尤为明显。"
+    ]
   },
   {
     id: 3000013,
     name: '语音情感识别',
+    equipType: 9,
+    label: [
+      '项目1'
+    ],
+    equip: {
+      $changeHp: 5
+    },
+    dsc: [
+      '· 尝试了多种特征提取方法并构建了多个语音情感识别模型；',
+      '· 我们的模型在 CASIA（汉语）、EMODB（德语）、SAVEE（英语）、RAVDESS（英语）四个基线数据集上，相比基线模型有了 7.2 - 12.2 的准确率提升；',
+      '· 该项目已在 Github 上开源，截至 11/2020 已获得 130 个 star。'
+    ],
+    link: {
+      text: '点击物品查看源码',
+      url: 'https://github.com/Renovamen/Speech-Emotion-Recognition'
+    }
+  },
+  {
+    id: 3000014,
+    name: '聊天机器人',
     equipType: 10,
     label: [
-      '研究1'
+      '项目2'
     ],
     equip: {
       $changeHp: -60
     },
     dsc: [
-      '语音情感识别（2019.3 - 2019.6）',
-      '· 使用 Opensmile 提取语音音频中的特征，并进行特征处理',
-      '· 构建 LSTM、CNN、SVM 和 MLP 模型进行语音情感识别',
-      '· 在 CASIA（汉语）、EMODB（德语），SAVEE（英语）和 RAVDESS（英语）数据集上达到了 80% 以上的识别准确率，与现有研究相比有着具有竞争力的效果。'
-    ],
-    linkInfo: '点击物品查看源码及详细说明',
-    link: 'https://github.com/Renovamen/Speech-Emotion-Recognition'
+      '在麻省理工学院期间完成的工作（远程）：',
+      '\xa0· 利用 RasaNLU 搭建了一个能识别用户意图并提供股票和天气信息的聊天机器人；',
+      '\xa0· 使用 spaCy 和 scikit-learn 实现了基于 SVM 的意图分类和命名实体识别模型；',
+      '\xa0· 实现了基于有限状态自动机的多轮问询和状态切换；',
+      '\xa0· 将机器人部署到了微信和 QQ 上，以获取更好的交互体验。'
+    ]
   },
   {
-    id: 3000014,
-    name: '智障问答系统',
+    id: 3000015,
+    name: '论文',
     equipType: 11,
     label: [
-      '研究2'
+      '论文'
     ],
     equip: {
       $changeHp: -50
     },
     dsc: [
-      '问答系统（2018.11 - 2019.1）',
-      '· 基于 Rasa NLU 实现的能提供股票和天气信息的问答系统',
-      '· 调用 iexfinance 和天气预报 API 提供股票和天气信息',
-      '· 使用 spaCy 和 sklearn 进行意图识别和实体抽取，使用 SVM 模型作为分类器',
-      '· 能处理单轮查询、多轮查询、状态转换和识别否定实体',
-      '· 使用 wxpy 将该系统集成到微信上，使其作为一个微信号跟别人聊天'
-    ],
-    linkInfo: '点击物品查看源码及详细说明',
-    link: 'https://github.com/Renovamen/StockBot'
+      '· Xiaohan Zou, Cheng Lin, Yinjia Zhang, and Qinpei Zhao. "To be an Artist: Automatic Generation on Food Image Aesthetic Captioning". ICTAI 2020.',
+      '· Xiaohan Zou. "A Survey on Application of Knowledge Graph". CCEAI 2020.'
+    ]
   },
   {
-    id: 3000015,
-    name: '知识图谱',
+    id: 3000016,
+    name: '实习',
     equipType: 12,
     label: [
-      '论文'
+      '实习'
     ],
     equip: {
       $changeHp: -80
     },
-    dsc: ['Xiaohan Zou. "A Survey on Application of Knowledge Graph". Under Review.']
+    dsc: [
+      '· 2020.10 - 至今：软件开发实习生，中国电子科技集团',
+      '· 2020.09 - 至今：研究助理，北京大学',
+      '· 2019.10 - 2020.5：游戏开发实习生，上海伯拉乐文化科技有限公司',
+    ]
   },
   {
-    id: 3000016,
-    name: '经历',
+    id: 3000017,
+    name: '其他经历',
     equipType: 13,
     label: [
       '经历'
@@ -272,16 +294,14 @@ const BaseItems = [
       $changeHp: -40
     },
     dsc: [
-      '1. 微软俱乐部（2017.9 - 2019.6）',
-      '· 技术部副部长（2018.9 - 2019.6）',
-      '2. 垒球队 & 棒垒球协会（2016.9 - 至今）',
-      '· 棒垒球协会嘉定分社副社长（2018.3 - 2019.1）',
-      '· 打球和被球打'
+      '1. 2017.09 - 2019.06：同济大学微软俱乐部，技术部副部长',
+      '2. 2018.03 - 2019.01：同济大学棒垒球协会，嘉定分会副会长',
+      '3. 2016.09 - 2019.06：同济大学垒球队'
     ],
   }
 ]
 
-const getAllItems = function(baseItems) {
+const getResumeItems = function(baseItems) {
   var allItems = []
   for(let grade = 0; grade <= 3; grade++) {
     for(let item of baseItems) {
@@ -295,15 +315,16 @@ const getAllItems = function(baseItems) {
           $changeHp: item.equip.$changeHp > 0 ? item.equip.$changeHp + (10 * grade)
                      : Math.round(item.equip.$changeHp + grade * 0.2 * Math.abs(item.equip.$changeHp))
         },
-        dsc: item.dsc
+        dsc: item.dsc,
+        link: item.link
       })
     }
   }
   return allItems
 }
 
-const AllItems = getAllItems(BaseItems)
+const RESUME_ITEMS_TABLE = getResumeItems(baseResumeItems)
 
-const ITEM_TABLE = _.concat(Materials, AllItems)
+const ITEM_TABLE = _.concat(MATERIAL_TABLE, RESUME_ITEMS_TABLE)
 
-export default ITEM_TABLE
+export { ITEM_TABLE, MATERIAL_TABLE, RESUME_ITEMS_TABLE }

@@ -1,5 +1,5 @@
 <template>
-  <div v-item-tool-tip="item" v-drop-item="dropData" class="package-item">
+  <div v-item-tip="item" v-drop-item="dropData" class="package-item">
     <div v-if="item" :style="{'color': gradeColor[item.grade || 0]}">
       <slot name="item-name">
         <span class="item-name" v-if="item.name">{{ item.name }}</span>
@@ -25,12 +25,12 @@
 
 <script>
 import CONSTANT from '../data/constant'
-import ItemToolTip from '../directive/item-tool-tip'
+import ItemTip from '../directive/item-tip'
 import DropItem from '../directive/drop-item'
 
 export default {
   directives: {
-    'item-tool-tip': ItemToolTip,
+    'item-tip': ItemTip,
     'drop-item': DropItem
   },
   props: [

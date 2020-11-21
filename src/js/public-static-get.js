@@ -1,5 +1,5 @@
 import DIALOG_DATA from '../data/event-data'
-import ITEM_TABLE from '../data/item-data'
+import { ITEM_TABLE } from '../data/item-data'
 import CHEST_DATA from '../data/chest-data'
 
 const Data = {     

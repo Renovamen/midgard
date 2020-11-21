@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import CONSTANT from '../data/constant'
-import '../styles/item-tool-tip'
+import '../styles/item-tip'
 
 export default function(el, binding) {
   let keyName = CONSTANT.UNIT_ATTR_NAME,
       itemLevel = CONSTANT.ITEM_LEVEL,
-      tipClassName = '.item-tool-tip-pover',
+      tipClassName = '.item-tip-pover',
       item = binding.value
       
   let event = {
     click: function() {
       if(item.link) {
-        window.open(item.link)
+        window.open(item.link.url)
       }
     },
     mouseenter: function(e) {
@@ -30,17 +30,17 @@ export default function(el, binding) {
         className : tipClassName.slice(1),
         innerHTML : `
           <div class="name m-b-10 font-min" :style="itemColor">
-            {{this.item.name}}
+            {{ this.item.name }}
           </div>
           <div class="equip m-b-10">
-            <span class="attr-name">{{this.hpName}}</span>
-            <span class="attr-data">{{this.changeHp}}</span>
+            <span class="attr-name">{{ this.hpName }}</span>
+            <span class="attr-data">{{ this.changeHp }}</span>
           </div>
-          <div class="dsc" v-for="dsc in item.dsc">{{dsc}}</div>
+          <div class="dsc" v-for="dsc in item.dsc" v-html="dsc"></div>
           <div class="image" v-for="img in item.img">
             <img :src='img' style="width: 200px"/>
           </div>
-          <div class="btn" v-if="item.linkInfo">{{item.linkInfo}}</div>
+          <div class="btn" v-if="item.link">{{ item.link.text }}</div>
         `
       })
 
