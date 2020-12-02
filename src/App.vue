@@ -1,14 +1,14 @@
 <template>
-  <div
-    class="container"
-    :style="{'margin-top':`${margin}px`,'transform': `scale(${scale})`}"
-  >
-    <div class="main">
-      <div class="router-view" id="router-view">
-        <transition enter-active-class="animate__animated animate__fadeIn">
-          <router-view></router-view>
-        </transition>
-      </div>
+  <div class="container">
+    <div
+      class="router-view" id="router-view"
+      :style="{
+        'margin-top':`${margin}px`,
+        'transform': `scale(${scale}) translateZ(1px)`
+      }">
+      <transition enter-active-class="animate__animated animate__fadeIn">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -41,23 +41,21 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
 .container
-  margin auto
-  width 830px
   border-radius 2px
-  height 500px
-.main
-  display inline-block
-  width 100%
-  height 100%
+  transform-style preserve-3d
 .router-view
   position relative
   height 500px
+  width 830px
+  margin auto
   background #252830
   border-radius 2px
   & > div
     position absolute
     height 100%
     width 100%
+.item-tip-pover
+  transform translateZ(99px)
 </style>

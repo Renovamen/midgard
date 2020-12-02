@@ -19,11 +19,14 @@ export default function(el, binding) {
 
       let tip = document.createElement('div')
       let {right, top} = e.target.getBoundingClientRect()
+      
+      let height = window.innerHeight - 10, height_original = 500
+      let scale = height / height_original
+      let margin = (scale - 1) * height_original / 2 + 5
 
       Object.assign(tip.style, {
-        position : 'absolute',
         left : `${right}px`,
-        top : `${top}px`
+        top : `${top - margin}px`
       })
 
       Object.assign(tip, {
@@ -44,7 +47,8 @@ export default function(el, binding) {
         `
       })
 
-      document.body.appendChild(tip)
+      let $container = document.querySelector('.container')
+      $container.appendChild(tip)
 
       new Vue({
         created(){
@@ -68,9 +72,7 @@ export default function(el, binding) {
     mouseleave: function() {
       let old = document.querySelector(tipClassName)
       // 移除已经存在的 tip
-      if(old){
-        old.parentNode.removeChild(old)
-      }
+      if(old) old.parentNode.removeChild(old)
     }
   }
 
