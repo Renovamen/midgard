@@ -7,7 +7,7 @@
       <div class="e-title">Voyage</div>
       <img :src="require('assets/ui/fight.svg')"/>
     </div>
-    
+
     <template v-for="(item, index) in menu">
       <a
         class="link"
@@ -36,7 +36,7 @@ export default {
     return {
       menu : [
         ['咸鱼', 'Github', 'https://github.com/Renovamen', require('assets/ui/github.svg')],
-        ['博客', 'Blog', 'https://renovamen.ink', require('assets/ui/blog.svg')],
+        ['博客', 'Blog', 'https://zxh.io', require('assets/ui/blog.svg')],
         ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('assets/ui/email.svg')],
       ]
     }
@@ -47,7 +47,7 @@ export default {
       var chestList = []
       for(let i = 1; i <= 10; i++) {
         var level, chestID
-        
+
         // 包裹中物品种类
         let itemID = Math.ceil(Math.random() * 14)
         // 包裹中物品等级 R: 50%, SR: 30%, SSR:15%, UR: 5%

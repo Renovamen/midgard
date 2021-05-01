@@ -99,7 +99,7 @@ export default {
     exchange() {
       // 兑换完整版简历
       if(this.isCollected == true) {
-        window.open("https://renovamen.ink/files/cv/en.pdf")
+        window.open("https://zxh.io/files/cv/full/en.pdf")
       }
     },
     // 作弊码弹窗

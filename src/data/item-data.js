@@ -63,7 +63,7 @@ const baseResumeItems = [
       '邮箱：xiaohan.zou@foxmail.com',
       'Facebook：renovamen.zou',
       'Github：Renovamen',
-      '博客：renovamen.ink'
+      '博客：zxh.io'
     ]
   },
   {
@@ -177,7 +177,7 @@ const baseResumeItems = [
     ],
     link: {
       text: '点击物品查看论文',
-      url: 'https://renovamen.ink/files/papers/ictai2020/food-iac.pdf'
+      url: 'https://zxh.io/files/papers/ictai2020/food-iac.pdf'
     }
   },
   {

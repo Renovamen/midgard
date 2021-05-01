@@ -2,7 +2,8 @@
 
 Hey adventurer! ~~A cool~~ An evil dragon just tore up my curriculum vitae. So why not help me with retrieving my CV fragments scattered widely on Midgard back!
 
-[Start Your Adventure!](http://midgard.renovamen.ink)
+[Start Your Adventure!](http://resume.zxh.io)
+
 
 &nbsp;
 
@@ -22,6 +23,7 @@ yarn dev
 yarn build
 ```
 
+
 &nbsp;
 
 ## To Do
@@ -33,7 +35,7 @@ yarn build
 
 &nbsp;
 
-## Acknowledgement
+## Credits
 
 - This project is inspired by [bastarder/vue-endless-h5-game](https://github.com/bastarder/vue-endless-h5-game).
 - Some of the icons are modified from [Freepik](https://www.flaticon.com/authors/freepik) and [Smashicons](https://www.flaticon.com/authors/smashicons)'s work from [Flaticon](www.flaticon.com).
