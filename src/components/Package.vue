@@ -2,47 +2,57 @@
   <div class="package shadow-box">
     <div class="info-list">
       <div class="label-name">背包</div>
-      <PackageItem class="dustbin" position-index="$destory|0">
-        <span slot="item-name" class="item-name"></span>
+      <PackageItem class="dustbin" position-type="$destory" :position-index="0">
+        <template #item-name>
+          <span class="item-name"></span>
+        </template>
       </PackageItem>
       <div class="btn f-r sort" @click="sort">整理</div>
     </div>
     <div class="list">
-      <template v-for="(item, index) in hero.$package">
+      <template
+        v-for="(item, index) in store.state.hero.$package"
+        :key="`package-item-${index}`"
+      >
         <PackageItem
           class="item"
-          :key="`package-item-${index}`"
+          position-type="$package"
           :item="item"
-          :position-index="'$package|' + index"
+          :position-index="index"
         />
       </template>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import PackageItem from "@/components/PackageItem.vue";
 
-export default {
-  computed: {
-    hero() {
-      return this.$store.state.HeroStore.hero
-    }
+export default defineComponent({
+  name: "Package",
+  components: {
+    PackageItem
   },
-  watch: {
-    '$store.state.UPDATE': function() {
-      this.$forceUpdate()
-    },
-  },
-  methods: {
-    sort() {
-      this.$store.state.HeroStore.hero.itemSort('$package')
-    }
+  setup() {
+    const store = useStore();
+
+    const sort = () => {
+      store.commit("hero/sortPackage", "$package");
+    };
+
+    return {
+      store,
+      sort
+    };
   }
-}
+});
 </script>
 
 <style scoped lang="stylus">
 @require '../styles/palette.styl'
+
 .package
   padding 5px
   height 100%
@@ -54,7 +64,7 @@ export default {
       height 40px
       line-height 40px
       width 60px
-      background $bgLabelColor
+      background $bg-label-color
       color white
       text-align center
       border-radius 2px
@@ -69,19 +79,19 @@ export default {
       height 30px
       line-height 25px
       margin-top 6px
-      border-color $bgLabelColor
+      border-color $bg-label-color
       color white
       &:hover
-        background-color $bgLabelColor
+        background-color $bg-label-color
     .dustbin
       height 30px
       margin-top 6px
       float right
-      background-color $delColor
+      background-color $trash-color
       .blank
         line-height 36px
       span
-        content url('../assets/ui/recycle.svg')
+        content url('/ui/recycle.svg')
         position absolute
         width 20px
         height 20px

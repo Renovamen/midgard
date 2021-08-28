@@ -1,18 +1,27 @@
-# general
+node_modules/
+dist/
+
+# Mac / OSX
 .DS_Store
 
-# logs
-logs
-*.log
+# Windows
+Thumbs.db
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# dependency directories
-node_modules/
-
-# optional npm cache directory
-.npm
-
-# editor directories and files
+# Editor directories and files
+.project
+.idea
 .vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*

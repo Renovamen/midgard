@@ -1,44 +1,50 @@
 <template>
   <div class="container">
     <div
-      class="router-view" id="router-view"
+      class="router-view"
       :style="{
-        'margin-top':`${margin}px`,
-        'transform': `scale(${scale}) translateZ(1px)`
-      }">
-      <transition enter-active-class="animate__animated animate__fadeIn">
-        <router-view></router-view>
-      </transition>
+        'margin-top': `${margin}px`,
+        transform: `scale(${scale}) translateZ(1px)`
+      }"
+    >
+      <router-view v-slot="{ Component }">
+        <transition enter-active-class="animate__animated animate__fadeIn">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
 
-<script>
-import CreateGame from "./js/create-game.js"
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from "vue";
+import createGame from "@/js/create-game";
 
-export default {
-  data() {
-    return {
+export default defineComponent({
+  name: "App",
+  setup() {
+    const state = reactive({
       scale: 1,
-      margin: 0,
-    }
-  },
-  created() {
+      margin: 0
+    });
+
+    const setPosition = () => {
+      const curHeight = window.innerHeight - 10;
+      const height = 500;
+      state.scale = curHeight / height;
+      state.margin = ((state.scale - 1) * height) / 2 + 5;
+    };
+
     window.onresize = () => {
-      this.setPosition()
-    }
-    this.setPosition()
-    CreateGame(false)
-  },
-  methods: {
-    setPosition() {
-      let height = window.innerHeight - 10
-      let height_original = 500
-      this.scale = height / height_original
-      this.margin = (this.scale - 1) * height_original / 2 + 5
-    }
+      setPosition();
+    };
+    setPosition();
+
+    createGame(); // initialize hero state
+
+    return { ...toRefs(state) };
   }
-}
+});
 </script>
 
 <style lang="stylus">
