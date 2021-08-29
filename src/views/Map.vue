@@ -40,10 +40,10 @@
 
     <div class="map-data">
       <div class="map">
-        <div v-for="(line, x) in map.$data.mapData" :key="`line-${x}`">
+        <div v-for="(line, x) in map.$data.mapData" :key="`line-${String(x)}`">
           <MapBlock
             v-for="(block, y) in line"
-            :key="`block-${y}`"
+            :key="`block-${String(y)}`"
             :block="block"
             :map="map"
             @autoMove="autoMove(block)"
@@ -84,15 +84,15 @@ export default defineComponent({
     const store = useStore();
     const instance = getCurrentInstance();
 
-    const initMap = new InitMap(store.state.map.list[0]);
     const state = reactive({
       opt: {
-        info: false, // 信息栏, 装备栏
-        tip: true // 地图左上提示框
+        info: false,  // 信息栏, 装备栏
+        tip: true  // 地图左上提示框
       },
-      map: initMap, // 地图数据对象
-      moveEvent: new HeroMoveEvent(initMap) // 单位移动事件监听,触发
+      map: new InitMap(store.state.map.list[0])  // 地图数据对象
     });
+
+    const moveEvent = new HeroMoveEvent(state.map);
 
     watch(
       () => store.state.map.UPDATE,
@@ -127,7 +127,7 @@ export default defineComponent({
 
     const autoMove = (end: any) => {
       const _path = new Astar(state.map.$data, state.map.hero, end).init();
-      state.moveEvent.autoMove(_path);
+      moveEvent.autoMove(_path);
     };
 
     onMounted(() => {
@@ -139,7 +139,7 @@ export default defineComponent({
     });
 
     onUnmounted(() => {
-      state.moveEvent && state.moveEvent.stop();
+      moveEvent && moveEvent.stop();
     });
 
     setTimeout(() => {

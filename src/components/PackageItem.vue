@@ -36,19 +36,11 @@ export default defineComponent({
     "item-tip": ItemTip,
     "drop-item": DropItem
   },
-  props: {
-    item: {
-      default: 0
-    },
-    positionType: {
-      type: String,
-      required: true
-    },
-    positionIndex: {
-      type: Number,
-      required: true
-    }
-  },
+  props: [
+    'item',
+    'positionType',
+    'positionIndex'
+  ],
   setup(props) {
     const store = useStore();
 

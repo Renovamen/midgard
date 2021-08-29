@@ -12,6 +12,7 @@ import CONSTANT from "../data/constant";
 export default defineComponent({
   name: "MapBlock",
   props: ["block", "map"],
+  emits: ["autoMove"],
   setup(props, ctx) {
     const autoMove = () => {
       ctx.emit("autoMove");

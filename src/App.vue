@@ -4,7 +4,7 @@
       id="router-view"
       class="router-view"
       :style="{
-        'margin-top': `${margin}px`,
+        marginTop: `${margin}px`,
         transform: `scale(${scale}) translateZ(1px)`
       }"
     >

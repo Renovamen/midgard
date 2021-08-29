@@ -40,12 +40,12 @@
         <div class="right">
           <template v-for="(item, index) in store.state.hero.$resumes">
             <PackageItem
-              v-if="index > 1"
-              :key="`resume-item-${index}`"
+              v-if="Number(index) > 1"
+              :key="`resume-item-${String(index)}`"
               class="item"
               position-type="$resumes"
               :item="item"
-              :position-index="index"
+              :position-index="Number(index)"
             />
           </template>
         </div>
