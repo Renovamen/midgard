@@ -152,10 +152,7 @@ const baseResumeItems: Array<ItemType> = [
     equip: {
       $changeHp: -200
     },
-    dsc: [
-      "正在北京大学进行的工作：",
-      "\xa0· 进行元学习和持续学习的相关研究"
-    ]
+    dsc: ["正在北京大学进行的工作：", "\xa0· 进行元学习和持续学习的相关研究"]
   },
   {
     id: 3000010,

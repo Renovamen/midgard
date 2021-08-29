@@ -30,7 +30,7 @@ const createPopup = () => {
     height: `100%`,
     left: `0px`,
     top: `0px`,
-    zIndex: "5"
+    zIndex: "10"
   });
 
   // 模态框 创建
@@ -40,7 +40,7 @@ const createPopup = () => {
     height: `${opt.width}px`,
     left: `${(view.offsetWidth - opt.width) / 2}px`,
     top: `${(view.offsetHeight - opt.height) / 2}px`,
-    zIndex: "6"
+    zIndex: "20"
   });
 
   const info = {

@@ -86,10 +86,10 @@ export default defineComponent({
 
     const state = reactive({
       opt: {
-        info: false,  // 信息栏, 装备栏
-        tip: true  // 地图左上提示框
+        info: false, // 信息栏, 装备栏
+        tip: true // 地图左上提示框
       },
-      map: new InitMap(store.state.map.list[0])  // 地图数据对象
+      map: new InitMap(store.state.map.list[0]) // 地图数据对象
     });
 
     const moveEvent = new HeroMoveEvent(state.map);
