@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import store from "@/store";
-import getStatic from '@/js/get-static'
+import getStatic from "@/js/get-static";
 import { setStoreState, setHeroItem } from "@/store/utils";
 
 const createPopup = function () {
@@ -130,89 +130,90 @@ const demount = (equipType: number, index: number, type = "$package"): void => {
   updateHp();
 };
 
-function getList(key: any, opt: any, isIndex: boolean = false) {
+function getList(key: any, opt: any, isIndex = false) {
   const hero = (store.state as any).hero;
   const list = hero[key];
 
-  if(!list) return false
+  if (!list) return false;
 
   let condition = null;
 
-  if(typeof opt === 'number') condition = (i: any) => i && (i.id === opt)
-  if(typeof opt === 'object') condition = (i: any) => i && (i.id === opt.id)
-  if(typeof opt === 'function') condition = opt
-  if(!condition) return false
+  if (typeof opt === "number") condition = (i: any) => i && i.id === opt;
+  if (typeof opt === "object") condition = (i: any) => i && i.id === opt.id;
+  if (typeof opt === "function") condition = opt;
+  if (!condition) return false;
 
-  return isIndex ? list.findIndex(condition) : list.find(condition)
+  return isIndex ? list.findIndex(condition) : list.find(condition);
 }
 
-const getItem = (data: any, force: boolean = false, type: string = '$package') => {
+const getItem = (data: any, force = false, type = "$package") => {
   const hero = (store.state as any).hero;
   const container = force ? hero[type] : _.cloneDeep(hero[type]);
-  let surplus: any = [];
+  const surplus: any = [];
 
   if (!container || !data || !data.length) return surplus;
 
   data.forEach((i: any) => {
-    let item, num = i[1]
-
-    if (typeof i[0] === 'object') item = i[0]
-    else item = getStatic(i[0])
+    let item;
+    if (typeof i[0] === "object") item = i[0];
+    else item = getStatic(i[0]);
 
     const itemInPackage = getList(type, { id: item.id });
     const nextBlankPlace = container.findIndex((item: any) => !item);
 
-    item.pile && (item.num = num)
+    const num = i[1];
+    item.pile && (item.num = num);
 
     // 可堆叠且包里存在该物品
     if (itemInPackage && item.pile)
-      itemInPackage.num = (itemInPackage.num || 0) + num
+      itemInPackage.num = (itemInPackage.num || 0) + num;
     else {
       // 不可堆叠或包里不存在该物品
-      if (~nextBlankPlace) container[nextBlankPlace] = item  // 有空位
-      else surplus.push(i)  // 没空位
+      if (~nextBlankPlace) container[nextBlankPlace] = item;
+      // 有空位
+      else surplus.push(i); // 没空位
     }
-  })
+  });
 
-  return surplus
-}
+  return surplus;
+};
 
-function costItem(list: any, type = '$package') {
+function costItem(list: any, type = "$package"): void {
   const hero = (store.state as any).hero;
   const container = hero[type];
 
-  for(let opt of list) {
-    const index = getList(type, opt[0], true)
+  for (const opt of list) {
+    const index = getList(type, opt[0], true);
     const num = (() => {
-      if(typeof opt[1] === 'function') return opt[1].call()
-      return opt[1]
-    })()
+      if (typeof opt[1] === "function") return opt[1].call();
+      return opt[1];
+    })();
 
     const curItem = container[index];
     curItem.num -= num;
     setHeroItem(type, index, curItem);
 
-    if(!container[index].num) setHeroItem(type, index, undefined);
+    if (!container[index].num) setHeroItem(type, index, undefined);
   }
 }
 
-function isEnoughItem(list: any, type = '$package') {
+function isEnoughItem(list: any, type = "$package"): boolean {
   const hero = (store.state as any).hero;
   const container = hero[type];
 
-  if(!container || !list || !list.length) return false
+  if (!container || !list || !list.length) return false;
 
-  for(let opt of list) {
-    const item = getList(type, opt[0])
+  for (const opt of list) {
+    const item = getList(type, opt[0]);
     const num = (() => {
-      if(typeof opt[1] === 'function') return opt[1].call()
-      return opt[1]
-    })()
+      if (typeof opt[1] === "function") return opt[1].call();
+      return opt[1];
+    })();
 
-    if(!item || (item.num || 1) < num) return false
+    if (!item || (item.num || 1) < num) return false;
   }
-  return true
-};
+  return true;
+}
 
 export default {
   updateHp,

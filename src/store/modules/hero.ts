@@ -3,7 +3,7 @@ const state = {
   $package: [],
   $hp: 600,
   $maxHp: 600,
-  $canMove: true,  // 人物在地图上遇到事件时，在关闭对话框前不能移动
+  $canMove: true, // 人物在地图上遇到事件时，在关闭对话框前不能移动
   UPDATE: 1
 };
 
@@ -20,7 +20,7 @@ const mutations = {
     list.sort((a: any, b: any) => (a.id || Infinity) - (b.id || Infinity));
     return true;
   },
-  UPDATE(state: any) {
+  UPDATE(state: any): void {
     state.UPDATE = Math.random() + Date.now();
   }
 };

@@ -1,77 +1,79 @@
 import * as _ from "lodash";
 import { createApp } from "vue";
-import CONSTANT from '@/data/constant'
-import getStatic from '@/js/get-static'
+import CONSTANT from "@/data/constant";
+import getStatic from "@/js/get-static";
 import op from "@/js/hero-operations";
-import store from '@/store'
+import store from "@/store";
 import { setStoreState } from "@/store/utils";
 
-const DialogElementClassName = '.map-dialog-modal'
-const ShadowViewClassName = '.shadow-view'
+const DialogElementClassName = ".map-dialog-modal";
+const ShadowViewClassName = ".shadow-view";
 
 const createPopup = () => {
-  const modal = document.createElement('div');
-  const shadowView = document.createElement('div');
-  const view = document.querySelector('#router-view') as HTMLElement;
+  const modal = document.createElement("div");
+  const shadowView = document.createElement("div");
+  const view = document.querySelector("#router-view") as HTMLElement;
   const opt = {
     height: 300,
     width: 200,
-    animated: 'animate__animated animate__faster animate__zoomIn',
+    animated: "animate__animated animate__faster animate__zoomIn",
     backForce: 0.2
-  }
+  };
 
-  shadowView.className = ShadowViewClassName.slice(1)
+  shadowView.className = ShadowViewClassName.slice(1);
 
   // 背景层 创建
   Object.assign(shadowView.style, {
-    position: 'absolute',
+    position: "absolute",
     background: `rgba(0,0,0,${opt.backForce})`,
     width: `100%`,
     height: `100%`,
     left: `0px`,
     top: `0px`,
-    zIndex: '5'
-  })
+    zIndex: "5"
+  });
 
   // 模态框 创建
   Object.assign(modal.style, {
-    position: 'absolute',
+    position: "absolute",
     width: `${opt.height}px`,
     height: `${opt.width}px`,
     left: `${(view.offsetWidth - opt.width) / 2}px`,
     top: `${(view.offsetHeight - opt.height) / 2}px`,
-    zIndex: '6'
-  })
+    zIndex: "6"
+  });
 
   const info = {
-    "modal": modal,
-    "shadowView": shadowView,
-    "opt": opt,
-    "view": view
-  }
-  return info
-}
+    modal: modal,
+    shadowView: shadowView,
+    opt: opt,
+    view: view
+  };
+  return info;
+};
 
-const closeModal = (callback: any) => {
-  setStoreState("hero", "$canMove", true);  // 对话窗口关闭后，恢复移动
+const closeModal = (callback: any): void => {
+  setStoreState("hero", "$canMove", true); // 对话窗口关闭后，恢复移动
 
   const modal = document.querySelector(DialogElementClassName);
   const shadow = document.querySelector(ShadowViewClassName);
 
-  modal && (modal.parentNode as HTMLElement).removeChild(modal)
-  shadow && (shadow.parentNode as HTMLElement).removeChild(shadow)
-  callback && callback()
-}
+  modal && (modal.parentNode as HTMLElement).removeChild(modal);
+  shadow && (shadow.parentNode as HTMLElement).removeChild(shadow);
+  callback && callback();
+};
 
-const itemLevel = CONSTANT.ITEM_LEVEL
+const itemLevel = CONSTANT.ITEM_LEVEL;
 
 const MapDialog = function (event: any, callback: any) {
   const info = createPopup();
-  const modal = info.modal, shadowView = info.shadowView;
-  const opt = info.opt, view = info.view;
+  const modal = info.modal,
+    shadowView = info.shadowView;
+  const opt = info.opt,
+    view = info.view;
 
   Object.assign(modal, {
-    className: [opt.animated, DialogElementClassName.slice(1)].join(' '),
+    className: [opt.animated, DialogElementClassName.slice(1)].join(" "),
     innerHTML: `
       <div class="close" @click="this.close">+</div>
       <div class="msg m-b-4 radius-2">
@@ -95,114 +97,114 @@ const MapDialog = function (event: any, callback: any) {
         <button v-if="this.isEnd" class="action radius-2" @click="close">结束对话</button>
       </div>
     `
-  })
+  });
 
-  view.appendChild(modal)
-  view.appendChild(shadowView)
+  view.appendChild(modal);
+  view.appendChild(shadowView);
 
   createApp({
     store,
     created() {
-      this.event = event
-      this.$i = 0
-      this.isEnd = false
-      this.next()
+      this.event = event;
+      this.$i = 0;
+      this.isEnd = false;
+      this.next();
     },
     methods: {
       next() {
         if (this.$isEnd) {
-          this.close()
-          return
+          this.close();
+          return;
         }
-        this.record = transformEventObj(this.event.data[this.$i])
-        this.isEnd = (this.$i++ === (this.event.data.length - 1))
-        this.$forceUpdate()
+        this.record = transformEventObj(this.event.data[this.$i]);
+        this.isEnd = this.$i++ === this.event.data.length - 1;
+        this.$forceUpdate();
       },
       action(e: any) {
-        e.call(this)
+        e.call(this);
       },
       close() {
-        closeModal(callback)
+        closeModal(callback);
       },
       getColor(itemID: number) {
         const itemColor = {
           color: itemLevel[getStatic(itemID).grade || 0]
-        }
-        return itemColor
+        };
+        return itemColor;
       },
       itemKey(id: any, key: any) {
         const data = getStatic(id);
         return data[key] || data;
       }
     }
-  }).mount(DialogElementClassName)
+  }).mount(DialogElementClassName);
 
   function transformEventObj(opt: any) {
-    let record = _.cloneDeep(opt)
-    if (typeof record === 'string') {
+    let record = _.cloneDeep(opt);
+    if (typeof record === "string") {
       record = {
         msg: record
-      }
+      };
     }
 
     const buttons = _.map(record.buttons, function (str) {
-      if (typeof str === 'object') return str
+      if (typeof str === "object") return str;
 
-      const strc = str
-      str = str.match(/\[([^]+)\]\{([^]+)\}/)
+      const strc = str;
+      str = str.match(/\[([^]+)\]\{([^]+)\}/);
 
-      const btn: any = {}
-      btn.title = str[1]
+      const btn: any = {};
+      btn.title = str[1];
 
-      if (!str[2]) return btn
+      if (!str[2]) return btn;
 
-      if (strc[0] !== '#') {
+      if (strc[0] !== "#") {
         btn.action = function () {
-          let [i, isEnd] = str[2].split(',')
-          this.$i = Number(i)
-          this.next()
-          if (Number(isEnd)) this.isEnd = true
-        }
-      }
-
-      else {
-        const i = str[2].split(',')
-        const isEnd = i.unshift()
+          const [i, isEnd] = str[2].split(",");
+          this.$i = Number(i);
+          this.next();
+          if (Number(isEnd)) this.isEnd = true;
+        };
+      } else {
+        const i = str[2].split(",");
+        const isEnd = i.unshift();
         btn.action = function () {
-          const need = opt.need || []
-          const get = opt.get || []
-          const enough = op.isEnoughItem(need)
+          const need = opt.need || [];
+          const get = opt.get || [];
+          const enough = op.isEnoughItem(need);
 
-          if (!enough) this.$i = i[0]
+          if (!enough) this.$i = i[0];
           else {
-            const left = op.getItem(get)
-            if (left.length) this.$i = i[1]
+            const left = op.getItem(get);
+            if (left.length) this.$i = i[1];
             else {
-              op.getItem(get, true)
-              op.costItem(need)
-              this.$i = i[2]
+              op.getItem(get, true);
+              op.costItem(need);
+              this.$i = i[2];
             }
           }
 
-          this.next()
-          if (Number(isEnd)) this.isEnd = true
-        }
+          this.next();
+          if (Number(isEnd)) this.isEnd = true;
+        };
       }
-      return btn
-    })
+      return btn;
+    });
 
-    record.buttons = buttons
-    return record
+    record.buttons = buttons;
+    return record;
   }
-}
+};
 
 const MapGetItem = function (event: any, callback: any) {
   const info = createPopup();
-  const modal = info.modal, shadowView = info.shadowView;
-  const opt = info.opt, view = info.view;
+  const modal = info.modal,
+    shadowView = info.shadowView;
+  const opt = info.opt,
+    view = info.view;
 
   Object.assign(modal, {
-    className: [opt.animated, DialogElementClassName.slice(1)].join(' '),
+    className: [opt.animated, DialogElementClassName.slice(1)].join(" "),
     innerHTML: `
       <div class="close" @click="this.close">+</div>
       <div class="msg m-b-4 radius-2">
@@ -222,105 +224,99 @@ const MapGetItem = function (event: any, callback: any) {
         <button v-if="this.isEnd" class="action radius-2" @click="close">结束</button>
       </div>
     `
-  })
+  });
 
-  view.appendChild(modal)
-  view.appendChild(shadowView)
+  view.appendChild(modal);
+  view.appendChild(shadowView);
 
   createApp({
     store,
     created() {
-      this.chest = event
-      this.$i = 0
-      this.isEnd = false
-      this.next()
+      this.chest = event;
+      this.$i = 0;
+      this.isEnd = false;
+      this.next();
     },
     methods: {
       next() {
         if (this.$isEnd) {
-          this.close()
-          return
+          this.close();
+          return;
         }
-        this.record = getItemObj(this.chest.data[this.$i])
-        this.isEnd = (this.$i++ === (this.chest.data.length - 1))
-        this.$forceUpdate()
+        this.record = getItemObj(this.chest.data[this.$i]);
+        this.isEnd = this.$i++ === this.chest.data.length - 1;
+        this.$forceUpdate();
       },
       action(e: any) {
-        e.call(this)
+        e.call(this);
       },
       close() {
-        closeModal(callback)
+        closeModal(callback);
       },
       getColor(itemID: number) {
-        let itemColor = {
+        const itemColor = {
           color: itemLevel[getStatic(itemID).grade || 0]
-        }
-        return itemColor
+        };
+        return itemColor;
       },
       itemKey(id: any, key: any) {
         const data = getStatic(id);
         return data[key] || data;
       }
     }
-  }).mount(DialogElementClassName)
-
+  }).mount(DialogElementClassName);
 
   function getItemObj(opt: any) {
-    let record = _.cloneDeep(opt)
-    if (typeof record === 'string') {
+    let record = _.cloneDeep(opt);
+    if (typeof record === "string") {
       record = {
         msg: record
-      }
+      };
     }
 
     const buttons = _.map(record.buttons, function (str) {
-      if (typeof str === 'object') return str
+      if (typeof str === "object") return str;
 
-      const strc = str
-      str = str.match(/\[([^]+)\]\{([^]+)\}/)
+      const strc = str;
+      str = str.match(/\[([^]+)\]\{([^]+)\}/);
 
-      const btn: any = {}
-      btn.title = str[1]
+      const btn: any = {};
+      btn.title = str[1];
 
-      if (!str[2]) return btn
+      if (!str[2]) return btn;
 
-      if (strc[0] !== '#') {
+      if (strc[0] !== "#") {
         btn.action = function () {
-          let [i, isEnd] = str[2].split(',')
-          this.$i = Number(i)
+          const [i, isEnd] = str[2].split(",");
+          this.$i = Number(i);
           // console.log("this.i: ", Number(i))
-          this.next()
-          if (Number(isEnd)) this.isEnd = true
-        }
-      }
-
-      else {
-        const i = str[2].split(',')
-        const isEnd = i.unshift()
+          this.next();
+          if (Number(isEnd)) this.isEnd = true;
+        };
+      } else {
+        const i = str[2].split(",");
+        const isEnd = i.unshift();
 
         btn.action = function () {
-          const get = opt.get || []
-          const left = op.getItem(get)
+          const get = opt.get || [];
+          const left = op.getItem(get);
 
-          if (left.length) this.$i = Number(i[0])
+          if (left.length) this.$i = Number(i[0]);
           else {
-            op.getItem(get, true)
-            this.$i = Number(i[1])
+            op.getItem(get, true);
+            this.$i = Number(i[1]);
           }
 
-          this.next()
-          if (Number(isEnd)) this.isEnd = true
-        }
+          this.next();
+          if (Number(isEnd)) this.isEnd = true;
+        };
       }
-      return btn
-    })
+      return btn;
+    });
 
-    record.buttons = buttons
-    return record
+    record.buttons = buttons;
+    return record;
   }
-}
+};
 
-export {
-  MapDialog,
-  MapGetItem
-}
+export { MapDialog, MapGetItem };

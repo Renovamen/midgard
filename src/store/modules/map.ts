@@ -8,7 +8,7 @@ const mutations = {
   __set(state: any, msg: { key: string; val: any }): void {
     state[msg.key] = msg.val;
   },
-  UPDATE(state: any) {
+  UPDATE(state: any): void {
     state.UPDATE = Math.random() + Date.now();
   }
 };

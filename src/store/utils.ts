@@ -6,7 +6,7 @@ export function setStoreState<T>(
   module: ModuleNameType,
   key: keyof T,
   value: any
-) {
+): void {
   store.commit({
     type: module + "/__set",
     key: key,
@@ -14,7 +14,7 @@ export function setStoreState<T>(
   });
 }
 
-export function setHeroItem(type: string, index: number, value: any) {
+export function setHeroItem(type: string, index: number, value: any): void {
   store.commit("hero/setItem", {
     type: type,
     index: index,

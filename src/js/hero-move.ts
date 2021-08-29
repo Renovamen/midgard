@@ -1,7 +1,7 @@
 import * as _ from "lodash";
-import CONSTANT from '@/data/constant'
-import { MapDialog, MapGetItem } from '@/js/event-class'
-import store from '@/store'
+import CONSTANT from "@/data/constant";
+import { MapDialog, MapGetItem } from "@/js/event-class";
+import store from "@/store";
 import { setStoreState } from "@/store/utils";
 
 const KEY_UP = 38;
@@ -26,28 +26,28 @@ class HeroMoveEvent {
     this.start();
   }
 
-  start = () => {
+  start = (): void => {
     this.keyUpFunc = (event: any) => {
-      if (!event.keyCode) return
-      this.autoMoveTimer && clearInterval(this.autoMoveTimer)
-      this.move(event.keyCode)
-    }
-    document.addEventListener('keyup', this.keyUpFunc)
-  }
+      if (!event.keyCode) return;
+      this.autoMoveTimer && clearInterval(this.autoMoveTimer);
+      this.move(event.keyCode);
+    };
+    document.addEventListener("keyup", this.keyUpFunc);
+  };
 
-  stop = () => {
-    document.removeEventListener('keyup', this.keyUpFunc)
-    clearInterval(this.autoMoveTimer)
-  }
+  stop = (): void => {
+    document.removeEventListener("keyup", this.keyUpFunc);
+    clearInterval(this.autoMoveTimer);
+  };
 
   move = (direction: any) => {
-    if (!this.canMoveDelay) return
+    if (!this.canMoveDelay) return;
 
-    this.canMoveDelay = false
+    this.canMoveDelay = false;
 
     setTimeout(() => {
-      this.canMoveDelay = true
-    }, MOVE_DELAY)
+      this.canMoveDelay = true;
+    }, MOVE_DELAY);
 
     let x = this.map.hero.x;
     let y = this.map.hero.y;
@@ -55,74 +55,74 @@ class HeroMoveEvent {
     if ((store.state as any).hero.$canMove) {
       switch (direction) {
         case KEY_UP:
-          x--
-          break
+          x--;
+          break;
         case KEY_DOWN:
-          x++
-          break
+          x++;
+          break;
         case KEY_LEFT:
-          y--
-          break
+          y--;
+          break;
         case KEY_RIGHT:
-          y++
-          break
+          y++;
+          break;
       }
     }
 
     let nextBlock = null;
     try {
-      nextBlock = this.map.$data.mapData[x][y]
+      nextBlock = this.map.$data.mapData[x][y];
     } catch (e) {
       // pass
     }
 
-    if (!nextBlock || nextBlock.block_type != BLOCK_TYPE['ROAD']) return false
+    if (!nextBlock || nextBlock.block_type != BLOCK_TYPE["ROAD"]) return false;
 
     // 将当前格子设置为 Road
-    this.map.hero.block_type = BLOCK_TYPE['ROAD']
+    this.map.hero.block_type = BLOCK_TYPE["ROAD"];
     // 将目标格子标识为 Hero
-    nextBlock.block_type = BLOCK_TYPE['HERO']
+    nextBlock.block_type = BLOCK_TYPE["HERO"];
 
-    const { event_type, event } = nextBlock.event || {}
+    const { event_type, event } = nextBlock.event || {};
 
     // 更新视图
     store.commit("map/UPDATE");
 
     // 事件不会保留
-    if (event_type === 'map-chest' || event_type === 'map-dialog') {
-      delete nextBlock.event
+    if (event_type === "map-chest" || event_type === "map-dialog") {
+      delete nextBlock.event;
     }
 
     // 设置新的英雄位置
-    this.map.hero = nextBlock
+    this.map.hero = nextBlock;
 
     // 执行事件
     switch (event_type) {
-      case 'map-chest':
+      case "map-chest":
         // 遇到事件时，在关闭对话框前不能移动
-        this.autoMove([])
+        this.autoMove([]);
         setStoreState("hero", "$canMove", false);
-        MapGetItem(event, () => this.start())
-        break
-      case 'map-dialog':
+        MapGetItem(event, () => this.start());
+        break;
+      case "map-dialog":
         // 遇到事件时，在关闭对话框前不能移动
-        this.autoMove([])
+        this.autoMove([]);
         setStoreState("hero", "$canMove", false);
-        MapDialog(event, () => this.start())
-        break
+        MapDialog(event, () => this.start());
+        break;
     }
-  }
+  };
 
-  autoMove = (path: any) => {
-    const _path = _.cloneDeep(path)
+  autoMove = (path: any): void => {
+    const _path = _.cloneDeep(path);
 
-    this.autoMoveTimer && clearInterval(this.autoMoveTimer)
+    this.autoMoveTimer && clearInterval(this.autoMoveTimer);
     this.autoMoveTimer = setInterval(() => {
       const next = _path.splice(0, 1)[0];
 
       if (!next) {
-        this.autoMoveTimer && clearInterval(this.autoMoveTimer)
-        return
+        this.autoMoveTimer && clearInterval(this.autoMoveTimer);
+        return;
       }
 
       const x = this.map.hero.x;
@@ -131,24 +131,24 @@ class HeroMoveEvent {
       let direction = -1;
       switch (true) {
         case next.x < x:
-          direction = KEY_UP
-          break
+          direction = KEY_UP;
+          break;
         case next.x > x:
-          direction = KEY_DOWN
-          break
+          direction = KEY_DOWN;
+          break;
         case next.y < y:
-          direction = KEY_LEFT
-          break
+          direction = KEY_LEFT;
+          break;
         case next.y > y:
-          direction = KEY_RIGHT
-          break
+          direction = KEY_RIGHT;
+          break;
       }
 
-      this.move(direction)
+      this.move(direction);
 
-      if (_path.length < 1) clearInterval(this.autoMoveTimer)
-    }, MOVE_DELAY + 100)
-  }
+      if (_path.length < 1) clearInterval(this.autoMoveTimer);
+    }, MOVE_DELAY + 100);
+  };
 }
 
-export default HeroMoveEvent
+export default HeroMoveEvent;

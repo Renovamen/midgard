@@ -55,7 +55,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, watch, toRefs, onMounted, onUpdated, onUnmounted, getCurrentInstance } from "vue";
+import {
+  defineComponent,
+  reactive,
+  watch,
+  toRefs,
+  onMounted,
+  onUpdated,
+  onUnmounted,
+  getCurrentInstance
+} from "vue";
 import { useStore } from "vuex";
 import MapBlock from "@/components/MapBlock.vue";
 import HomeInfo from "@/components/HomeInfo.vue";
@@ -78,17 +87,17 @@ export default defineComponent({
     const initMap = new InitMap(store.state.map.list[0]);
     const state = reactive({
       opt: {
-        info: false,  // 信息栏, 装备栏
-        tip: true  // 地图左上提示框
+        info: false, // 信息栏, 装备栏
+        tip: true // 地图左上提示框
       },
-      map: initMap,  // 地图数据对象
-      moveEvent: new HeroMoveEvent(initMap)  // 单位移动事件监听,触发
+      map: initMap, // 地图数据对象
+      moveEvent: new HeroMoveEvent(initMap) // 单位移动事件监听,触发
     });
 
     watch(
       () => store.state.map.UPDATE,
       () => {
-        instance?.proxy?.$forceUpdate()
+        instance?.proxy?.$forceUpdate();
       }
     );
 
