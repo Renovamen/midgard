@@ -77,7 +77,7 @@ export default defineComponent({
     const store = useStore();
 
     watch(
-      () => store.state.UPDATE,
+      () => store.state.hero.UPDATE,
       () => {
         checkCollect();
       }

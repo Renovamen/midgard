@@ -1,5 +1,6 @@
 import initDragDrop from "@/js/drag-drop";
 import op from "@/js/hero-operations";
+import store from "@/store";
 
 export default function (el: any, binding: any) {
   const { hero, posType, posIndex } = binding.value;
@@ -38,6 +39,7 @@ export default function (el: any, binding: any) {
       );
 
       op.updateHp();
+      store.commit("hero/UPDATE");
     }
   };
 

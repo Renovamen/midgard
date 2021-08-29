@@ -2,6 +2,7 @@
   <div class="container">
     <div
       class="router-view"
+      id="router-view"
       :style="{
         'margin-top': `${margin}px`,
         transform: `scale(${scale}) translateZ(1px)`

@@ -29,8 +29,6 @@ class Astar {
     this.map = _.cloneDeep(map);
     this.start = start;
     this.end = end;
-
-    this.init();
   }
 
   init = () => {

@@ -55,12 +55,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, onUpdated } from "vue";
+import { defineComponent, reactive, watch, toRefs, onMounted, onUpdated, onUnmounted, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import MapBlock from "@/components/MapBlock.vue";
 import HomeInfo from "@/components/HomeInfo.vue";
 import Package from "@/components/Package.vue";
 import Astar from "@/js/astar";
+import HeroMoveEvent from "@/js/hero-move";
 import InitMap from "@/js/init-map";
 
 export default defineComponent({
@@ -72,14 +73,24 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const instance = getCurrentInstance();
+
+    const initMap = new InitMap(store.state.map.list[0]);
     const state = reactive({
       opt: {
-        info: false, // 信息栏, 装备栏
-        tip: true // 地图左上提示框
+        info: false,  // 信息栏, 装备栏
+        tip: true  // 地图左上提示框
       },
-      map: new InitMap(store.state.map.list[0]), // 地图数据对象
-      moveEvent: null // 单位移动事件监听,触发
+      map: initMap,  // 地图数据对象
+      moveEvent: new HeroMoveEvent(initMap)  // 单位移动事件监听,触发
     });
+
+    watch(
+      () => store.state.map.UPDATE,
+      () => {
+        instance?.proxy?.$forceUpdate()
+      }
+    );
 
     const autoPosition = () => {
       const $m = document.querySelector(".map") as HTMLElement;
@@ -106,8 +117,8 @@ export default defineComponent({
     };
 
     const autoMove = (end: any) => {
-      // pass
-      console.log("autoMove");
+      const _path = new Astar(state.map.$data, state.map.hero, end).init();
+      state.moveEvent.autoMove(_path);
     };
 
     onMounted(() => {
@@ -116,6 +127,10 @@ export default defineComponent({
 
     onUpdated(() => {
       autoPosition();
+    });
+
+    onUnmounted(() => {
+      state.moveEvent && state.moveEvent.stop();
     });
 
     setTimeout(() => {

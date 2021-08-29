@@ -1,7 +1,7 @@
 import store from "@/store";
 import { setHeroItem } from "@/store/utils";
 
-class MoveClass {
+class ItemMoveEvent {
   type: string;
   index: number;
 
@@ -13,7 +13,7 @@ class MoveClass {
   }
 
   get = () => {
-    const hero = store.state.hero;
+    const hero = (store.state as any).hero;
     return hero && hero[this.type] && hero[this.type][this.index];
   };
 
@@ -22,4 +22,4 @@ class MoveClass {
   };
 }
 
-export default MoveClass;
+export default ItemMoveEvent;

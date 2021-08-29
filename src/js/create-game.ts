@@ -1,4 +1,4 @@
-import { ITEM_TABLE, MATERIAL_TABLE } from "../data/item-data";
+import { ITEM_TABLE, MATERIAL_TABLE } from "@/data/item-data";
 import { setStoreState } from "@/store/utils";
 
 const MATERIAL_LENGTH = MATERIAL_TABLE.length;
