@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xiaohan Zou's interactive resume</title>
+    <style>
+      body {
+        background: #47485c;
+      }
+      .game-main-loading {
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 550px;
+        height: 120px;
+        margin: auto;
+        font-weight: 200;
+        line-height: 30px;
+        text-align: center;
+        font-size: 24px;
+      }
+      .game-main-loading .warning {
+        margin-top: 10px;
+        font-size: 16px;
+      }
+      .game-main-loading .gif {
+        margin-top: -100px;
+        width: 180px;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index.50f90422.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.49b4b8ca.js">
+    <link rel="stylesheet" href="/assets/index.ec73349b.css">
+  </head>
+  <body>
+    <div class="game-main-loading">
+      <img class="gif" src="/loading.gif" />
+      <div>Loading ...</div>
+      <div class="warning">WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</div>
+    </div>
+    <div id="app"></div>
+    
+  </body>
+</html>
