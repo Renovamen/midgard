@@ -2,11 +2,16 @@
   <div class="home-info">
     <div class="hero-info">
       <div class="basic-info">
-        <div class="avatar" @click="cheat()">
-          <img :src="require('assets/hero.svg')"/>
+        <div class="avatar" @click="showCheatInput()">
+          <img src="/hero.svg" />
         </div>
         <div class="name">
-          <input class="cheatInput" v-show="isCheat" v-model="cheatCode" @keyup.enter="checkCheatCode()"/>
+          <input
+            v-show="isCheating"
+            v-model="cheatCode"
+            class="cheatInput"
+            @keyup.enter="checkCheatCode()"
+          />
           去找简历吧勇士
         </div>
       </div>
@@ -14,30 +19,33 @@
         <div class="left">
           <div
             class="label-name"
-            :class="{collect: isCollected}"
+            :class="{ collect: isCollected }"
             @click="exchange()"
           >
-            {{ this.collectTip }}
+            {{ collectTip }}
           </div>
           <PackageItem
             class="resume1"
-            :item="hero.$resumes[0]"
-            :position-index="'$resumes|0'"
+            position-type="$resumes"
+            :position-index="0"
+            :item="store.state.hero.$resumes[0]"
           />
           <PackageItem
             class="resume2"
-            :item="hero.$resumes[1]"
-            :position-index="'$resumes|1'"
+            position-type="$resumes"
+            :position-index="1"
+            :item="store.state.hero.$resumes[1]"
           />
         </div>
         <div class="right">
-          <template v-for="(item, index) in hero.$resumes">
+          <template v-for="(item, index) in store.state.hero.$resumes">
             <PackageItem
-              class="item"
               v-if="index > 1"
               :key="`resume-item-${index}`"
+              class="item"
+              position-type="$resumes"
               :item="item"
-              :position-index="'$resumes|' + index"
+              :position-index="index"
             />
           </template>
         </div>
@@ -48,74 +56,88 @@
         <div class="label-name">梦想</div>
       </div>
       <div class="right">
-        <div class="attr">{{ hero.$hp.toFixed(1) }}</div>
+        <div class="attr">{{ store.state.hero.$hp.toFixed(1) }}</div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import CreateGame from "../js/create-game.js"
+<script lang="ts">
+import { defineComponent, reactive, toRefs, watch } from "vue";
+import { useStore } from "vuex";
+import createGame from "@/js/create-game";
+import PackageItem from "@/components/PackageItem.vue";
 
-export default {
-  data() {
-    return {
-      isCollected : false,
+export default defineComponent({
+  name: "HomeInfo",
+  components: {
+    PackageItem
+  },
+  setup() {
+    const store = useStore();
+
+    watch(
+      () => store.state.hero.UPDATE,
+      () => {
+        checkCollect();
+      }
+    );
+
+    const state = reactive({
+      isCollected: false,
       collectTip: "收集",
-      isCheat: false,
-      cheatCode: '',
-    }
-  },
-  created() {
-    this.checkCollect()
-  },
-  computed: {
-    hero() {
-      return this.$store.state.HeroStore.hero
-    }
-  },
-  watch: {
-    '$store.state.UPDATE' : function(item) {
-      this.$forceUpdate()
-      this.checkCollect()
-    }
-  },
-  methods: {
-    checkCollect() {
-      // 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
-      let resumes = this.$store.state.HeroStore.hero.$resumes, flag = 0
-      for(let resume of resumes) {
-        if(resume == 0 || resume == null) flag = 1
+      isCheating: false,
+      cheatCode: ""
+    });
+
+    // 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
+    const checkCollect = () => {
+      const resumes = store.state.hero.$resumes;
+      let flag = 0;
+
+      for (let resume of resumes) {
+        if (resume == 0 || resume == null) flag = 1;
       }
-      if(flag == 0) {
-        this.isCollected = true
-        this.collectTip = "兑换"
+
+      if (flag == 0) {
+        state.isCollected = true;
+        state.collectTip = "兑换";
+      } else {
+        state.isCollected = false;
+        state.collectTip = "收集";
       }
-      else {
-        this.isCollected = false
-        this.collectTip = "收集"
-      }
-    },
-    exchange() {
-      // 兑换完整版简历
-      if(this.isCollected == true) {
-        window.open("https://zxh.io/files/cv/full/en.pdf")
-      }
-    },
+    };
+
+    // 兑换完整版简历
+    const exchange = () => {
+      if (state.isCollected === true)
+        window.open("https://zxh.io/files/cv/full/en.pdf");
+    };
+
     // 作弊码弹窗
-    cheat() {
-      if(this.isCheat) {
-        this.isCheat = false
-        this.cheatCode = ''
-      }
-      else this.isCheat = true
-    },
-    checkCheatCode() {
-      if(this.cheatCode == 'xiaohanzouissocool') CreateGame(true)
-      else this.cheatCode = '作弊码错误！'
-    }
+    const showCheatInput = () => {
+      if (state.isCheating) {
+        state.isCheating = false;
+        state.cheatCode = "";
+      } else state.isCheating = true;
+    };
+
+    const checkCheatCode = () => {
+      if (state.cheatCode == "xiaohanzouissocool") createGame(true);
+      else state.cheatCode = "作弊码错误！";
+    };
+
+    checkCollect();
+
+    return {
+      ...toRefs(state),
+      store,
+      showCheatInput,
+      checkCheatCode,
+      exchange
+    };
   }
-}
+});
 </script>
 
 <style scoped lang="stylus">
@@ -138,21 +160,21 @@ export default {
     height 40px
     line-height 40px
     width 60px
-    background $bgLabelColor
+    background $bg-label-color
     color white
     text-align center
     border-radius 2px
   .collect
-    background $redColor
+    background $text-color-red
     &:hover
-      box-shadow $hoverShadow
+      box-shadow $hover-shadow
   .basic-info
     margin-bottom 4px
     .avatar
       display inline-block
       width 40px
       height 40px
-      background-color $bgLabelColor
+      background-color $bg-label-color
       border-radius 2px
       vertical-align top
       position relative
@@ -161,9 +183,9 @@ export default {
         width 40px
         height 40px
       &:hover
-        box-shadow $hoverShadowSmall
+        box-shadow $hover-shadow-small
     .name
-      background-color $bgLabelColor
+      background-color $bg-label-color
       border-radius 2px
       color white
       display inline-block
@@ -182,7 +204,7 @@ export default {
       height 30px
       margin-left -13px
       margin-top 5px
-      background-color $bgLabelColor
+      background-color $bg-label-color
       color white
       outline none
       border 1px solid white
@@ -214,7 +236,7 @@ export default {
         display block
         margin-left 4px
         margin-top -2px
-        color $redColor
+        color $text-color-red
 
 .home-info.right-info
   height 168px

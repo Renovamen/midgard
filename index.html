@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8"/>  
-    <title>Midgrad: Retrieve the Curriculum Vitae Fragments Back!</title>
-    <link rel="icon" href="src/assets/favicon.svg" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
     <style>
       body {
         background: #47485c;
@@ -35,11 +36,11 @@
   </head>
   <body>
     <div class="game-main-loading">
-      <img class="gif" src="src/assets/loading.gif" />
+      <img class="gif" src="/loading.gif" />
       <div>Loading ...</div>
       <div class="warning">WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</div>
     </div>
     <div id="app"></div>
-    <script src="dist/build.js"></script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

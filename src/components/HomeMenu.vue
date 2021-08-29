@@ -1,103 +1,111 @@
 <template>
   <div class="home-menu">
-    <div class="link" @click="goToMap()" :style="{'width': '25%'}">
-      <div class="title text-center">
-        <span>游</span>荡
-      </div>
+    <div class="link" @click="goToMap()">
+      <div class="title text-center"><span>游</span>荡</div>
       <div class="e-title">Voyage</div>
-      <img :src="require('assets/ui/fight.svg')"/>
+      <img src="/ui/fight.svg" />
     </div>
 
-    <template v-for="(item, index) in menu">
-      <a
-        class="link"
-        :key="`menu-item-${index}`"
-        :href="item[2]"
-        target="_blank"
-        :style="{'width': '25%'}"
-      >
+    <template v-for="(item, index) in menu" :key="`menu-item-${index}`">
+      <a class="link" :href="item[2]" target="_blank">
         <div class="title text-center">
-          <span>{{item[0][0]}}</span>{{item[0][1]}}
+          <span>{{ item[0][0] }}</span
+          >{{ item[0][1] }}
         </div>
         <div class="e-title">
-          {{item[1]}}
+          {{ item[1] }}
         </div>
-        <img :src="item[3]"/>
+        <img :src="item[3]" />
       </a>
     </template>
   </div>
 </template>
 
-<script>
-import MapInit from '../js/map-init'
+<script lang="ts">
+import * as _ from "lodash";
+import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { setStoreState } from "@/store/utils";
+import InitMap from "@/js/init-map";
 
-export default {
-  data () {
-    return {
-      menu : [
-        ['咸鱼', 'Github', 'https://github.com/Renovamen', require('assets/ui/github.svg')],
-        ['博客', 'Blog', 'https://zxh.io', require('assets/ui/blog.svg')],
-        ['邮箱', 'Email', 'mailto:renovamenzxh@gmail.com', require('assets/ui/email.svg')],
-      ]
-    }
-  },
-  computed: {
-    mapList() {
-      // 随机生成包裹
-      var chestList = []
-      for(let i = 1; i <= 10; i++) {
-        var level, chestID
+export default defineComponent({
+  name: "HomeMenu",
+  setup() {
+    const store = useStore();
+    const router = useRouter();
 
+    const menu = [
+      ["咸鱼", "Github", "https://github.com/Renovamen", "/ui/github.svg"],
+      ["博客", "Blog", "https://zxh.io", "/ui/blog.svg"],
+      ["邮箱", "Email", "mailto:renovamenzxh@gmail.com", "/ui/email.svg"]
+    ];
+
+    const mapList = () => {
+      // --------- 随机生成包裹 ---------
+      let chestList = [];
+
+      for (let i = 1; i <= 10; i++) {
         // 包裹中物品种类
-        let itemID = Math.ceil(Math.random() * 14)
+        const itemID = Math.ceil(Math.random() * 14);
         // 包裹中物品等级 R: 50%, SR: 30%, SSR:15%, UR: 5%
-        let levelID = Math.ceil(Math.random() * 100)
+        const levelID = Math.ceil(Math.random() * 100);
 
-        if(levelID <= 50) level = 0
-        else if(levelID > 50 && levelID <= 80) level = 1
-        else if(levelID > 80 && levelID <= 95) level = 2
-        else level = 3
+        let level = 0;
 
-        chestID = 5000000 + level * 14 + itemID
-        chestList.push(chestID)
+        if (levelID <= 50) level = 0;
+        else if (levelID > 50 && levelID <= 80) level = 1;
+        else if (levelID > 80 && levelID <= 95) level = 2;
+        else level = 3;
+
+        const chestID = 5000000 + level * 14 + itemID;
+        chestList.push(chestID);
       }
 
-      // 随机生成事件
-      var eventList = []
-      for(let i = 1; i <= 3; i++) eventList.push(7000000 + Math.ceil(Math.random() * 10))
+      // --------- 随机生成事件 ---------
+      let eventList = [];
 
-      var map_table = [
+      for (let i = 1; i <= 3; i++)
+        eventList.push(7000000 + Math.ceil(Math.random() * 10));
+
+      // --------- 地图数据 ---------
+      const mapTable = [
         {
           id: 8000001,
-          name: '世界',
-          logo: '',
+          name: "世界",
           mapInitOption: {
             row: 20,
             col: 20,
-            lines: 10,  // 分支量
-            inflex: 0.5  // 曲折度
+            lines: 10, // 分支量
+            inflex: 0.5 // 曲折度
           },
           chestList: chestList,
-          eventList: eventList,  // 事件
-          rule: {}  // 生成规则
+          eventList: eventList, // 事件
+          rule: {} // 生成规则
         }
-      ]
-      this.$store.state.MapStore.mapList = _.cloneDeep(map_table)
-      return this.$store.state.MapStore.mapList
-    }
-  },
-  methods: {
-    goToMap() {
-      let map = this.mapList[0]
-      this.$store.state.MapStore.map = new MapInit(map)
-      location.href = '#/map'
-    }
+      ];
+
+      setStoreState("map", "list", _.cloneDeep(mapTable));
+      return store.state.map.list;
+    };
+
+    const goToMap = () => {
+      const map = mapList()[0];
+      setStoreState("map", "map", new InitMap(map));
+      router.push("/map");
+    };
+
+    return {
+      goToMap,
+      menu
+    };
   }
-}
+});
 </script>
 
 <style scoped lang="stylus">
 @require '../styles/palette.styl'
+
 .home-menu
   margin-top -16px
   word-spacing:-4px
@@ -115,6 +123,7 @@ export default {
     border 1px solid #535664
     border-radius 5px
     height 100%
+    width 25%
     transition 0.2s
     .title
       margin-top 10px
@@ -133,7 +142,7 @@ export default {
       transition 0.2s
     &:hover
       text-decoration none
-      background $primaryColor
+      background $primary-color
       color white
       transition 0.3s
       img

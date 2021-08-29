@@ -1,74 +1,83 @@
 <template>
   <div v-item-tip="item" v-drop-item="dropData" class="package-item">
-    <div v-if="item" :style="{'color': gradeColor[item.grade || 0]}">
+    <div v-if="item" :style="{ color: gradeColor[item.grade || 0] }">
       <slot name="item-name">
-        <span class="item-name" v-if="item.name">{{ item.name }}</span>
+        <span v-if="item.name" class="item-name">{{ item.name }}</span>
       </slot>
       <slot name="badges">
-        <span class="badges" v-if="item.num">
+        <span v-if="item.num" class="badges">
           {{ item.num }}
         </span>
-        <span class="badges equip" v-if="item.equipType > -1">
-          {{ equipCname[item.equipType] }}
+        <span v-if="item.equipType > -1" class="badges equip">
+          {{ equipName[item.equipType] }}
         </span>
       </slot>
     </div>
     <div v-else class="blank">
       <slot name="item-name">
         <span class="item-name">
-          {{ position.$resumes ? equipCname[index]: '' }}
+          {{ positionType === "$resumes" ? equipName[index] : "" }}
         </span>
       </slot>
     </div>
   </div>
 </template>
 
-<script>
-import CONSTANT from '../data/constant'
-import ItemTip from '../directive/item-tip'
-import DropItem from '../directive/drop-item'
+<script lang="ts">
+import { defineComponent, ref, reactive } from "vue";
+import { useStore } from "vuex";
+import CONSTANT from "@/data/constant";
+import ItemTip from "@/directive/item-tip";
+import DropItem from "@/directive/drop-item";
 
-export default {
+export default defineComponent({
+  name: "PackageItem",
   directives: {
-    'item-tip': ItemTip,
-    'drop-item': DropItem
+    "item-tip": ItemTip,
+    "drop-item": DropItem
   },
-  props: [
-    'item',
-    'positionIndex'
-  ],
-  data() {
+  props: {
+    item: {
+      default: 0
+    },
+    positionType: {
+      type: String,
+      required: true
+    },
+    positionIndex: {
+      type: Number,
+      required: true
+    }
+  },
+  setup(props) {
+    const store = useStore();
+
+    const index = ref(Number(props.positionIndex));
+    const dropData = reactive({
+      hero: store.state.hero,
+      posType: props.positionType,
+      posIndex: props.positionIndex
+    });
+
+    const equipName = CONSTANT.EQUIP_ID;
+    const gradeColor = CONSTANT.ITEM_LEVEL;
+
     return {
-      equipCname: CONSTANT.EQUIP_ID,
-      gradeColor: CONSTANT.ITEM_LEVEL
-    }
-  },
-  created() {
-    let record = this.positionIndex.split("|")
-    this.position = {
-      $package: false,
-      $resumes: false
-    }
-    this.position[record[0]] = true
-    this.index = Number(record[1])
-    this.dropData = {
-      position: this.positionIndex,
-      hero: this.$store.state.HeroStore.hero
-    }
-  },
-  watch: {
-    '$store.state.UPDATE': function() {
-      this.$forceUpdate()
-    }
+      index,
+      dropData,
+      equipName,
+      gradeColor
+    };
   }
-}
+});
 </script>
 
 <style lang="stylus">
-@require '../styles/palette.styl'
+@require "../styles/palette.styl"
+
 .package-item
   position relative
-  background $bgItemColor
+  background $bg-item-color
   display inline-block
   vertical-align top
   width 44px
@@ -78,7 +87,7 @@ export default {
   overflow hidden
   cursor pointer
   &:hover
-    box-shadow $hoverShadow
+    box-shadow $hover-shadow
   .badges
     position absolute
     width 38px
