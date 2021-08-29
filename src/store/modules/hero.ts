@@ -7,13 +7,13 @@ const state = {
 };
 
 const mutations = {
-  __set(state: any, msg: { key: string; val: any }) {
+  __set(state: any, msg: { key: string; val: any }): void {
     state[msg.key] = msg.val;
   },
-  setItem(state: any, msg: { type: string; index: number; value: any }) {
+  setItem(state: any, msg: { type: string; index: number; value: any }): void {
     state[msg.type][msg.index] = msg.value;
   },
-  sortPackage(state: any, type: string) {
+  sortPackage(state: any, type: string): boolean {
     const list = state[type];
 
     if (!list || !list.length) return false;

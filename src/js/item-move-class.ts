@@ -1,7 +1,7 @@
 import store from "@/store";
 import { setHeroItem } from "@/store/utils";
 
-class moveClass {
+class MoveClass {
   type: string;
   index: number;
 
@@ -17,9 +17,9 @@ class moveClass {
     return hero && hero[this.type] && hero[this.type][this.index];
   };
 
-  set = (obj: any) => {
+  set = (obj: any): void => {
     setHeroItem(this.type, this.index, obj);
   };
 }
 
-export default moveClass;
+export default MoveClass;

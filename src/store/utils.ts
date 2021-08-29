@@ -1,6 +1,6 @@
 import store from "@/store";
 
-type ModuleNameType = "hero";
+type ModuleNameType = "hero" | "map";
 
 export function setStoreState<T>(
   module: ModuleNameType,

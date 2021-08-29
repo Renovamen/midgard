@@ -1,4 +1,4 @@
-import moveClass from "@/js/item-move-class";
+import MoveClass from "@/js/item-move-class";
 import op from "@/js/hero-operations";
 
 const noting = function (from: any, to: any) {
@@ -61,8 +61,8 @@ const change = function (from: any, to: any) {
 };
 
 const initDragDrop = function (from: any, to: any) {
-  from = new moveClass(from);
-  to = new moveClass(to);
+  from = new MoveClass(from);
+  to = new MoveClass(to);
 
   for (const event of [noting, destory, equip, demount, merge, change]) {
     const dropResult = event(from, to);

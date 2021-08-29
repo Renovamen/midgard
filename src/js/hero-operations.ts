@@ -44,7 +44,7 @@ const createPopup = function () {
   return info;
 };
 
-const updateHp = () => {
+const updateHp = (): void => {
   const hero = store.state.hero;
 
   const itemList = hero.$resumes || [];
@@ -80,7 +80,7 @@ const updateHp = () => {
   }
 };
 
-const equip = (item: any, index: number, type = "$package") => {
+const equip = (item: any, index: number, type = "$package"): boolean => {
   /*
     0: 基本
     1: 教育
@@ -111,7 +111,7 @@ const equip = (item: any, index: number, type = "$package") => {
   return true;
 };
 
-const demount = (equipType: number, index: number, type = "$package") => {
+const demount = (equipType: number, index: number, type = "$package"): void => {
   const hero = store.state.hero;
   const equipItem = hero.$resumes[equipType];
 
@@ -123,10 +123,7 @@ const demount = (equipType: number, index: number, type = "$package") => {
   index = index || container.findIndex((i: any) => !i);
 
   if (~index) setHeroItem(type, index, equipItem);
-  else {
-    setHeroItem("$resumes", equipType, equipItem);
-    return false;
-  }
+  else setHeroItem("$resumes", equipType, equipItem);
 
   updateHp();
 };

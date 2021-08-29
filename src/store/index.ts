@@ -1,10 +1,12 @@
 import { createStore } from "vuex";
 
 import hero from "./modules/hero";
+import map from "./modules/map";
 
 export default createStore({
   modules: {
-    hero
+    hero,
+    map
   },
   state: {
     UPDATE: 1

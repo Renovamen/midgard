@@ -1,17 +1,139 @@
 <template>
-  <div class="map">map</div>
+  <div class="map">
+    <router-link class="btn backhome" to="/">回城</router-link>
+
+    <transition
+      enter-active-class="animate__animated animate__faster animate__slideInUp"
+      leave-active-class="animate__animated animate__faster animate__slideOutDown"
+    >
+      <Package v-show="opt.info" class="v-package" />
+    </transition>
+
+    <transition
+      enter-active-class="animate__animated animate__faster animate__slideInDown"
+      leave-active-class="animate__animated animate__faster animate__slideOutUp"
+    >
+      <HomeInfo v-show="opt.info" class="right-info" transition="bounce" />
+    </transition>
+
+    <div
+      :class="['show-btn', opt.info ? 'opened' : 'closed']"
+      @click="togglePackage"
+    >
+      <span v-if="opt.info" class="arrow-left"></span>
+      <span v-else class="arrow-right"></span>
+    </div>
+
+    <transition
+      enter-active-class="animate__animated animate__slideInRight"
+      leave-active-class="animate__animated animate__slideOutRight"
+    >
+      <div v-if="opt.tip" class="tip">
+        <div class="map-name">{{ map.$opt.name }}</div>
+        <div class="tip-blocklist">
+          <span class="tip-block map-chest">包裹</span>
+          <span class="tip-block map-dialog">事件</span>
+          <span class="tip-block hero">你</span>
+        </div>
+      </div>
+    </transition>
+
+    <div class="map-data">
+      <div class="map">
+        <div v-for="(line, x) in map.$data.mapData" :key="`line-${x}`">
+          <MapBlock
+            v-for="(block, y) in line"
+            :key="`block-${y}`"
+            :block="block"
+            :map="map"
+            @autoMove="autoMove(block)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs, onMounted, onUpdated } from "vue";
+import { useStore } from "vuex";
+import MapBlock from "@/components/MapBlock.vue";
+import HomeInfo from "@/components/HomeInfo.vue";
+import Package from "@/components/Package.vue";
+import Astar from "@/js/astar";
+import InitMap from "@/js/init-map";
 
 export default defineComponent({
-  name: "Map"
+  name: "Map",
+  components: {
+    MapBlock,
+    HomeInfo,
+    Package
+  },
+  setup() {
+    const store = useStore();
+    const state = reactive({
+      opt: {
+        info: false, // 信息栏, 装备栏
+        tip: true // 地图左上提示框
+      },
+      map: new InitMap(store.state.map.list[0]), // 地图数据对象
+      moveEvent: null // 单位移动事件监听,触发
+    });
+
+    const autoPosition = () => {
+      const $m = document.querySelector(".map") as HTMLElement;
+      const $b = document.querySelector(".map-block") as HTMLElement;
+      const blockX = $b.offsetWidth;
+      const blockY = $b.offsetHeight;
+      const hero = state.map.hero;
+
+      const { row, col } = state.map.$data;
+      const sty = (document.querySelector(".map-data .map") as HTMLElement)
+        .style;
+      sty.left =
+        ($m.offsetWidth - blockX * row) / 2 -
+        (hero.y - (col - 1) / 2) * blockX +
+        "px";
+      sty.top =
+        ($m.offsetHeight - blockY * col) / 2 -
+        (hero.x - (row - 1) / 2) * blockY +
+        "px";
+    };
+
+    const togglePackage = () => {
+      state.opt.info = !state.opt.info;
+    };
+
+    const autoMove = (end: any) => {
+      // pass
+      console.log("autoMove");
+    };
+
+    onMounted(() => {
+      autoPosition();
+    });
+
+    onUpdated(() => {
+      autoPosition();
+    });
+
+    setTimeout(() => {
+      state.opt.tip = false;
+    }, 5000);
+
+    return {
+      ...toRefs(state),
+      togglePackage,
+      autoMove
+    };
+  }
 });
 </script>
 
 <style scoped lang="stylus">
 @require '../styles/palette.styl'
+
 .map
   position relative
   overflow hidden
@@ -70,9 +192,9 @@ export default defineComponent({
       top 50%
       margin-top -8px
     .arrow-left
-      content url('../assets/ui/left.svg')
+      content url('/ui/left.svg')
     .arrow-right
-      content url('../assets/ui/right.svg')
+      content url('/ui/right.svg')
   .tip
     display inline-block
     color white

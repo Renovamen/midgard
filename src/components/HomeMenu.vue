@@ -22,10 +22,12 @@
 </template>
 
 <script lang="ts">
-// import MapInit from '../js/map-init'
+import * as _ from "lodash";
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { setStoreState } from "@/store/utils";
+import InitMap from "@/js/init-map";
 
 export default defineComponent({
   name: "HomeMenu",
@@ -78,17 +80,18 @@ export default defineComponent({
             inflex: 0.5 // 曲折度
           },
           chestList: chestList,
-          eventList: eventList // 事件
+          eventList: eventList, // 事件
+          rule: {} // 生成规则
         }
       ];
 
-      // this.$store.state.MapStore.mapList = _.cloneDeep(map_table)
-      // return this.$store.state.MapStore.mapList
+      setStoreState("map", "list", _.cloneDeep(mapTable));
+      return store.state.map.list;
     };
 
     const goToMap = () => {
-      // let map = this.mapList[0]
-      // this.$store.state.MapStore.map = new MapInit(map)
+      const map = mapList()[0];
+      setStoreState("map", "map", new InitMap(map));
       router.push("/map");
     };
 
