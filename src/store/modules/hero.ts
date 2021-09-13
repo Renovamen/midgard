@@ -1,3 +1,5 @@
+import { ItemType } from "@/types";
+
 const state = {
   $resumes: [],
   $package: [],
@@ -17,7 +19,9 @@ const mutations = {
   sortPackage(state: any, type: string): boolean {
     const list = state[type];
     if (!list || !list.length) return false;
-    list.sort((a: any, b: any) => (a.id || Infinity) - (b.id || Infinity));
+    list.sort(
+      (a: ItemType, b: ItemType) => (a.id || Infinity) - (b.id || Infinity)
+    );
     return true;
   },
   UPDATE(state: any): void {

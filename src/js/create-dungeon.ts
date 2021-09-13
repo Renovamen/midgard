@@ -1,3 +1,5 @@
+import { BlockType, MapPositionType } from "@/types";
+
 const getRandom = (start: number, end: number, per?: number, max?: number) => {
   let num = Number((Math.random() * (end - start) + start).toFixed(0));
   if (per) {
@@ -48,7 +50,7 @@ class CreateDungeon {
   init = () => {
     const result = [];
     for (let i = 0; i < this.row; i++) {
-      const arr = [];
+      const arr: BlockType[] = [];
       for (let j = 0; j < this.col; j++) {
         arr.push({
           x: i,
@@ -82,7 +84,11 @@ class CreateDungeon {
     return this.mapData;
   };
 
-  createLine = (start: any, end: any, first = false) => {
+  createLine = (
+    start: MapPositionType,
+    end: MapPositionType,
+    first = false
+  ) => {
     // 计算两点之间的距离
     const disX = Math.abs(start.x - end.x);
     const disY = Math.abs(start.y - end.y);

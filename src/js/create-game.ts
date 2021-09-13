@@ -7,7 +7,7 @@ const ITEM_LENGTH = ITEM_TABLE.length;
 const INIT_HP = 600;
 const MAX_HP = 600;
 
-const createGame = function (isCheat = false) {
+const createGame = function (isCheat = false): void {
   if (isCheat == false) {
     // 生命值
     setStoreState("hero", "$hp", INIT_HP);

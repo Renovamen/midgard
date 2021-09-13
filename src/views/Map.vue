@@ -72,6 +72,7 @@ import Package from "@/components/Package.vue";
 import Astar from "@/js/astar";
 import HeroMoveEvent from "@/js/hero-move";
 import InitMap from "@/js/init-map";
+import { BlockType } from "@/types";
 
 export default defineComponent({
   name: "Map",
@@ -125,7 +126,7 @@ export default defineComponent({
       state.opt.info = !state.opt.info;
     };
 
-    const autoMove = (end: any) => {
+    const autoMove = (end: BlockType) => {
       const _path = new Astar(state.map.$data, state.map.hero, end).init();
       moveEvent.autoMove(_path);
     };

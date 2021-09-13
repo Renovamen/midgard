@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import store from "@/store";
 import getStatic from "@/js/get-static";
 import { setStoreState, setHeroItem } from "@/store/utils";
+import { ItemType, OperationType } from "@/types";
 
 const createPopup = function () {
   const modal = document.createElement("div");
@@ -82,7 +83,7 @@ const updateHp = (): void => {
   }
 };
 
-const equip = (item: any, index: number, type = "$package"): boolean => {
+const equip = (item: ItemType, index: number, type = "$package"): boolean => {
   /*
     0: 基本
     1: 教育
@@ -106,8 +107,10 @@ const equip = (item: any, index: number, type = "$package"): boolean => {
   // 删除包裹中的装备，如果已有装备，卸载装备
   setHeroItem(type, index, undefined);
 
-  if (hero.$resumes[item.equipType]) demount(item.equipType, index, type);
-  setHeroItem("$resumes", item.equipType, item);
+  if (item.equipType) {
+    if (hero.$resumes[item.equipType]) demount(item.equipType, index, type);
+    setHeroItem("$resumes", item.equipType, item);
+  }
 
   updateHp();
   return true;
@@ -130,7 +133,11 @@ const demount = (equipType: number, index: number, type = "$package"): void => {
   updateHp();
 };
 
-function getList(key: any, opt: any, isIndex = false) {
+function getList(
+  key: string,
+  opt: number | { id: number } | { (i: ItemType): any },
+  isIndex = false
+) {
   const hero = (store.state as any).hero;
   const list = hero[key];
 
@@ -138,28 +145,34 @@ function getList(key: any, opt: any, isIndex = false) {
 
   let condition = null;
 
-  if (typeof opt === "number") condition = (i: any) => i && i.id === opt;
-  if (typeof opt === "object") condition = (i: any) => i && i.id === opt.id;
+  if (typeof opt === "number") condition = (i: ItemType) => i && i.id === opt;
+  if (typeof opt === "object")
+    condition = (i: ItemType) => i && i.id === opt.id;
   if (typeof opt === "function") condition = opt;
   if (!condition) return false;
 
   return isIndex ? list.findIndex(condition) : list.find(condition);
 }
 
-const getItem = (data: any, force = false, type = "$package") => {
+const getItem = (
+  data: Array<any>,
+  force = false,
+  type = "$package"
+): OperationType[] => {
   const hero = (store.state as any).hero;
   const container = force ? hero[type] : _.cloneDeep(hero[type]);
-  const surplus: any = [];
+  const surplus: OperationType[] = [];
 
   if (!container || !data || !data.length) return surplus;
-
-  data.forEach((i: any) => {
+  data.forEach((i: OperationType) => {
     let item;
     if (typeof i[0] === "object") item = i[0];
     else item = getStatic(i[0]);
 
     const itemInPackage = getList(type, { id: item.id });
-    const nextBlankPlace = container.findIndex((item: any) => !item);
+    const nextBlankPlace = container.findIndex(
+      (item: ItemType | undefined) => !item
+    );
 
     const num = i[1];
     item.pile && (item.num = num);

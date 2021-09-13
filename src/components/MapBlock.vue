@@ -57,7 +57,7 @@ export default defineComponent({
         [1, 1]
       ];
       for (let i = 0; i < 4; i++) {
-        let around = _.map(new Array(3), (v: any, k: any) => {
+        let around = _.map(new Array(3), (v: any, k: number) => {
           let [up_x, up_y] = relativePosition[i];
           let [_x, _y] = [
             [x + up_x, y],

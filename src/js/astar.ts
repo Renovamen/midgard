@@ -1,11 +1,12 @@
 import * as _ from "lodash";
+import { BlockType } from "@/types";
 
 class Block {
   x: number;
   y: number;
-  parent: any;
-  G: any;
-  H: any;
+  parent: Block | BlockType | null;
+  G: number;
+  H: number | null;
 
   constructor(x: number, y: number) {
     this.x = x;
@@ -16,29 +17,32 @@ class Block {
   }
 
   getF = () => {
-    return this.G + this.H;
+    return this.G + (this.H as number);
   };
 }
 
 class Astar {
   map: any;
-  start: any;
-  end: any;
+  start: BlockType;
+  end: BlockType;
 
-  constructor(map: any, start: any, end: any) {
+  constructor(map: any, start: BlockType, end: BlockType) {
     this.map = _.cloneDeep(map);
     this.start = start;
     this.end = end;
   }
 
-  init = () => {
+  init = (): Array<Block | BlockType> => {
     const opt = {
       startBlock: this.start,
       endBlock: this.end,
       stickList: _.filter(_.flattenDeep(this.map.mapData), { block_type: "2" }),
       openList: [],
       closeList: [],
-      isInList: function (block: any, type: any): any {
+      isInList: function (
+        block: Block,
+        type: string
+      ): number | { index: number } {
         const index = _.findIndex((this as any)[type], {
           x: block.x,
           y: block.y
@@ -69,7 +73,7 @@ class Astar {
   };
 
   step = (): any => {
-    this.map.openList = this.map.openList.sort(function (a: any, b: any) {
+    this.map.openList = this.map.openList.sort(function (a: Block, b: Block) {
       return a.getF() - b.getF();
     });
 
@@ -113,8 +117,8 @@ class Astar {
     return this.step();
   };
 
-  around = (currentBlock: any) => {
-    const list = [];
+  around = (currentBlock: BlockType): Block[] => {
+    const list: Block[] = [];
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
         if (i === 0 && j === 0) continue;
@@ -133,14 +137,15 @@ class Astar {
     return list;
   };
 
-  countH = (block: any) => {
+  countH = (block: Block): number => {
     const x = Math.abs(block.x - this.map.endBlock.x);
     const y = Math.abs(block.y - this.map.endBlock.y);
     return (x + y) * 10;
   };
 
-  countG = (block: any) => {
-    if (block.x !== block.parent.x && block.y !== block.parent.y) return 14;
+  countG = (block: Block): number => {
+    const parent = block.parent as Block | BlockType;
+    if (block.x !== parent.x && block.y !== parent.y) return 14;
     else return 10;
   };
 }

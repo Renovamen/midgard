@@ -1,8 +1,8 @@
-import { createApp } from "vue";
+import { createApp, DirectiveBinding } from "vue";
 import CONSTANT from "@/data/constant";
 import "../styles/item-tip.styl";
 
-export default function (el: any, binding: any) {
+export default function (el: HTMLElement, binding: DirectiveBinding): void {
   const itemLevel = CONSTANT.ITEM_LEVEL,
     tipClassName = ".item-tip-pover",
     item = binding.value;
@@ -13,11 +13,11 @@ export default function (el: any, binding: any) {
         window.open(item.link.url);
       }
     },
-    mouseenter: function (e: any) {
+    mouseenter: function (e: MouseEvent) {
       event.mouseleave();
 
       const tip = document.createElement("div");
-      const { right, top } = e.target.getBoundingClientRect();
+      const { right, top } = (e.target as HTMLElement).getBoundingClientRect();
 
       const height = window.innerHeight - 10,
         height_original = 500;

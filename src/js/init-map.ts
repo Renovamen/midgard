@@ -2,15 +2,16 @@ import * as _ from "lodash";
 import CreateDungeon from "@/js/create-dungeon";
 import getStatic from "@/js/get-static";
 import CONSTANT from "@/data/constant";
+import { MapType, BlockType } from "@/types";
 
 const blockType = CONSTANT.MAP_BLOCK_TYPE;
 
 class InitMap {
-  $opt: any;
-  $data: any;
-  hero: any;
+  $opt: MapType;
+  $data: CreateDungeon;
+  hero: BlockType;
 
-  constructor(o: any) {
+  constructor(o: MapType) {
     const opt = _.cloneDeep(o);
     this.$opt = opt;
 

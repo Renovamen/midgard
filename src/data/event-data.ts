@@ -1,10 +1,11 @@
 import { RESUME_ITEMS_TABLE } from "./item-data";
+import { EventType } from "@/types";
 
 const DIALOG = "map-dialog",
   FIRST_ID = RESUME_ITEMS_TABLE[0].id;
 
 const getDialogData = function () {
-  const dialogList = [];
+  const dialogList: EventType[] = [];
   for (let i = 1; i <= 10; i++) {
     dialogList.push({
       id: 7000000 + i,

@@ -9,7 +9,7 @@ const Data = {
   "7": DIALOG_DATA
 };
 
-const getStatic = function (key: any) {
+const getStatic = function (key: number) {
   const head: string = key.toString()[0];
   const record = (Data as any)[head];
   const result =

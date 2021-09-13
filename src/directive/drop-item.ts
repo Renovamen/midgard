@@ -1,26 +1,30 @@
+import { DirectiveBinding } from "vue";
 import initDragDrop from "@/js/drag-drop";
 import op from "@/js/hero-operations";
 import store from "@/store";
 
-export default function (el: any, binding: any) {
+export default function (el: HTMLElement, binding: DirectiveBinding): void {
   const { hero, posType, posIndex } = binding.value;
 
   const event = {
-    dragend(event: any) {
+    dragend(event: DragEvent) {
+      if (!event.dataTransfer) return false;
       event.dataTransfer.clearData("text");
       return false;
     },
-    dragover(event: any) {
+    dragover(event: DragEvent) {
       event.preventDefault();
       return true;
     },
-    dragstart(event: any) {
+    dragstart(event: DragEvent) {
+      if (!event.dataTransfer) return;
       event.dataTransfer.setData("text", posType + "|" + String(posIndex));
       try {
+        const eTarget = event.target as HTMLElement;
         event.dataTransfer.setDragImage(
-          !~event.target.className.indexOf("package-item")
-            ? event.target.parentNode
-            : event.target,
+          !~eTarget.className.indexOf("package-item")
+            ? (eTarget.parentNode as HTMLElement)
+            : eTarget,
           20,
           20
         );
@@ -30,9 +34,10 @@ export default function (el: any, binding: any) {
       const itemPover = document.querySelector(".item-tip-pover");
       itemPover && (itemPover.parentNode as HTMLElement).removeChild(itemPover);
     },
-    drop(event: any) {
+    drop(event: DragEvent) {
       event.preventDefault();
 
+      if (!event.dataTransfer) return;
       initDragDrop(
         event.dataTransfer.getData("text"),
         posType + "|" + String(posIndex)

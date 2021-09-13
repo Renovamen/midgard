@@ -1,10 +1,11 @@
 import { RESUME_ITEMS_TABLE } from "./item-data";
+import { ChestType } from "@/types";
 
 const CHEST = "map-chest",
   FIRST_ID = RESUME_ITEMS_TABLE[0].id;
 
 const getChestData = function () {
-  const chestList = [];
+  const chestList: ChestType[] = [];
   for (const item of RESUME_ITEMS_TABLE) {
     chestList.push({
       $type: CHEST,

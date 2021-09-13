@@ -1,23 +1,27 @@
 import * as _ from "lodash";
 import CONSTANT from "@/data/constant";
 import { MapDialog, MapGetItem } from "@/js/event-class";
+import InitMap from "./init-map";
 import store from "@/store";
 import { setStoreState } from "@/store/utils";
+import { MapPositionType, BlockType } from "@/types";
 
-const KEY_UP = 38;
-const KEY_DOWN = 40;
-const KEY_LEFT = 37;
-const KEY_RIGHT = 39;
+const KEY_UP = "ArrowUp";
+const KEY_DOWN = "ArrowDown";
+const KEY_LEFT = "ArrowLeft";
+const KEY_RIGHT = "ArrowRight";
 const MOVE_DELAY = 280;
 const BLOCK_TYPE = CONSTANT.MAP_BLOCK_TYPE;
 
-class HeroMoveEvent {
-  map: any;
-  canMoveDelay: boolean;
-  keyUpFunc: any;
-  autoMoveTimer: any;
+type keyUpFuncType = (event: KeyboardEvent) => any;
 
-  constructor(map: any) {
+class HeroMoveEvent {
+  map: InitMap;
+  canMoveDelay: boolean;
+  keyUpFunc: keyUpFuncType | null;
+  autoMoveTimer: number | null;
+
+  constructor(map: InitMap) {
     this.map = map;
     this.canMoveDelay = true;
     this.keyUpFunc = null;
@@ -27,20 +31,20 @@ class HeroMoveEvent {
   }
 
   start = (): void => {
-    this.keyUpFunc = (event: any) => {
-      if (!event.keyCode) return;
+    this.keyUpFunc = (event: KeyboardEvent) => {
+      if (!event.key) return;
       this.autoMoveTimer && clearInterval(this.autoMoveTimer);
-      this.move(event.keyCode);
+      this.move(event.key);
     };
     document.addEventListener("keyup", this.keyUpFunc);
   };
 
   stop = (): void => {
-    document.removeEventListener("keyup", this.keyUpFunc);
-    clearInterval(this.autoMoveTimer);
+    document.removeEventListener("keyup", this.keyUpFunc as keyUpFuncType);
+    if (this.autoMoveTimer !== null) clearInterval(this.autoMoveTimer);
   };
 
-  move = (direction: any) => {
+  move = (direction: string): void => {
     if (!this.canMoveDelay) return;
 
     this.canMoveDelay = false;
@@ -76,7 +80,7 @@ class HeroMoveEvent {
       // pass
     }
 
-    if (!nextBlock || nextBlock.block_type != BLOCK_TYPE["ROAD"]) return false;
+    if (!nextBlock || nextBlock.block_type != BLOCK_TYPE["ROAD"]) return;
 
     // 将当前格子设置为 Road
     this.map.hero.block_type = BLOCK_TYPE["ROAD"];
@@ -113,7 +117,7 @@ class HeroMoveEvent {
     }
   };
 
-  autoMove = (path: any): void => {
+  autoMove = (path: Array<MapPositionType | BlockType>): void => {
     const _path = _.cloneDeep(path);
 
     this.autoMoveTimer && clearInterval(this.autoMoveTimer);
@@ -128,7 +132,7 @@ class HeroMoveEvent {
       const x = this.map.hero.x;
       const y = this.map.hero.y;
 
-      let direction = -1;
+      let direction = "";
       switch (true) {
         case next.x < x:
           direction = KEY_UP;
@@ -146,7 +150,8 @@ class HeroMoveEvent {
 
       this.move(direction);
 
-      if (_path.length < 1) clearInterval(this.autoMoveTimer);
+      if (_path.length < 1 && this.autoMoveTimer !== null)
+        clearInterval(this.autoMoveTimer);
     }, MOVE_DELAY + 100);
   };
 }

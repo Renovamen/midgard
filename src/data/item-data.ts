@@ -1,18 +1,4 @@
-type ItemType = {
-  id: number;
-  name: string;
-  label: Array<string>;
-  dsc: Array<string>;
-  num?: number;
-  pile?: boolean;
-  equipType?: number;
-  equip?: any;
-  img?: Array<string>;
-  link?: {
-    text: string;
-    url: string;
-  };
-};
+import { ItemType, equipType } from "@/types";
 
 const MATERIAL_TABLE: Array<ItemType> = [
   {
@@ -285,6 +271,7 @@ const getResumeItems = function (baseItems: Array<ItemType>) {
   const allItems = [];
   for (let grade = 0; grade <= 3; grade++) {
     for (const item of baseItems) {
+      const equip = item.equip as equipType;
       allItems.push({
         id: item.id + 14 * grade,
         name: item.name,
@@ -293,11 +280,10 @@ const getResumeItems = function (baseItems: Array<ItemType>) {
         label: item.label,
         equip: {
           $changeHp:
-            item.equip.$changeHp > 0
-              ? item.equip.$changeHp + 10 * grade
+            equip.$changeHp > 0
+              ? equip.$changeHp + 10 * grade
               : Math.round(
-                  item.equip.$changeHp +
-                    grade * 0.2 * Math.abs(item.equip.$changeHp)
+                  equip.$changeHp + grade * 0.2 * Math.abs(equip.$changeHp)
                 )
         },
         dsc: item.dsc,

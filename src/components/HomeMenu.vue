@@ -28,6 +28,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { setStoreState } from "@/store/utils";
 import InitMap from "@/js/init-map";
+import { MapType } from "@/types";
 
 export default defineComponent({
   name: "HomeMenu",
@@ -69,7 +70,7 @@ export default defineComponent({
         eventList.push(7000000 + Math.ceil(Math.random() * 10));
 
       // --------- 地图数据 ---------
-      const mapTable = [
+      const mapTable: MapType[] = [
         {
           id: 8000001,
           name: "世界",

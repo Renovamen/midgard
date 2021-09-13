@@ -5,6 +5,7 @@ import getStatic from "@/js/get-static";
 import op from "@/js/hero-operations";
 import store from "@/store";
 import { setStoreState } from "@/store/utils";
+import { EventType, EventDataType, ChestType, ChestDataType } from "@/types";
 
 const DialogElementClassName = ".map-dialog-modal";
 const ShadowViewClassName = ".shadow-view";
@@ -65,7 +66,7 @@ const closeModal = (callback: any): void => {
 
 const itemLevel = CONSTANT.ITEM_LEVEL;
 
-const MapDialog = function (event: any, callback: any) {
+const MapDialog = function (event: EventType, callback: any) {
   const info = createPopup();
   const modal = info.modal,
     shadowView = info.shadowView;
@@ -132,14 +133,14 @@ const MapDialog = function (event: any, callback: any) {
         };
         return itemColor;
       },
-      itemKey(id: any, key: any) {
+      itemKey(id: number, key: string) {
         const data = getStatic(id);
         return data[key] || data;
       }
     }
   }).mount(DialogElementClassName);
 
-  function transformEventObj(opt: any) {
+  function transformEventObj(opt: EventDataType) {
     let record = _.cloneDeep(opt);
     if (typeof record === "string") {
       record = {
@@ -150,23 +151,22 @@ const MapDialog = function (event: any, callback: any) {
     const buttons = _.map(record.buttons, function (str) {
       if (typeof str === "object") return str;
 
-      const strc = str;
-      str = str.match(/\[([^]+)\]\{([^]+)\}/);
-
+      const strReg = str.match(/\[([^]+)\]\{([^]+)\}/) as RegExpMatchArray;
       const btn: any = {};
-      btn.title = str[1];
 
-      if (!str[2]) return btn;
+      btn.title = strReg[1];
 
-      if (strc[0] !== "#") {
+      if (!strReg[2]) return btn;
+
+      if (str[0] !== "#") {
         btn.action = function () {
-          const [i, isEnd] = str[2].split(",");
+          const [i, isEnd] = strReg[2].split(",");
           this.$i = Number(i);
           this.next();
           if (Number(isEnd)) this.isEnd = true;
         };
       } else {
-        const i = str[2].split(",");
+        const i = strReg[2].split(",");
         const isEnd = i.unshift();
         btn.action = function () {
           const need = opt.need || [];
@@ -196,7 +196,7 @@ const MapDialog = function (event: any, callback: any) {
   }
 };
 
-const MapGetItem = function (event: any, callback: any) {
+const MapGetItem = function (event: ChestType, callback: any) {
   const info = createPopup();
   const modal = info.modal,
     shadowView = info.shadowView;
@@ -259,14 +259,14 @@ const MapGetItem = function (event: any, callback: any) {
         };
         return itemColor;
       },
-      itemKey(id: any, key: any) {
+      itemKey(id: number, key: string) {
         const data = getStatic(id);
         return data[key] || data;
       }
     }
   }).mount(DialogElementClassName);
 
-  function getItemObj(opt: any) {
+  function getItemObj(opt: ChestDataType) {
     let record = _.cloneDeep(opt);
     if (typeof record === "string") {
       record = {
@@ -277,24 +277,23 @@ const MapGetItem = function (event: any, callback: any) {
     const buttons = _.map(record.buttons, function (str) {
       if (typeof str === "object") return str;
 
-      const strc = str;
-      str = str.match(/\[([^]+)\]\{([^]+)\}/);
-
+      const strReg = str.match(/\[([^]+)\]\{([^]+)\}/) as RegExpMatchArray;
       const btn: any = {};
-      btn.title = str[1];
 
-      if (!str[2]) return btn;
+      btn.title = strReg[1];
 
-      if (strc[0] !== "#") {
+      if (!strReg[2]) return btn;
+
+      if (str[0] !== "#") {
         btn.action = function () {
-          const [i, isEnd] = str[2].split(",");
+          const [i, isEnd] = strReg[2].split(",");
           this.$i = Number(i);
           // console.log("this.i: ", Number(i))
           this.next();
           if (Number(isEnd)) this.isEnd = true;
         };
       } else {
-        const i = str[2].split(",");
+        const i = strReg[2].split(",");
         const isEnd = i.unshift();
 
         btn.action = function () {
