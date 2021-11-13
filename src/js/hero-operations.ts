@@ -107,7 +107,7 @@ const equip = (item: ItemType, index: number, type = "$package"): boolean => {
   // 删除包裹中的装备，如果已有装备，卸载装备
   setHeroItem(type, index, undefined);
 
-  if (item.equipType) {
+  if (item.equipType != undefined) {
     if (hero.$resumes[item.equipType]) demount(item.equipType, index, type);
     setHeroItem("$resumes", item.equipType, item);
   }

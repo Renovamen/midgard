@@ -19,7 +19,7 @@ const createGame = function (isCheat = false): void {
     const $resumes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     setStoreState("hero", "$resumes", $resumes);
 
-    // 初始背包装有龙的信和氪金信
+    // 初始背包装有龙的信和氪金信
     const $package = MATERIAL_TABLE.concat(new Array(90 - MATERIAL_LENGTH));
     setStoreState("hero", "$package", $package);
   } else {
