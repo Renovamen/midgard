@@ -1,5 +1,5 @@
 const CONSTANT = {
-  MAP_BLOCK_TYPE: {
+  MAP_BLOCK_TYPES: {
     ROAD: "0", // 可行走
     HERO: "1", // 英雄
     STICK: "2", // 障碍

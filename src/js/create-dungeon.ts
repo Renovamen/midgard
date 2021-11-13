@@ -55,7 +55,7 @@ class CreateDungeon {
         arr.push({
           x: i,
           y: j,
-          block_type: this.$BLOCK_STICK
+          blockType: this.$BLOCK_STICK
         });
       }
       result.push(arr);
@@ -94,9 +94,9 @@ class CreateDungeon {
     const disY = Math.abs(start.y - end.y);
 
     // 生成线路：采用从 A - B 的走法，中间随机曲折
-    // _x, _y 用于记录当前走到得节点位置，默认为起点
-    let _x = start.x;
-    let _y = start.y;
+    // toX, toY 用于记录当前走到得节点位置，默认为起点
+    let toX = start.x;
+    let toY = start.y;
 
     // 剩余的移动量，用于确保能够到达目标地点
     const moveLeft = {
@@ -107,16 +107,16 @@ class CreateDungeon {
     // 用于存放需要被点亮的点的位置（最终的路径）
     const lines = [];
     // 循环生成曲折线路，直到走到目标地点
-    while (_x !== end.x && _y !== end.y) {
+    while (toX !== end.x && toY !== end.y) {
       // ------- 进行 X 轴移动 -------
       const moveX = getRandom(0, disX, this.inflex, moveLeft.x);
       moveLeft.x -= moveX;
       for (let i = 0; i < moveX; i++) {
-        if (start.x > end.x) lines.push([_x - i, _y]);
-        else lines.push([_x + i, _y]);
+        if (start.x > end.x) lines.push([toX - i, toY]);
+        else lines.push([toX + i, toY]);
       }
-      if (start.x > end.x) _x -= moveX;
-      else _x += moveX;
+      if (start.x > end.x) toX -= moveX;
+      else toX += moveX;
 
       // ------- 进行 Y 轴移动 -------
       // 如果 X 轴已经走到同一线，则这一步 Y 轴需要直接走到终点
@@ -126,11 +126,11 @@ class CreateDungeon {
 
       moveLeft.y -= moveY;
       for (let j = 0; j < moveY; j++) {
-        if (start.y > end.y) lines.push([_x, _y - j]);
-        else lines.push([_x, _y + j]);
+        if (start.y > end.y) lines.push([toX, toY - j]);
+        else lines.push([toX, toY + j]);
       }
-      if (start.y > end.y) _y -= moveY;
-      else _y += moveY;
+      if (start.y > end.y) toY -= moveY;
+      else toY += moveY;
     }
 
     // 判断是否是第一条路径
@@ -139,7 +139,7 @@ class CreateDungeon {
       let isIn = false;
 
       lines.forEach((pos) => {
-        this.mapData[pos[0]][pos[1]].block_type === this.$BLOCK_ROAD &&
+        this.mapData[pos[0]][pos[1]].blockType === this.$BLOCK_ROAD &&
           (isIn = true);
       });
 
@@ -148,7 +148,7 @@ class CreateDungeon {
 
     // 生成路径成功，将其更新至地图数据
     lines.forEach((pos) => {
-      this.mapData[pos[0]][pos[1]].block_type = this.$BLOCK_ROAD;
+      this.mapData[pos[0]][pos[1]].blockType = this.$BLOCK_ROAD;
     });
 
     return true;

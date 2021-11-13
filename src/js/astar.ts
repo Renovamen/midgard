@@ -36,7 +36,7 @@ class Astar {
     const opt = {
       startBlock: this.start,
       endBlock: this.end,
-      stickList: _.filter(_.flattenDeep(this.map.mapData), { block_type: "2" }),
+      stickList: _.filter(_.flattenDeep(this.map.mapData), { blockType: "2" }),
       openList: [],
       closeList: [],
       isInList: function (

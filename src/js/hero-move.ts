@@ -11,7 +11,7 @@ const KEY_DOWN = "ArrowDown";
 const KEY_LEFT = "ArrowLeft";
 const KEY_RIGHT = "ArrowRight";
 const MOVE_DELAY = 280;
-const BLOCK_TYPE = CONSTANT.MAP_BLOCK_TYPE;
+const BLOCK_TYPE = CONSTANT.MAP_BLOCK_TYPES;
 
 type keyUpFuncType = (event: KeyboardEvent) => any;
 
@@ -80,12 +80,12 @@ class HeroMoveEvent {
       // pass
     }
 
-    if (!nextBlock || nextBlock.block_type != BLOCK_TYPE["ROAD"]) return;
+    if (!nextBlock || nextBlock.blockType != BLOCK_TYPE["ROAD"]) return;
 
     // 将当前格子设置为 Road
-    this.map.hero.block_type = BLOCK_TYPE["ROAD"];
+    this.map.hero.blockType = BLOCK_TYPE["ROAD"];
     // 将目标格子标识为 Hero
-    nextBlock.block_type = BLOCK_TYPE["HERO"];
+    nextBlock.blockType = BLOCK_TYPE["HERO"];
 
     const { event_type, event } = nextBlock.event || {};
 

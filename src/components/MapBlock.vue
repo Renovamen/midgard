@@ -21,8 +21,8 @@ export default defineComponent({
     const bgColor = () => {
       const roadColor = "#c3944e";
       const stickColor = "#51963d";
-      const type = props.block.block_type;
-      const bt = CONSTANT.MAP_BLOCK_TYPE;
+      const type = props.block.blockType;
+      const bt = CONSTANT.MAP_BLOCK_TYPES;
 
       let opt = {
         display: "inline-block",
@@ -39,32 +39,33 @@ export default defineComponent({
     const blockClass = () => {
       const block = props.block;
       const typeList = ["road", "hero", "stick", "end"];
-      const stick = CONSTANT.MAP_BLOCK_TYPE.STICK;
+      const stick = CONSTANT.MAP_BLOCK_TYPES.STICK;
       let classList = ["map-block"];
 
-      classList.push(typeList[Number(block.block_type)] || "");
+      classList.push(typeList[Number(block.blockType)] || "");
 
       block.event && classList.push(block.event.event_type);
 
       // 计算圆角
       // r-1 r-2 r-3 r-4
       const data = props.map.$data.mapData;
-      const { x, y, block_type: type } = block;
-      const relativePosition = [
+      const directions = [
         [-1, -1],
         [-1, 1],
         [1, -1],
         [1, 1]
       ];
+      const { x, y, blockType: type } = block;
+
       for (let i = 0; i < 4; i++) {
         let around = _.map(new Array(3), (v: any, k: number) => {
-          let [up_x, up_y] = relativePosition[i];
-          let [_x, _y] = [
-            [x + up_x, y],
-            [x, y + up_y],
-            [x + up_x, y + up_y]
+          const [dx, dy] = directions[i];
+          let [toX, toY] = [
+            [x + dx, y],
+            [x, y + dy],
+            [x + dx, y + dy]
           ][k];
-          if (data[_x] && data[_x][_y]) return data[_x][_y].block_type;
+          if (data[toX] && data[toX][toY]) return data[toX][toY].blockType;
           else return stick;
         });
         if (type == stick) {

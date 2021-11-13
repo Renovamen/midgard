@@ -4,7 +4,7 @@ import getStatic from "@/js/get-static";
 import CONSTANT from "@/data/constant";
 import { MapType, BlockType } from "@/types";
 
-const blockType = CONSTANT.MAP_BLOCK_TYPE;
+const blockTypes = CONSTANT.MAP_BLOCK_TYPES;
 
 class InitMap {
   $opt: MapType;
@@ -19,7 +19,7 @@ class InitMap {
 
     this.hero = (() => {
       const hero = this.getBlankRandomBlock(1)[0];
-      hero.block_type = blockType["HERO"];
+      hero.blockType = blockTypes["HERO"];
       return hero;
     })();
 
@@ -42,7 +42,7 @@ class InitMap {
   getBlankRandomBlock = (size?: number): any => {
     return _.sampleSize(
       _.filter(_.flattenDeep(this.$data.mapData), (item: any) => {
-        if (item.block_type != blockType["ROAD"] || item.event) {
+        if (item.blockType != blockTypes["ROAD"] || item.event) {
           return false;
         }
         return true;

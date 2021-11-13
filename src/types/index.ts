@@ -1,6 +1,6 @@
 import CreateDungeon from "@/js/create-dungeon";
 
-export type equipType = {
+export type EquipType = {
   $changeHp: number;
 };
 
@@ -12,7 +12,7 @@ export type ItemType = {
   num?: number;
   pile?: boolean;
   equipType?: number;
-  equip?: equipType;
+  equip?: EquipType;
   img?: Array<string>;
   link?: {
     text: string;
@@ -53,7 +53,7 @@ export type MapPositionType = {
 };
 
 export type BlockType = MapPositionType & {
-  block_type: string;
+  blockType: string;
 };
 
 export type MapType = {

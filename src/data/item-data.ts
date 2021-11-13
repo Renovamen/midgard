@@ -1,4 +1,4 @@
-import { ItemType, equipType } from "@/types";
+import { ItemType, EquipType } from "@/types";
 
 const MATERIAL_TABLE: Array<ItemType> = [
   {
@@ -271,7 +271,7 @@ const getResumeItems = function (baseItems: Array<ItemType>) {
   const allItems = [];
   for (let grade = 0; grade <= 3; grade++) {
     for (const item of baseItems) {
-      const equip = item.equip as equipType;
+      const equip = item.equip as EquipType;
       allItems.push({
         id: item.id + 14 * grade,
         name: item.name,
