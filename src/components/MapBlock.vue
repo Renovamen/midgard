@@ -1,91 +1,76 @@
 <template>
-  <div :style="bgColor()" @click="autoMove">
+  <div :style="bgColor()" @click="$emit('autoMove')">
     <span :class="blockClass()"></span>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import * as _ from "lodash";
-import { defineComponent } from "vue";
 import CONSTANT from "../data/constant";
 
-export default defineComponent({
-  name: "MapBlock",
-  props: ["block", "map"],
-  emits: ["autoMove"],
-  setup(props, ctx) {
-    const autoMove = () => {
-      ctx.emit("autoMove");
-    };
+const props = defineProps(["block", "map"]);
+defineEmits(["autoMove"]);
 
-    const bgColor = () => {
-      const roadColor = "#c3944e";
-      const stickColor = "#51963d";
-      const type = props.block.blockType;
-      const bt = CONSTANT.MAP_BLOCK_TYPES;
+const bgColor = () => {
+  const roadColor = "#c3944e";
+  const stickColor = "#51963d";
+  const type = props.block.blockType;
+  const bt = CONSTANT.MAP_BLOCK_TYPES;
 
-      let opt = {
-        display: "inline-block",
-        background: stickColor
-      };
+  let opt = {
+    display: "inline-block",
+    background: stickColor
+  };
 
-      if (type != bt.ROAD || type == bt.HERO || props.block.event) {
-        opt.background = roadColor;
-      }
-
-      return opt;
-    };
-
-    const blockClass = () => {
-      const block = props.block;
-      const typeList = ["road", "hero", "stick", "end"];
-      const stick = CONSTANT.MAP_BLOCK_TYPES.STICK;
-      let classList = ["map-block"];
-
-      classList.push(typeList[Number(block.blockType)] || "");
-
-      block.event && classList.push(block.event.event_type);
-
-      // 计算圆角
-      // r-1 r-2 r-3 r-4
-      const data = props.map.$data.mapData;
-      const directions = [
-        [-1, -1],
-        [-1, 1],
-        [1, -1],
-        [1, 1]
-      ];
-      const { x, y, blockType: type } = block;
-
-      for (let i = 0; i < 4; i++) {
-        let around = _.map(new Array(3), (v: any, k: number) => {
-          const [dx, dy] = directions[i];
-          let [toX, toY] = [
-            [x + dx, y],
-            [x, y + dy],
-            [x + dx, y + dy]
-          ][k];
-          if (data[toX] && data[toX][toY]) return data[toX][toY].blockType;
-          else return stick;
-        });
-        if (type == stick) {
-          _.every(around, (i) => i != stick) && classList.push(`r-${i + 1}`);
-        } else {
-          _.every(around.slice(0, 2), (i) => i == stick) &&
-            classList.push(`r-${i + 1}`);
-        }
-      }
-
-      return classList;
-    };
-
-    return {
-      autoMove,
-      bgColor,
-      blockClass
-    };
+  if (type != bt.ROAD || type == bt.HERO || props.block.event) {
+    opt.background = roadColor;
   }
-});
+
+  return opt;
+};
+
+const blockClass = () => {
+  const block = props.block;
+  const typeList = ["road", "hero", "stick", "end"];
+  const stick = CONSTANT.MAP_BLOCK_TYPES.STICK;
+  let classList = ["map-block"];
+
+  classList.push(typeList[Number(block.blockType)] || "");
+
+  block.event && classList.push(block.event.event_type);
+
+  // 计算圆角
+  // r-1 r-2 r-3 r-4
+  const data = props.map.$data.mapData;
+  const directions = [
+    [-1, -1],
+    [-1, 1],
+    [1, -1],
+    [1, 1]
+  ];
+  const { x, y, blockType: type } = block;
+
+  for (let i = 0; i < 4; i++) {
+    const around = _.map(new Array(3), (v: any, k: number) => {
+      const [dx, dy] = directions[i];
+      let [toX, toY] = [
+        [x + dx, y],
+        [x, y + dy],
+        [x + dx, y + dy]
+      ][k];
+      if (data[toX] && data[toX][toY]) return data[toX][toY].blockType;
+      else return stick;
+    });
+    if (type == stick) {
+      _.every(around, (i) => i != stick) && classList.push(`r-${i + 1}`);
+    } else {
+      _.every(around.slice(0, 2), (i) => i == stick) &&
+        classList.push(`r-${i + 1}`);
+    }
+  }
+
+  return classList;
+};
 </script>
 
 <style scoped lang="stylus">

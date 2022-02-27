@@ -23,41 +23,26 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+<script lang="ts" setup>
+import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 import CONSTANT from "@/data/constant";
-import ItemTip from "@/directive/item-tip";
-import DropItem from "@/directive/drop-item";
+import vItemTip from "@/directive/item-tip";
+import vDropItem from "@/directive/drop-item";
 
-export default defineComponent({
-  name: "PackageItem",
-  directives: {
-    "item-tip": ItemTip,
-    "drop-item": DropItem
-  },
-  props: ["item", "positionType", "positionIndex"],
-  setup(props) {
-    const store = useStore();
+const props = defineProps(["item", "positionType", "positionIndex"]);
 
-    const index = ref(Number(props.positionIndex));
-    const dropData = reactive({
-      hero: store.state.hero,
-      posType: props.positionType,
-      posIndex: props.positionIndex
-    });
+const store = useStore();
 
-    const equipName = CONSTANT.EQUIP_ID;
-    const gradeColor = CONSTANT.ITEM_LEVEL;
-
-    return {
-      index,
-      dropData,
-      equipName,
-      gradeColor
-    };
-  }
+const index = ref(Number(props.positionIndex));
+const dropData = reactive({
+  hero: store.state.hero,
+  posType: props.positionType,
+  posIndex: props.positionIndex
 });
+
+const equipName = CONSTANT.EQUIP_ID;
+const gradeColor = CONSTANT.ITEM_LEVEL;
 </script>
 
 <style lang="stylus">

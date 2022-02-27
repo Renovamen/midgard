@@ -25,29 +25,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
 import { useStore } from "vuex";
 import PackageItem from "@/components/PackageItem.vue";
 
-export default defineComponent({
-  name: "Package",
-  components: {
-    PackageItem
-  },
-  setup() {
-    const store = useStore();
+const store = useStore();
 
-    const sort = () => {
-      store.commit("hero/sortPackage", "$package");
-    };
-
-    return {
-      store,
-      sort
-    };
-  }
-});
+const sort = () => {
+  store.commit("hero/sortPackage", "$package");
+};
 </script>
 
 <style scoped lang="stylus">

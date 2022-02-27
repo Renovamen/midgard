@@ -62,82 +62,64 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs, watch } from "vue";
+<script lang="ts" setup>
+import { ref, watch } from "vue";
 import { useStore } from "vuex";
 import createGame from "@/js/create-game";
 import PackageItem from "@/components/PackageItem.vue";
 
-export default defineComponent({
-  name: "HomeInfo",
-  components: {
-    PackageItem
-  },
-  setup() {
-    const store = useStore();
+const store = useStore();
 
-    watch(
-      () => store.state.hero.UPDATE,
-      () => {
-        checkCollect();
-      }
-    );
-
-    const state = reactive({
-      isCollected: false,
-      collectTip: "收集",
-      isCheating: false,
-      cheatCode: ""
-    });
-
-    // 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
-    const checkCollect = () => {
-      const resumes = store.state.hero.$resumes;
-      let flag = 0;
-
-      for (let resume of resumes) {
-        if (resume == 0 || resume == null) flag = 1;
-      }
-
-      if (flag == 0) {
-        state.isCollected = true;
-        state.collectTip = "兑换";
-      } else {
-        state.isCollected = false;
-        state.collectTip = "收集";
-      }
-    };
-
-    // 兑换完整版简历
-    const exchange = () => {
-      if (state.isCollected === true)
-        window.open("https://zxh.io/files/cv/full/en.pdf");
-    };
-
-    // 作弊码弹窗
-    const showCheatInput = () => {
-      if (state.isCheating) {
-        state.isCheating = false;
-        state.cheatCode = "";
-      } else state.isCheating = true;
-    };
-
-    const checkCheatCode = () => {
-      if (state.cheatCode == "xiaohanzouissocool") createGame(true);
-      else state.cheatCode = "作弊码错误！";
-    };
-
+watch(
+  () => store.state.hero.UPDATE,
+  () => {
     checkCollect();
-
-    return {
-      ...toRefs(state),
-      store,
-      showCheatInput,
-      checkCheatCode,
-      exchange
-    };
   }
-});
+);
+
+const isCollected = ref(false);
+const collectTip = ref("收集");
+const isCheating = ref(false);
+const cheatCode = ref("");
+
+// 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
+const checkCollect = () => {
+  const resumes = store.state.hero.$resumes;
+  let flag = 0;
+
+  for (let resume of resumes) {
+    if (resume == 0 || resume == null) flag = 1;
+  }
+
+  if (flag == 0) {
+    isCollected.value = true;
+    collectTip.value = "兑换";
+  } else {
+    isCollected.value = false;
+    collectTip.value = "收集";
+  }
+};
+
+// 兑换完整版简历
+const exchange = () => {
+  if (isCollected.value === true)
+    window.open("https://zxh.io/files/cv/en/full.pdf");
+};
+
+// 作弊码弹窗
+const showCheatInput = () => {
+  if (isCheating.value) {
+    isCheating.value = false;
+    cheatCode.value = "";
+  } else isCheating.value = true;
+};
+
+const checkCheatCode = () => {
+  if (cheatCode.value == "xiaohanzouissocool") createGame(true);
+  else cheatCode.value = "作弊码错误！";
+};
+
+checkCollect();
 </script>
 
 <style scoped lang="stylus">
