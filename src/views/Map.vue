@@ -46,7 +46,7 @@
             :key="`block-${String(y)}`"
             :block="block"
             :map="map"
-            @autoMove="autoMove(block)"
+            @auto-move="autoMove(block)"
           />
         </div>
       </div>
