@@ -1,28 +1,27 @@
-import { createApp, DirectiveBinding } from "vue";
-import CONSTANT from "@/data/constant";
-import "../styles/item-tip.styl";
+import { createApp, type DirectiveBinding } from "vue";
+import { ITEM_LEVELS, UI } from "~/core/data";
+import type { GameItem } from "~/types";
 
-export default function (el: HTMLElement, binding: DirectiveBinding): void {
-  const itemLevel = CONSTANT.ITEM_LEVEL,
-    tipClassName = ".item-tip-pover",
-    item = binding.value;
+export default function (
+  el: HTMLElement,
+  binding: DirectiveBinding<GameItem | undefined>
+) {
+  const className = ".item-tip";
+  const item = binding.value;
 
-  const event = {
-    click: function () {
-      if (item.link) {
-        window.open(item.link.url);
-      }
+  const events = {
+    click: () => {
+      if (item?.link) window.open(item.link.url);
     },
-    mouseenter: function (e: MouseEvent) {
-      event.mouseleave();
+    mouseenter: (e: MouseEvent) => {
+      events.mouseleave();
 
       const tip = document.createElement("div");
       const { right, top } = (e.target as HTMLElement).getBoundingClientRect();
 
-      const height = window.innerHeight - 10,
-        height_original = 500;
-      const scale = height / height_original;
-      const margin = ((scale - 1) * height_original) / 2 + 5;
+      const height = window.innerHeight - 10;
+      const scale = height / UI.HEIGHT;
+      const margin = ((scale - 1) * UI.HEIGHT) / 2 + 5;
 
       Object.assign(tip.style, {
         left: `${right}px`,
@@ -30,61 +29,48 @@ export default function (el: HTMLElement, binding: DirectiveBinding): void {
       });
 
       Object.assign(tip, {
-        className: tipClassName.slice(1),
+        className: className.slice(1),
         innerHTML: `
-          <div class="name m-b-10 font-min" :style="itemColor">
+          <div class="name" :style="{ color: this.itemColor }">
             {{ this.item.name }}
           </div>
 
-          <div class="equip m-b-10">
-            <span class="attr-name">{{ this.hpName }}</span>
-            <span class="attr-data">{{ this.changeHp }}</span>
-          </div>
+          <div v-if="this.changeHp" class="equip">梦想 {{ this.changeHp }}</div>
 
-          <div class="dsc" v-for="dsc in item.dsc" v-html="dsc"></div>
+          <div v-for="dsc in item.dsc" v-html="dsc"></div>
           <img v-for="img in item.img" :src='img' />
 
-          <div class="btn" v-if="item.link">{{ item.link.text }}</div>
+          <button class="btn" v-if="item.link">{{ item.link.text }}</button>
         `
       });
 
-      const $container = document.querySelector(".container") as HTMLElement;
-      $container.appendChild(tip);
+      const appElement = document.querySelector("#app") as HTMLElement;
+      appElement.appendChild(tip);
 
       createApp({
         created() {
           this.item = item;
-          this.itemColor = {
-            color: itemLevel[this.item.grade || 0]
-          };
-
-          if (this.item.equip) {
-            this.changeHp = this.item.equip.$changeHp;
-            this.hpName = "梦想";
-          } else {
-            this.changeHp = null;
-            this.hpName = null;
-          }
-          if (this.changeHp > 0) this.changeHp = "+" + this.changeHp;
+          this.itemColor = ITEM_LEVELS[this.item.grade || 0];
+          this.changeHp = this.item.equip?.changeHp;
+          if (this.changeHp && this.changeHp > 0) this.changeHp = "+" + this.changeHp;
         }
-      }).mount(tipClassName);
+      }).mount(className);
     },
-    mouseleave: function () {
-      const old = document.querySelector(tipClassName);
-      // 移除已经存在的 tip
-      if (old) (old.parentNode as HTMLElement).removeChild(old);
+    mouseleave: () => {
+      const old = document.querySelector(className);
+      if (old) (old.parentNode as HTMLElement).removeChild(old); // 移除已经存在的 tip
     }
   };
 
-  for (const key in event) {
-    const value = (event as any)[key];
-    const keyNameInElement = `${key}_EVENT_FUNCTION_ITEM_TOOL_TIP`;
+  for (const key in events) {
+    const value = (events as any)[key];
+    const eventName = `${key}_TOOL_TIP_EVENT`;
 
-    el.removeEventListener(key, el[keyNameInElement]);
+    el.removeEventListener(key, (el as any)[eventName]);
 
     if (item) {
       el.addEventListener(key, value);
-      el[keyNameInElement] = value;
+      (el as any)[eventName] = value;
     }
   }
 }

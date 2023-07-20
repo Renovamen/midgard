@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "mainfont";
+  src: url("/fonts/mainfont.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.game-loading {
+  @apply hidden;
+}
+
+#app {
+  transform-style: preserve-3d;
+}
+
+.item-tip {
+  @apply absolute bg-blue-600/80 rounded p-1.5 text-white text-sm border border-slate-400/70;
+  transform: translateZ(99px);
+  text-shadow: black 1px 1px;
+}
+
+.item-tip .name {
+  @apply mb-2 text-xl;
+}
+
+.item-tip .equip {
+  @apply mb-2 text-base text-orange-200;
+}
+
+.item-tip button {
+  @apply mt-2 px-1;
+}
+
+.item-tip img {
+  @apply mt-2 w-50;
+}
+
+.mask {
+  @apply absolute z-100 h-full w-full inset-0 flex-center bg-black/30;
+}
+
+button.action {
+  @apply rounded px-2 py-1 shadow-gray-400 hover:shadow;
+}

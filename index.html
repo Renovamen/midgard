@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Xiaohan Zou's interactive resume</title>
-    <style>
-      body {
-        background: #47485c;
-      }
-      .game-main-loading {
-        color: white;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 550px;
-        height: 120px;
-        margin: auto;
-        font-weight: 200;
-        line-height: 30px;
-        text-align: center;
-        font-size: 24px;
-      }
-      .game-main-loading .warning {
-        margin-top: 10px;
-        font-size: 16px;
-      }
-      .game-main-loading .gif {
-        margin-top: -100px;
-        width: 180px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="game-main-loading">
-      <img class="gif" src="/loading.gif" />
-      <div>Loading ...</div>
-      <div class="warning">WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</div>
-    </div>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Interesting resume</title>
+  <meta name="description" content="Xiaohan Zou's interesting resume.">
+
+  <style>
+    .game-loading {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      height: 320px;
+      color: white;
+      text-align: center;
+      z-index: 1;
+    }
+    .game-loading img {
+      width: 180px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 16px;
+    }
+    .game-loading h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body class="font-ui bg-background">
+  <div class="game-loading">
+    <img src="/images/loading.gif" />
+    <h1>Loading ...</h1>
+    <p>WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</p>
+  </div>
+
+  <div id="app"></div>
+
+  <noscript>
+    <div>Please enable JavaScript to use this application.</div>
+  </noscript>
+  <script type="module" src="/src/main.ts"></script>
+</body>
 </html>

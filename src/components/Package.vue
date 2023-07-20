@@ -1,94 +1,38 @@
 <template>
-  <div class="package shadow-box">
-    <div class="info-list">
-      <div class="label-name">背包</div>
-      <PackageItem class="dustbin" position-type="$destory" :position-index="0">
-        <template #item-name>
-          <span class="item-name"></span>
-        </template>
-      </PackageItem>
-      <div class="btn f-r sort" @click="sort">整理</div>
-    </div>
-    <div class="list">
-      <template
-        v-for="(item, index) in store.state.hero.$package"
-        :key="`package-item-${index}`"
-      >
+  <div flex flex-col space-y-2>
+    <div class="w-full flex items-end justify-between pr-1.5">
+      <div class="bg-label h-11 w-15 leading-11 rounded-sm" text="white center">背包</div>
+      <div hstack space-x-1.5>
+        <button
+          class="btn w-11 h-7.5 border-label hover:bg-label text-xs"
+          @click="sortItemsInPackage"
+        >
+          整理
+        </button>
         <PackageItem
-          class="item"
-          position-type="$package"
-          :item="item"
-          :position-index="index"
-        />
-      </template>
+          class="!h-7.5 !bg-trash text-center text-sm/7.5"
+          type="destory"
+          :index="0"
+        >
+          <template #item-name>
+            <div i-mdi:recycle />
+          </template>
+        </PackageItem>
+      </div>
+    </div>
+
+    <div overflow-scroll grid grid-cols-10 gap-y-1>
+      <PackageItem
+        v-for="(item, index) in hero.package"
+        :key="index"
+        :item="item"
+        :index="index"
+        type="package"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useStore } from "vuex";
-import PackageItem from "@/components/PackageItem.vue";
-
-const store = useStore();
-
-const sort = () => {
-  store.commit("hero/sortPackage", "$package");
-};
+const { hero, sortItemsInPackage } = useHeroStore();
 </script>
-
-<style scoped lang="stylus">
-@require '../styles/palette.styl'
-
-.package
-  padding 5px
-  height 100%
-  width 520px
-  .info-list
-    padding 5px 8px
-    font-size 10px
-    .label-name
-      height 40px
-      line-height 40px
-      width 60px
-      background $bg-label-color
-      color white
-      text-align center
-      border-radius 2px
-      font-size 16px
-      margin-top -4px
-      margin-bottom 4px
-      display inline-block
-    .sort
-      float right
-      margin-right 6px
-      width 44px
-      height 30px
-      line-height 25px
-      margin-top 6px
-      border-color $bg-label-color
-      color white
-      &:hover
-        background-color $bg-label-color
-    .dustbin
-      height 30px
-      margin-top 6px
-      float right
-      background-color $trash-color
-      .blank
-        line-height 36px
-      span
-        content url('/ui/recycle.svg')
-        position absolute
-        width 20px
-        height 20px
-        top 50%
-        left 50%
-        margin-top -9px
-        margin-left -10px
-  .list
-    height 40%
-    overflow scroll
-    padding-left 8px
-    .item
-      margin 0px 6px 4px 0px
-</style>

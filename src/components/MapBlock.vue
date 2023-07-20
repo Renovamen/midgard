@@ -1,123 +1,110 @@
 <template>
-  <div :style="bgColor()" @click="$emit('autoMove')">
-    <span :class="blockClass()"></span>
+  <div :class="outerColor" @click="$emit('autoMove')">
+    <div class="map-block h-10 w-10 text-white text-lg flex-center" :class="innerClasses">
+      <span v-if="innerClasses.includes('hero')" i-ic:baseline-catching-pokemon />
+      <span v-else-if="innerClasses.includes(CHEST_TYPE)" i-mdi:treasure-chest-outline />
+      <span v-else-if="innerClasses.includes(DIALOG_TYPE)" i-typcn:info-large-outline />
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import * as _ from "lodash";
-import CONSTANT from "../data/constant";
+import { BLOCK_TYPES, CHEST_TYPE, DIALOG_TYPE } from "~/core/data";
+import type { MapBlock } from "~/types";
 
-const props = defineProps(["block", "map"]);
+const props = defineProps<{
+  block: MapBlock;
+  map: Array<Array<MapBlock>>;
+}>();
 defineEmits(["autoMove"]);
 
-const bgColor = () => {
-  const roadColor = "#c3944e";
-  const stickColor = "#51963d";
-  const type = props.block.blockType;
-  const bt = CONSTANT.MAP_BLOCK_TYPES;
+const STICK = BLOCK_TYPES.STICK;
 
-  let opt = {
-    display: "inline-block",
-    background: stickColor
-  };
+const blockName = computed(() =>
+  Object.keys(BLOCK_TYPES)
+    .find((k) => BLOCK_TYPES[k as keyof typeof BLOCK_TYPES] === props.block.type)
+    ?.toLowerCase()
+);
 
-  if (type != bt.ROAD || type == bt.HERO || props.block.event) {
-    opt.background = roadColor;
-  }
+const outerColor = computed(() => {
+  const { event, type } = props.block;
+  return type != BLOCK_TYPES.ROAD || event ? "bg-road" : "bg-stick";
+});
 
-  return opt;
-};
-
-const blockClass = () => {
-  const block = props.block;
-  const typeList = ["road", "hero", "stick", "end"];
-  const stick = CONSTANT.MAP_BLOCK_TYPES.STICK;
-  let classList = ["map-block"];
-
-  classList.push(typeList[Number(block.blockType)] || "");
-
-  block.event && classList.push(block.event.event_type);
+const innerClasses = computed(() => {
+  const { x, y, type, event } = props.block;
+  const classes = [blockName.value, event?.type || ""];
 
   // 计算圆角
-  // r-1 r-2 r-3 r-4
-  const data = props.map.$data.mapData;
-  const directions = [
-    [-1, -1],
-    [-1, 1],
-    [1, -1],
-    [1, 1]
-  ];
-  const { x, y, blockType: type } = block;
+  const directions = {
+    tl: [-1, -1],
+    tr: [-1, 1],
+    bl: [1, -1],
+    br: [1, 1]
+  };
 
-  for (let i = 0; i < 4; i++) {
-    const around = _.map(new Array(3), (v: any, k: number) => {
-      const [dx, dy] = directions[i];
-      let [toX, toY] = [
+  for (const d in directions) {
+    const around = _.map(new Array(3), (_, k: number) => {
+      const [dx, dy] = directions[d as keyof typeof directions];
+      const [toX, toY] = [
         [x + dx, y],
         [x, y + dy],
         [x + dx, y + dy]
       ][k];
-      if (data[toX] && data[toX][toY]) return data[toX][toY].blockType;
-      else return stick;
+
+      if (props.map[toX] && props.map[toX][toY]) return props.map[toX][toY].type;
+      else return STICK;
     });
-    if (type == stick) {
-      _.every(around, (i) => i != stick) && classList.push(`r-${i + 1}`);
-    } else {
-      _.every(around.slice(0, 2), (i) => i == stick) &&
-        classList.push(`r-${i + 1}`);
-    }
+
+    if (type == STICK) around.every((i) => i != STICK) && classes.push(`r-${d}`);
+    else around.slice(0, 2).every((i) => i === STICK) && classes.push(`r-${d}`);
   }
 
-  return classList;
-};
+  return classes;
+});
 </script>
 
-<style scoped lang="stylus">
-@require '../styles/palette.styl'
+<style scoped>
+.r-tl {
+  @apply rounded-tl;
+}
 
-.map-block
-  display inline-block
-  width 40px
-  height 40px
-  vertical-align top
-.road
-  background-color $road-color
-  &:hover
-    box-shadow $hover-shadow
-    cursor pointer
-.stick
-  background-color $stick-color
-.map-dialog, .map-chest, .hero
-  border-radius 4px
-  position relative
-  &::before
-    color #fff
-    position absolute
-    width 26px
-    height 26px
-    top 50%
-    left 50%
-    margin-top -13px
-    margin-left -13px
-.map-dialog
-  background-color $event-color
-  &::before
-    content url('/map/info.svg')
-.map-chest
-  background-color $chest-color
-  &::before
-    content url('/map/chest.svg')
-.hero
-  background $hero-color
-  &::before
-    content url('/map/hero.svg')
-.r-1
-  border-top-left-radius 6px
-.r-2
-  border-top-right-radius 6px
-.r-3
-  border-bottom-left-radius 6px
-.r-4
-  border-bottom-right-radius 6px
+.r-bl {
+  @apply rounded-bl;
+}
+
+.r-tr {
+  @apply rounded-tr;
+}
+
+.r-br {
+  @apply rounded-br;
+}
+
+.road {
+  @apply bg-road cursor-pointer hover:shadow-inbox;
+}
+
+.stick {
+  @apply bg-stick;
+}
+
+.dialog,
+.chest,
+.hero {
+  @apply rounded;
+}
+
+.dialog {
+  @apply bg-event;
+}
+
+.chest {
+  @apply bg-chest;
+}
+
+.hero {
+  @apply bg-hero;
+}
 </style>

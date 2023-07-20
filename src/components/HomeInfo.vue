@@ -1,235 +1,93 @@
 <template>
-  <div class="home-info">
-    <div class="hero-info">
-      <div class="basic-info">
-        <div class="avatar" @click="showCheatInput()">
-          <img src="/hero.svg" />
+  <div pr-6>
+    <div mb-2>
+      <div hstack>
+        <div
+          class="inline-block w-11 h-11 bg-label rounded-sm hover:shadow-inbox-sm"
+          @click="toggleCheatInput"
+        >
+          <img src="/images/hero.svg" />
         </div>
-        <div class="name">
+        <div class="label relative flex-1 ml-2.5 text-[22px]">
           <input
-            v-show="isCheating"
+            v-show="cheat"
             v-model="cheatCode"
-            class="cheatInput"
-            @keyup.enter="checkCheatCode()"
+            class="absolute outline-none bg-label border border-white rounded w-[180px] h-7.5 inset-0 m-auto px-1"
+            @keyup.enter="checkCheatCode"
           />
           去找简历吧勇士
         </div>
       </div>
-      <div class="resume">
-        <div class="left">
+
+      <div flex mt-2>
+        <div w-15 text-right space-y-1>
           <div
-            class="label-name"
-            :class="{ collect: isCollected }"
-            @click="exchange()"
+            class="label w-15"
+            :class="[
+              'label w-15',
+              success && '!bg-rose-400 hover:shadow-inbox cursor-pointer'
+            ]"
+            @click="exchange"
           >
-            {{ collectTip }}
+            {{ success ? "兑换" : "收集" }}
           </div>
-          <PackageItem
-            class="resume1"
-            position-type="$resumes"
-            :position-index="0"
-            :item="store.state.hero.$resumes[0]"
-          />
-          <PackageItem
-            class="resume2"
-            position-type="$resumes"
-            :position-index="1"
-            :item="store.state.hero.$resumes[1]"
-          />
+          <PackageItem type="resumes" :index="0" :item="store.hero.resumes[0]" />
+          <PackageItem type="resumes" :index="1" :item="store.hero.resumes[1]" />
         </div>
-        <div class="right">
-          <template v-for="(item, index) in store.state.hero.$resumes">
+
+        <div flex-1 ml-1 grid grid-cols-4 gap-1>
+          <template v-for="(item, index) in store.hero.resumes">
             <PackageItem
-              v-if="Number(index) > 1"
-              :key="`resume-item-${String(index)}`"
-              class="item"
-              position-type="$resumes"
+              v-if="index > 1"
+              :key="index"
               :item="item"
-              :position-index="Number(index)"
+              :index="index"
+              type="resumes"
             />
           </template>
         </div>
       </div>
     </div>
-    <div class="attr-info">
-      <div class="left">
-        <div class="label-name">梦想</div>
-      </div>
-      <div class="right">
-        <div class="attr">{{ store.state.hero.$hp.toFixed(1) }}</div>
-      </div>
+
+    <div hstack space-x-2>
+      <div class="label w-15">梦想</div>
+      <div class="text-rose-400 text-lg">{{ store.hp }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import { useStore } from "vuex";
-import createGame from "@/js/create-game";
-import PackageItem from "@/components/PackageItem.vue";
+import { cheatGame } from "~/core";
+import { PERSONAL } from "~/core/data";
 
-const store = useStore();
-
-watch(
-  () => store.state.hero.UPDATE,
-  () => {
-    checkCollect();
-  }
-);
-
-const isCollected = ref(false);
-const collectTip = ref("收集");
-const isCheating = ref(false);
-const cheatCode = ref("");
+const store = useHeroStore();
 
 // 集齐了所有简历碎片（且 hp > 0），则可以兑换完整版简历
-const checkCollect = () => {
-  const resumes = store.state.hero.$resumes;
-  let flag = 0;
+const success = ref(false);
 
-  for (let resume of resumes) {
-    if (resume == 0 || resume == null) flag = 1;
-  }
-
-  if (flag == 0) {
-    isCollected.value = true;
-    collectTip.value = "兑换";
-  } else {
-    isCollected.value = false;
-    collectTip.value = "收集";
-  }
-};
+watch(store.hero.resumes, () => (success.value = store.hero.resumes.every((i) => i)));
 
 // 兑换完整版简历
-const exchange = () => {
-  if (isCollected.value === true)
-    window.open("https://zxh.io/files/cv/en/full.pdf");
-};
+const exchange = () => success.value && window.open(PERSONAL.CV_LINK);
 
 // 作弊码弹窗
-const showCheatInput = () => {
-  if (isCheating.value) {
-    isCheating.value = false;
-    cheatCode.value = "";
-  } else isCheating.value = true;
+const cheat = ref(false);
+const cheatCode = ref("");
+
+const toggleCheatInput = () => {
+  cheat.value = !cheat.value;
+  cheatCode.value = "";
 };
 
+// 作弊码判定
 const checkCheatCode = () => {
-  if (cheatCode.value == "xiaohanzouissocool") createGame(true);
+  if (cheatCode.value == "xiaohanzouissocool") cheatGame();
   else cheatCode.value = "作弊码错误！";
 };
-
-checkCollect();
 </script>
 
-<style scoped lang="stylus">
-@require '../styles/palette.styl'
-.home-info
-  word-spacing -4px
-  display table
-  width 276px
-  height 280px
-  padding 6px
-  .left
-    display inline-block
-    vertical-align top
-    width 60px
-  .right
-    display inline-block
-    vertical-align top
-    width 192px
-  .label-name
-    height 40px
-    line-height 40px
-    width 60px
-    background $bg-label-color
-    color white
-    text-align center
-    border-radius 2px
-  .collect
-    background $text-color-red
-    &:hover
-      box-shadow $hover-shadow
-  .basic-info
-    margin-bottom 4px
-    .avatar
-      display inline-block
-      width 40px
-      height 40px
-      background-color $bg-label-color
-      border-radius 2px
-      vertical-align top
-      position relative
-      img
-        display inline-block
-        width 40px
-        height 40px
-      &:hover
-        box-shadow $hover-shadow-small
-    .name
-      background-color $bg-label-color
-      border-radius 2px
-      color white
-      display inline-block
-      width 194px
-      height 40px
-      line-height 40px
-      margin-left 10px
-      padding 0px 20px
-      font-size 22px
-      text-align center
-      max-width 202px
-      text-overflow ellipsis
-    .cheatInput
-      position absolute
-      width 180px
-      height 30px
-      margin-left -13px
-      margin-top 5px
-      background-color $bg-label-color
-      color white
-      outline none
-      border 1px solid white
-      border-radius 5px
-      padding-left 4px
-
-  .resume
-    .right
-      padding 5px
-    .left
-      padding-top 5px
-    .resume1
-      margin-top 8px
-      margin-left 16px
-    .resume2
-      margin-top 4px
-      margin-left 16px
-    .item
-      margin 0px 1px 4px 0px
-
-  .attr-info
-    .right
-      padding-left 3px
-      .attr
-        width 63px
-        padding 6px 2px
-        margin-bottom 4px
-        font-size 18px
-        display block
-        margin-left 4px
-        margin-top -2px
-        color $text-color-red
-
-.home-info.right-info
-  height 168px
-  width 520px
-  .hero-info, .attr-info
-    width 280px
-    display inline-block
-    margin-left 7px
-  .attr-info
-    vertical-align top
-    width 150px
-    .attr
-      padding 12px 2px
+<style scoped>
+.label {
+  @apply h-11 bg-label rounded-sm text-white text-center leading-11;
+}
 </style>
