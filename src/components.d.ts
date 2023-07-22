@@ -7,8 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    DungeonBlock: typeof import('./components/DungeonBlock.vue')['default']
-    DungeonEvent: typeof import('./components/DungeonEvent.vue')['default']
     GameOverEvent: typeof import('./components/GameOverEvent.vue')['default']
     HomeInfo: typeof import('./components/HomeInfo.vue')['default']
     HomeMenu: typeof import('./components/HomeMenu.vue')['default']

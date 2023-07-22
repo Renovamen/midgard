@@ -7,24 +7,44 @@
     </router-link>
 
     <a
-      v-for="(item, index) in PERSONAL.MENU"
-      :key="index"
+      v-for="key in Object.keys(ICONS)"
+      :key="key"
       class="link"
-      :href="item.link"
+      :href="PERSONAL.MENU[key as KEY]"
       target="_blank"
     >
       <div class="title">
-        <span>{{ item.title[0] }}</span>
-        <span>{{ item.title[1] }}</span>
+        <span>{{ ICONS[key as KEY].title[0] }}</span>
+        <span>{{ ICONS[key as KEY].title[1] }}</span>
       </div>
-      <div class="subtitle">{{ item.subtitle }}</div>
-      <div class="icon" :class="item.icon" />
+      <div class="subtitle">{{ ICONS[key as KEY].subtitle }}</div>
+      <div class="icon" :class="ICONS[key as KEY].icon" />
     </a>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { PERSONAL } from "~/core/data";
+
+const ICONS = {
+  opensorce: {
+    title: "开源",
+    subtitle: "Github",
+    icon: "i-iconoir:github-circle"
+  },
+  blog: {
+    title: "博客",
+    subtitle: "Blog",
+    icon: "i-iconoir:planet-sat"
+  },
+  email: {
+    title: "邮箱",
+    subtitle: "Email",
+    icon: "i-lucide:mail"
+  }
+};
+
+type KEY = keyof typeof ICONS;
 </script>
 
 <style scoped>
