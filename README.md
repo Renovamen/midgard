@@ -1,8 +1,8 @@
-# Midgard
+# An Interesting Resume
 
 Hey adventurer! ~~A cool~~ An evil dragon just tore up my curriculum vitae. So why not help me with retrieving my CV fragments widely scattered across the world back!
 
-Powered by [Vue 3](https://v3.vuejs.org/) + [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/). The Vue 2 version is archived [here](https://github.com/Renovamen/midgard/tree/vue2).
+Powered by [Vue 3](https://v3.vuejs.org/) + [Vite](https://vitejs.dev/) + [Pinia](https://pinia.vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [UnoCSS](https://github.com/unocss/unocss).
 
 [Start Your Adventure!](http://resume.zxh.io)
 
@@ -11,18 +11,22 @@ Powered by [Vue 3](https://v3.vuejs.org/) + [Vite](https://vitejs.dev/) + [TypeS
 
 ## Usage
 
+Clone the repo and install dependencies:
+
 ```bash
-git clone https://github.com/Renovamen/midgard.git
-cd midgard
+pnpm i
+```
 
-# install dependencies
-yarn install
+Start developing the site:
 
-# serve with hot reload
-yarn dev
+```bash
+pnpm dev
+```
 
-# build for production with minification
-yarn build
+Build for production with minification:
+
+```bash
+pnpm build
 ```
 
 
@@ -31,16 +35,15 @@ yarn build
 ## To Do
 
 - [ ] Responsive design
-- [ ] English version
-- [ ] Language switcher
+- [ ] English version & i18n
 
 
 &nbsp;
 
 ## Credits
 
-- This project is inspired by [bastarder/vue-endless-h5-game](https://github.com/bastarder/vue-endless-h5-game).
-- Some of the icons are modified from [Freepik](https://www.flaticon.com/authors/freepik) and [Smashicons](https://www.flaticon.com/authors/smashicons)'s work from [Flaticon](www.flaticon.com).
+- Inspired by [bastarder/vue-endless-h5-game](https://github.com/bastarder/vue-endless-h5-game)
+- With the help of these plugins: [`unplugin-vue-router`](https://github.com/posva/unplugin-vue-router), [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import), [`vite-plugin-components`](https://github.com/antfu/vite-plugin-components)
 
 
 &nbsp;
