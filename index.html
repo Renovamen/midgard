@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Xiaohan Zou's interactive resume</title>
-    
-    <script type="module" crossorigin src="/assets/index.a70f9522.js"></script>
-    <link rel="modulepreload" href="/assets/vendor.3c28c2ee.js">
-    <link rel="stylesheet" href="/assets/index.6ecc5f2f.css">
-  </head>
-  <body>
-    <div class="game-main-loading">
-      <img class="gif" src="/loading.gif" />
-      <div>Loading ...</div>
-      <div class="warning">WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</div>
-    </div>
-    <div id="app"></div>
-    
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Interesting resume</title>
+  <meta name="description" content="Xiaohan Zou's interesting resume.">
+
+  <style>
+    .game-loading {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      height: 320px;
+      color: white;
+      text-align: center;
+      z-index: 1;
+    }
+    .game-loading img {
+      width: 180px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 16px;
+    }
+    .game-loading h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-7f2d0b82.js"></script>
+  <link rel="stylesheet" href="/assets/index-5cd368bb.css">
+</head>
+
+<body class="font-ui bg-background">
+  <div class="game-loading">
+    <img src="/images/loading.gif" />
+    <h1>Loading ...</h1>
+    <p>WARNING：本游戏没有数据库，所以不要刷新，不然你会失去一切 ：）</p>
+  </div>
+
+  <div id="app"></div>
+
+  <noscript>
+    <div>Please enable JavaScript to use this application.</div>
+  </noscript>
+  
+</body>
 </html>
