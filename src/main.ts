@@ -1,17 +1,24 @@
 import { createApp } from "vue";
-import App from "./App.vue";
+import { createRouter, createWebHistory } from "vue-router/auto";
+import { createPinia } from "pinia";
+import App from "~/App.vue";
 
-import router from "./router";
-
-// css libraries
-import "normalize.css/normalize.css";
+import "@unocss/reset/tailwind.css";
+import "~/styles/main.css";
+import "uno.css";
 import "animate.css/animate.min.css";
 
-// public styles
-import "@/styles/main.styl";
-import "@/styles/dialog.styl";
+const app = createApp(App);
 
-// store
-import store from "@/store";
+const pinia = createPinia();
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL)
+});
 
-createApp(App).use(router).use(store).mount("#app");
+router.beforeEach((to, from, next) => {
+  if (to.path === "/map" && from.matched.length === 0) next({ path: "/" });
+  else next();
+});
+
+app.use(router).use(pinia);
+app.mount("#app");
