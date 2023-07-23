@@ -1,7 +1,7 @@
 <template>
-  <div ref="container" class="h-full relative overflow-hidden bg-stick">
+  <div class="h-full relative overflow-hidden bg-stick">
     <router-link
-      class="btn absolute z-9 bottom-4 right-4 w-15 py-1 rounded border-white hover:(bg-white text-slate-700)"
+      class="btn absolute z-10 bottom-4 right-4 w-15 py-1 rounded border-white hover:(bg-white text-slate-700)"
       to="/"
     >
       回城
@@ -13,7 +13,7 @@
     >
       <Package
         v-show="isPackageOpen"
-        class="absolute z-2 w-[524px] h-[270px] bg-background rounded-tr bottom-0 pt-2 pb-1"
+        class="hero-info bottom-0 h-[270px] pt-2 pb-1 rounded-tr"
       />
     </transition>
 
@@ -24,12 +24,12 @@
       <HomeInfo
         v-show="isPackageOpen"
         transition="bounce"
-        class="absolute z-2 w-[524px] bg-background rounded-br flex items-start space-x-10 pt-1"
+        class="hero-info flex items-start space-x-6 pt-1 rounded-br"
       />
     </transition>
 
     <div
-      class="absolute top-[199px] -left-5 z-2 w-10 py-1 bg-gray-400 text-white text-right duration-500 cursor-pointer"
+      class="absolute top-[199px] -left-5 z-20 w-10 py-1 bg-gray-400 text-white text-right duration-500 cursor-pointer"
       border="y r gray-300/50 rounded-r"
       :class="[isPackageOpen && 'left-0']"
       @click="isPackageOpen = !isPackageOpen"
@@ -78,6 +78,7 @@
 
 <script lang="ts" setup>
 import { Astar, HeroMove, Dungeon, GameMap } from "~/core";
+import { UI } from "~/core/data";
 import type { MapBlock as MapBlockType } from "~/types";
 
 const isPackageOpen = ref(false); // 装备栏
@@ -108,26 +109,18 @@ watch(
 
 // center the view when entering the map
 
-const container = ref<HTMLDivElement>();
 const map = ref<HTMLDivElement>();
 
 const centerView = () => {
-  const block = document.querySelector(".map-block") as HTMLElement;
-
-  if (!container.value || !map.value || !block) return;
-
-  const containerX = container.value.offsetWidth;
-  const containerY = container.value.offsetHeight;
-  const blockX = block.offsetWidth;
-  const blockY = block.offsetHeight;
+  if (!map.value) return;
 
   const { x, y } = dungeon.value.hero;
   const { row, col } = dungeon.value.map;
 
   map.value.style.left =
-    (containerX - blockX * row) / 2 - (y - (col - 1) / 2) * blockX + "px";
+    (UI.WIDTH - UI.BLOCK_SIZE * row) / 2 - (y - (col - 1) / 2) * UI.BLOCK_SIZE + "px";
   map.value.style.top =
-    (containerY - blockY * col) / 2 - (x - (row - 1) / 2) * blockY + "px";
+    (UI.HEIGHT - UI.BLOCK_SIZE * col) / 2 - (x - (row - 1) / 2) * UI.BLOCK_SIZE + "px";
 };
 
 onMounted(centerView);
@@ -142,10 +135,14 @@ const autoMove = (end: MapBlockType) => {
   heroMove.autoMove(path);
 };
 
-onUnmounted(() => heroMove.stop());
+onUnmounted(heroMove.stop);
 </script>
 
 <style scoped>
+.hero-info {
+  @apply absolute z-10 w-[502px] pr-[2px] bg-background;
+}
+
 .tip-block {
   @apply h-8 w-8 flex-center border border-white/20 rounded text-xs;
 }

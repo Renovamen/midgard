@@ -2,8 +2,7 @@ export * from "./constants";
 export * from "./items";
 export * from "./chests";
 export * from "./dialogs";
-export * from "./ui";
-export * from "./personal";
+export * from "./configs";
 
 import { ITEM_TABLE, DIALOG_DATA, CHEST_DATA } from ".";
 import { GameItem, MapEvent } from "~/types";

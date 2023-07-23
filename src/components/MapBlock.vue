@@ -1,6 +1,10 @@
 <template>
   <div :class="outerColor" @click="$emit('autoMove')">
-    <div class="map-block h-10 w-10 text-white text-lg flex-center" :class="innerClasses">
+    <div
+      class="map-block text-white text-lg flex-center"
+      :class="innerClasses"
+      :style="{ width: `${UI.BLOCK_SIZE}px`, height: `${UI.BLOCK_SIZE}px` }"
+    >
       <span v-if="innerClasses.includes('hero')" i-ic:baseline-catching-pokemon />
       <span v-else-if="innerClasses.includes(CHEST_TYPE)" i-mdi:treasure-chest-outline />
       <span v-else-if="innerClasses.includes(DIALOG_TYPE)" i-typcn:info-large-outline />
@@ -10,7 +14,7 @@
 
 <script lang="ts" setup>
 import * as _ from "lodash";
-import { BLOCK_TYPES, CHEST_TYPE, DIALOG_TYPE } from "~/core/data";
+import { BLOCK_TYPES, CHEST_TYPE, DIALOG_TYPE, UI } from "~/core/data";
 import type { MapBlock } from "~/types";
 
 const props = defineProps<{

@@ -1,3 +1,9 @@
+export const UI = {
+  HEIGHT: 500,
+  WIDTH: 830,
+  BLOCK_SIZE: 40
+};
+
 export const PERSONAL = {
   MENU: {
     opensorce: "https://github.com/Renovamen",

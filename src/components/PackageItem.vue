@@ -4,29 +4,26 @@
     v-drag-drop="{ type, index }"
     class="relative h-11 w-11 bg-item inline-block align-top text-white cursor-pointer rounded-sm overflow-hidden hover:shadow-inbox"
   >
-    <div v-if="item">
-      <slot name="item-name">
-        <div class="name" :style="{ color: ITEM_LEVELS[item.grade || 0] }">
-          {{ item.name }}
-        </div>
-      </slot>
-      <slot name="badges">
-        <div v-if="item.equipType !== undefined && item.equipType > -1" class="badges">
-          {{ EQUIP_NAMES[item.equipType] }}
-        </div>
-        <div v-else-if="item.num" class="badges">
-          {{ item.num }}
-        </div>
-      </slot>
-    </div>
+    <template v-if="item">
+      <div class="name" :style="{ color: ITEM_LEVELS[item.grade || 0] }">
+        {{ item.name }}
+      </div>
 
-    <div v-else>
+      <div v-if="item.equipType !== undefined && item.equipType > -1" class="badge">
+        {{ EQUIP_NAMES[item.equipType] }}
+      </div>
+      <div v-else-if="item.num" class="badge">
+        {{ item.num }}
+      </div>
+    </template>
+
+    <template v-else>
       <slot name="item-name">
         <div class="name">
           {{ type === "resumes" ? EQUIP_NAMES[index] : "" }}
         </div>
       </slot>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -45,7 +42,7 @@ defineProps<{
 
 <style scoped>
 .name,
-.badges {
+.badge {
   @apply scale-75 text-xs text-center;
 }
 
@@ -53,7 +50,7 @@ defineProps<{
   @apply h-8 -mt-0.5 tracking-widest;
 }
 
-.badges {
+.badge {
   @apply origin-top h-3 border-t border-gray-400 text-emerald-300;
 }
 </style>

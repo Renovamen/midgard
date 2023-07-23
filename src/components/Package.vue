@@ -12,7 +12,7 @@
         <PackageItem
           class="!h-7.5 !bg-trash text-center text-sm/7.5"
           type="destory"
-          :index="0"
+          :index="-1"
         >
           <template #item-name>
             <div i-mdi:recycle />

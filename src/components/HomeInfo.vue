@@ -19,8 +19,8 @@
         </div>
       </div>
 
-      <div flex mt-2>
-        <div w-15 text-right space-y-1>
+      <div mt-2 space-y-1>
+        <div hstack space-x-1>
           <div
             class="label w-15"
             :class="[
@@ -31,14 +31,21 @@
           >
             {{ success ? "兑换" : "收集" }}
           </div>
-          <PackageItem type="resumes" :index="0" :item="store.hero.resumes[0]" />
-          <PackageItem type="resumes" :index="1" :item="store.hero.resumes[1]" />
-        </div>
-
-        <div flex-1 ml-1 grid grid-cols-4 gap-1>
           <template v-for="(item, index) in store.hero.resumes">
             <PackageItem
-              v-if="index > 1"
+              v-if="index < 4"
+              :key="index"
+              :item="item"
+              :index="index"
+              type="resumes"
+            />
+          </template>
+        </div>
+
+        <div pl-4 grid grid-cols-5 gap-1>
+          <template v-for="(item, index) in store.hero.resumes">
+            <PackageItem
+              v-if="index >= 4"
               :key="index"
               :item="item"
               :index="index"
