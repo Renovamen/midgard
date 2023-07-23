@@ -8,7 +8,7 @@ export const DIALOG_TYPE = "dialog";
 export const DIALOG_DATA = (() => {
   const dialogs: MapEvent[] = [];
 
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 100; i++) {
     dialogs.push({
       type: DIALOG_TYPE,
       id: 7000000 + i,

@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import type { MapEvent, DungeonOptions } from "~/types";
 import { GameMap } from ".";
-import { BLOCK_TYPES, getDataById } from "./data";
+import { BLOCK_TYPES, DIALOG_DATA, getDataById } from "./data";
 
 export class Dungeon {
   public name;
@@ -74,7 +74,7 @@ export class Dungeon {
   generateDialogs = () => {
     const events = [];
     for (let i = 1; i <= this.options.dialogNum!; i++) {
-      events.push(7000000 + Math.ceil(Math.random() * 10));
+      events.push(7000000 + Math.ceil(Math.random() * DIALOG_DATA.length));
     }
     return events;
   };

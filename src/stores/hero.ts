@@ -22,9 +22,9 @@ export const useHeroStore = defineStore("hero", () => {
     hero.package.sort((a, b) => (a?.id || Infinity) - (b?.id || Infinity));
   };
 
-  const findItemInPackage = (id: number) => ({
-    item: hero.package.find((i) => i?.id === id),
-    index: hero.package.findIndex((i) => i?.id === id)
+  const findItemsInPackage = (id: number) => ({
+    items: hero.package.filter((i) => i?.id === id),
+    indices: hero.package.map((i, k) => (i?.id === id ? k : -1)).filter((i) => i !== -1)
   });
 
   // 根据装备计算生命值
@@ -60,17 +60,35 @@ export const useHeroStore = defineStore("hero", () => {
   const getItems = (get: Array<GameItemOperation>) => {
     const failed: Array<GameItemOperation> = [];
 
+    const addToBlankBlock = (item: GameItem) => {
+      const index = hero.package.findIndex((j) => !j);
+
+      if (~index) {
+        hero.package[index] = item;
+        return true;
+      } // 有空位
+      return false; // 无空位
+    };
+
     get.forEach((g) => {
-      const { item } = findItemInPackage(g.itemId);
+      const { items } = findItemsInPackage(g.itemId);
+      const item = getDataById(g.itemId) as GameItem;
 
-      if (item?.pile) item.num = (item.num || 0) + g.num; // 可堆叠且包里存在该物品
-      else {
-        // 不可堆叠或包里不存在该物品
-        const blankIndex = hero.package.findIndex((j) => !j);
-        const newItem = getDataById(g.itemId) as GameItem;
-
-        if (~blankIndex) hero.package[blankIndex] = newItem; // 有空位
-        else failed.push(g); // 没空位
+      if (item.pile) {
+        // 可堆叠
+        if (items[0]) items[0].num = items[0].num! + g.num; // 包里存在该物品
+        else {
+          item.num = g.num;
+          if (!addToBlankBlock(item)) failed.push(g);
+        }
+      } else {
+        // 不可堆叠
+        for (let _ = 0; _ < g.num; _++) {
+          if (!addToBlankBlock(item)) {
+            failed.push(g);
+            break;
+          }
+        }
       }
     });
 
@@ -79,17 +97,30 @@ export const useHeroStore = defineStore("hero", () => {
 
   const costItems = (need: Array<GameItemOperation>) => {
     need.forEach((n) => {
-      const { item, index } = findItemInPackage(n.itemId);
+      const { indices } = findItemsInPackage(n.itemId);
+      let num = n.num;
 
-      if (!item?.num) setHeroItem("package", index, undefined);
-      else item.num = Math.max(item.num - n.num, 0);
+      for (const index of indices) {
+        if (num <= 0) break;
+
+        const item = hero.package[index] as GameItem;
+
+        if (!item.num || item.num - num <= 0) {
+          setHeroItem("package", index, undefined);
+          num -= item.num || 1;
+        } else {
+          item.num = item.num - num;
+          num = 0;
+        }
+      }
     });
   };
 
   const hasEnoughItems = (need: Array<GameItemOperation>) => {
     for (const n of need) {
-      const { item } = findItemInPackage(n.itemId);
-      if (!item || (item.num || 1) < n.num) return false;
+      const { items } = findItemsInPackage(n.itemId);
+      const sum = items.reduce((s, i) => s + (i?.num || 1), 0);
+      if (sum < n.num) return false;
     }
     return true;
   };

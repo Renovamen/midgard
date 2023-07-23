@@ -123,7 +123,7 @@ const BASE_RESUME_ITEMS_TABLE: Array<GameItem> = [
     ]
   },
   {
-    id: 30000009,
+    id: 3000009,
     name: "快速持续学习",
     equipType: 5,
     equip: {
