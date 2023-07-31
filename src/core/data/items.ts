@@ -51,7 +51,7 @@ const BASE_RESUME_ITEMS_TABLE: Array<GameItem> = [
     },
     dsc: [
       "姓名：邹笑寒",
-      "邮箱：renovamenzxh@foxmail.com",
+      "邮箱：renovamenzxh@gmail.com",
       "Github：Renovamen",
       "博客：zxh.io",
       "知乎：people/chao-neng-gui-su"
@@ -200,7 +200,7 @@ const BASE_RESUME_ITEMS_TABLE: Array<GameItem> = [
     dsc: [
       "Flint - 使用 Numpy 手写深度学习框架：",
       "\xa0· 使用纯 Numpy 实现了自动微分引擎（支持 19 种操作）",
-      "\xa0· 实现了线性、卷积、池化、Flatten、RNN、Dropout 和 BatchNorm 层，6 种优化器，4 种损失函数，3 种激活函数，5 种初始化器和数据加载模块",
+      "\xa0· 实现了线性、卷积、池化、Unfold、Flatten、Dropout 和 BatchNorm 层，6 种优化器，4 种损失函数，5 种激活函数，5 种初始化器和数据加载模块",
       "\xa0· 编写了详细的文档和全面的单元测试用例"
     ],
     link: {
