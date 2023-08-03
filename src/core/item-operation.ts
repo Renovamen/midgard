@@ -9,12 +9,12 @@ export class ItemOperation {
     this.index = index;
   }
 
-  get = () => {
+  public get = () => {
     const { hero } = useHeroStore();
     return this.type === "destory" ? undefined : hero[this.type][this.index];
   };
 
-  set = (value?: GameItem) => {
+  public set = (value?: GameItem) => {
     if (this.type === "destory") return;
 
     const { setHeroItem } = useHeroStore();

@@ -9,10 +9,10 @@ const KEY_RIGHT = "ArrowRight";
 const MOVE_DELAY = 280;
 
 export class HeroMove {
-  dungeon: Dungeon;
-  canMove: boolean;
-  onKeyUp: ((event: KeyboardEvent) => void) | null;
-  autoMoveTimer: ReturnType<typeof setInterval> | null;
+  private dungeon: Dungeon;
+  private canMove: boolean;
+  private onKeyUp: ((event: KeyboardEvent) => void) | null;
+  private autoMoveTimer: ReturnType<typeof setInterval> | null;
 
   constructor(dungeon: Dungeon) {
     this.dungeon = dungeon;
@@ -23,7 +23,7 @@ export class HeroMove {
     this.start();
   }
 
-  start = () => {
+  private start = () => {
     this.onKeyUp = (event: KeyboardEvent) => {
       if (!event.key) return;
       this.autoMoveTimer && clearInterval(this.autoMoveTimer);
@@ -32,12 +32,12 @@ export class HeroMove {
     document.addEventListener("keyup", this.onKeyUp);
   };
 
-  stop = () => {
+  public stop = () => {
     document.removeEventListener("keyup", this.onKeyUp!);
     this.autoMoveTimer && clearInterval(this.autoMoveTimer);
   };
 
-  move = (direction: string) => {
+  private move = (direction: string) => {
     if (!this.canMove) return;
 
     this.canMove = false;
@@ -93,7 +93,7 @@ export class HeroMove {
     delete toBlock.event;
   };
 
-  autoMove = (path: Array<MapPosition>) => {
+  public autoMove = (path: Array<MapPosition>) => {
     this.autoMoveTimer && clearInterval(this.autoMoveTimer);
     this.autoMoveTimer = setInterval(() => {
       const next = path.splice(0, 1)[0];

@@ -32,7 +32,7 @@ export class GameMap {
     this.create();
   }
 
-  create = () => {
+  private create = () => {
     for (let i = 0; i < this.row; i++) {
       const row: MapBlock[] = [];
 
@@ -70,7 +70,7 @@ export class GameMap {
     return this.data;
   };
 
-  createLine = (start: MapPosition, end: MapPosition, first = false) => {
+  private createLine = (start: MapPosition, end: MapPosition, first = false) => {
     // 计算两点之间的距离
     const disX = Math.abs(start.x - end.x);
     const disY = Math.abs(start.y - end.y);

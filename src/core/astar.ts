@@ -41,7 +41,7 @@ export class Astar {
     };
   }
 
-  find = () => {
+  public find = () => {
     this.list.open.push(this.start);
 
     let block = this.step();
@@ -62,7 +62,7 @@ export class Astar {
     return path;
   };
 
-  step = (): Block | false => {
+  private step = (): Block | false => {
     this.list.open.sort((a, b) => a.getF() - b.getF());
 
     const currentBlock = this.list.open.shift();
@@ -93,7 +93,7 @@ export class Astar {
     return this.step();
   };
 
-  around = (block: Block) => {
+  private around = (block: Block) => {
     const list = [];
 
     for (let i = -1; i <= 1; i++) {
@@ -117,18 +117,18 @@ export class Astar {
     return list;
   };
 
-  isInList = (type: "open" | "close" | "stick", block: Block) => {
+  private isInList = (type: "open" | "close" | "stick", block: Block) => {
     const index = this.list[type].findIndex((b) => b.x === block.x && b.y === block.y);
     return index === -1 ? false : index;
   };
 
-  countH = (block: Block) => {
+  private countH = (block: Block) => {
     const x = Math.abs(block.x - this.end.x);
     const y = Math.abs(block.y - this.end.y);
     return (x + y) * 10;
   };
 
-  countG = (block: Block) => {
+  private countG = (block: Block) => {
     const parent = block.parent!;
     if (block.x !== parent.x && block.y !== parent.y) return 14;
     else return 10;
