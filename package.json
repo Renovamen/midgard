@@ -1,6 +1,6 @@
 {
   "private": true,
-  "packageManager": "pnpm@8.6.9",
+  "packageManager": "pnpm@8.6.11",
   "scripts": {
     "dev": "vite --port 3003 --open",
     "build": "vite build",
@@ -9,30 +9,31 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "pinia": "^2.1.4",
+    "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.92",
-    "@types/lodash": "^4.14.195",
-    "@types/node": "^20.4.3",
+    "@iconify/json": "^2.2.97",
+    "@types/lodash": "^4.14.196",
+    "@types/node": "^20.4.6",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "@unocss/reset": "^0.53.5",
+    "@unocss/reset": "^0.53.6",
     "@vitejs/plugin-vue": "^4.2.3",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^8.7.1",
     "lodash": "^4.17.21",
-    "pnpm": "^8.6.9",
+    "pnpm": "^8.6.11",
     "prettier": "^2.8.8",
+    "taze": "^0.11.2",
     "typescript": "^5.1.6",
-    "unocss": "^0.53.5",
+    "unocss": "^0.53.6",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.1",
     "unplugin-vue-router": "^0.6.4",
-    "vite": "^4.4.4"
+    "vite": "^4.4.8"
   }
 }
