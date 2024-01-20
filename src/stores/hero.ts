@@ -76,7 +76,8 @@ export const useHeroStore = defineStore("hero", () => {
 
       if (item.pile) {
         // 可堆叠
-        if (items[0]) items[0].num = items[0].num! + g.num; // 包里存在该物品
+        if (items[0])
+          items[0].num = items[0].num! + g.num; // 包里存在该物品
         else {
           item.num = g.num;
           if (!addToBlankBlock(item)) failed.push(g);
