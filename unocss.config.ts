@@ -35,8 +35,8 @@ export default defineConfig({
       ui: "mainfont, -apple-system, Helvetica Neue, Arial, Noto Sans, sans-serif"
     },
     boxShadow: {
-      inbox: "0px 0px 4px #eee inset",
-      "inbox-sm": "0px 0px 2px #eee inset"
+      inbox: "inset 0 0 4px 0 #eee",
+      "inbox-sm": "inset 0 0 2px 0 #eee"
     }
   },
   presets: [
