@@ -1,7 +1,9 @@
 <template>
   <div class="h-full relative overflow-hidden bg-stick">
     <router-link
-      class="btn absolute z-10 bottom-4 right-4 w-15 py-1 rounded border-white hover:(bg-white text-slate-700)"
+      class="btn z-10 w-15 py-1 hover:(bg-white text-slate-700)"
+      pos="absolute bottom-4 right-4"
+      border="white rounded"
       to="/"
     >
       回城
@@ -29,9 +31,11 @@
     </transition>
 
     <div
-      class="absolute top-[199px] -left-5 z-20 w-10 py-1 bg-gray-400 text-white text-right duration-500 cursor-pointer"
+      class="z-20 w-10 py-1 bg-gray-400 duration-500 cursor-pointer"
+      text="white right"
       border="y r gray-300/50 rounded-r"
-      :class="[isPackageOpen && 'left-0']"
+      pos="absolute top-[199px]"
+      :class="[isPackageOpen ? 'left-0' : '-left-5']"
       @click="isPackageOpen = !isPackageOpen"
     >
       <span v-if="isPackageOpen" i-ic:round-arrow-left />
@@ -44,7 +48,9 @@
     >
       <div
         v-if="isTipShow"
-        class="absolute z-10 top-0 right-0 w-38 text-white text-right bg-black/40 rounded-bl p-2"
+        class="z-10 w-38 p-2 bg-black/40 rounded-bl"
+        pos="absolute top-0 right-0"
+        text="white right"
       >
         <div>{{ dungeon.name }}</div>
         <div class="hstack justify-end space-x-1 mt-1">

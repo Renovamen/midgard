@@ -10,7 +10,7 @@
           @click="close"
         />
 
-        <div v-if="dialog" class="bg-amber-200/60 rounded pl-1.5 pr-6 py-1 mb-1">
+        <div v-if="dialog" class="bg-amber-200/60 rounded mb-1" p="l-1.5 r-6 y-1">
           {{ dialog }}
         </div>
 

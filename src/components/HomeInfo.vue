@@ -1,21 +1,22 @@
 <template>
   <div pr-6>
     <div mb-2>
-      <div hstack>
+      <div hstack space-x-2.5>
         <div
-          class="inline-block w-11 h-11 bg-label rounded-sm hover:shadow-inbox-sm"
+          class="inline-block size-11 bg-label rounded-sm hover:shadow-inbox-sm"
           @click="toggleCheatInput"
         >
           <img src="/images/hero.svg" />
         </div>
-        <div class="label relative flex-1 ml-2.5 text-[22px]">
+        <div class="label relative flex-1 flex-center text-[22px]">
           <input
             v-show="cheat"
             v-model="cheatCode"
-            class="absolute outline-none bg-label border border-white rounded w-[180px] h-7.5 inset-0 m-auto px-1"
+            class="w-[180px] h-7.5 px-1 bg-transparent outline-none"
+            border="~ white rounded"
             @keyup.enter="checkCheatCode"
           />
-          去找简历吧勇士
+          <span v-show="!cheat">去找简历吧勇士</span>
         </div>
       </div>
 
@@ -23,10 +24,7 @@
         <div hstack space-x-1>
           <div
             class="label w-15"
-            :class="[
-              'label w-15',
-              success && '!bg-rose-400 hover:shadow-inbox cursor-pointer'
-            ]"
+            :class="success && '!bg-rose-400 hover:shadow-inbox cursor-pointer'"
             @click="exchange"
           >
             {{ success ? "兑换" : "收集" }}
@@ -42,7 +40,7 @@
           </template>
         </div>
 
-        <div pl-4 grid grid-cols-5 gap-1>
+        <div pl-4 grid="~ cols-5 gap-1">
           <template v-for="(item, index) in store.hero.resumes">
             <PackageItem
               v-if="index >= 4"
@@ -58,7 +56,7 @@
 
     <div hstack space-x-2>
       <div class="label w-15">梦想</div>
-      <div class="text-rose-400 text-lg">{{ store.hp }}</div>
+      <div text="rose-400 lg">{{ store.hp }}</div>
     </div>
   </div>
 </template>

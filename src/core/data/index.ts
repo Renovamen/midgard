@@ -13,9 +13,7 @@ const DATA = {
   "7": DIALOG_DATA
 };
 
-export const getDataById = (id: number): GameItem | MapEvent => {
-  const key = id.toString()[0] as "3" | "5" | "7";
-  const data = DATA[key] as any;
-
-  return data.find((i: GameItem | MapEvent) => i.id === id);
-};
+export const getDataById = (id: number): GameItem | MapEvent =>
+  DATA[id.toString()[0] as keyof typeof DATA].find(
+    (i: GameItem | MapEvent) => i.id === id
+  )!;

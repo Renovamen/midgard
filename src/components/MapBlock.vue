@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-import * as _ from "lodash";
 import { BLOCK_TYPES, CHEST_TYPE, DIALOG_TYPE, UI } from "~/core/data";
 import type { MapBlock } from "~/types";
 
@@ -26,9 +25,9 @@ defineEmits(["autoMove"]);
 const STICK = BLOCK_TYPES.STICK;
 
 const blockName = computed(() =>
-  Object.keys(BLOCK_TYPES)
-    .find((k) => BLOCK_TYPES[k as keyof typeof BLOCK_TYPES] === props.block.type)
-    ?.toLowerCase()
+  Object.entries(BLOCK_TYPES)
+    .find((item) => item[1] === props.block.type)![0]
+    .toLowerCase()
 );
 
 const outerColor = computed(() => {
@@ -48,9 +47,8 @@ const innerClasses = computed(() => {
     br: [1, 1]
   };
 
-  for (const d in directions) {
-    const around = _.map(new Array(3), (_, k: number) => {
-      const [dx, dy] = directions[d as keyof typeof directions];
+  Object.entries(directions).forEach(([d, [dx, dy]]) => {
+    const around = [0, 1, 2].map((k) => {
       const [toX, toY] = [
         [x + dx, y],
         [x, y + dy],
@@ -63,7 +61,7 @@ const innerClasses = computed(() => {
 
     if (type == STICK) around.every((i) => i != STICK) && classes.push(`r-${d}`);
     else around.slice(0, 2).every((i) => i === STICK) && classes.push(`r-${d}`);
-  }
+  });
 
   return classes;
 });

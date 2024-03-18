@@ -28,11 +28,9 @@ export const useHeroStore = defineStore("hero", () => {
   });
 
   // 根据装备计算生命值
-  const hp = computed(() => {
-    let hp = hero.initHp;
-    hero.resumes.forEach((item) => (hp += item?.equip?.changeHp || 0));
-    return hp;
-  });
+  const hp = computed(() =>
+    hero.resumes.reduce((acc, item) => acc + (item?.equip?.changeHp || 0), hero.initHp)
+  );
 
   const equip = (packageIndex: number) => {
     const item = hero.package[packageIndex];
@@ -47,26 +45,27 @@ export const useHeroStore = defineStore("hero", () => {
     return true;
   };
 
-  const demount = (equipType: number, packageIndex?: number): void => {
+  const demount = (equipType: number, packageIndex?: number) => {
     const equipItem = hero.resumes[equipType];
     if (!equipItem) return;
 
     setHeroItem("resumes", equipType, undefined);
 
-    packageIndex = packageIndex || hero.package.findIndex((i: any) => !i);
+    packageIndex = packageIndex || hero.package.findIndex((i) => !i);
     if (~packageIndex) setHeroItem("package", packageIndex, equipItem);
   };
 
-  const getItems = (get: Array<GameItemOperation>) => {
-    const failed: Array<GameItemOperation> = [];
+  const getItems = (get: GameItemOperation[]) => {
+    const failed: GameItemOperation[] = [];
 
     const addToBlankBlock = (item: GameItem) => {
-      const index = hero.package.findIndex((j) => !j);
+      const index = hero.package.findIndex((slot) => slot === undefined);
 
       if (~index) {
         hero.package[index] = item;
         return true;
       } // 有空位
+
       return false; // 无空位
     };
 
@@ -96,35 +95,28 @@ export const useHeroStore = defineStore("hero", () => {
     return failed;
   };
 
-  const costItems = (need: Array<GameItemOperation>) => {
-    need.forEach((n) => {
-      const { indices } = findItemsInPackage(n.itemId);
-      let num = n.num;
+  const costItems = (need: GameItemOperation[]) => {
+    need.forEach(({ itemId, num }) => {
+      const { indices } = findItemsInPackage(itemId);
 
-      for (const index of indices) {
-        if (num <= 0) break;
-
+      indices.some((index) => {
         const item = hero.package[index] as GameItem;
+        const decrement = Math.min(num, item.num || 1);
+        num -= decrement;
 
-        if (!item.num || item.num - num <= 0) {
-          setHeroItem("package", index, undefined);
-          num -= item.num || 1;
-        } else {
-          item.num = item.num - num;
-          num = 0;
-        }
-      }
+        if (!item.num || item.num <= decrement) setHeroItem("package", index, undefined);
+        else item.num -= decrement;
+
+        return num === 0;
+      });
     });
   };
 
-  const hasEnoughItems = (need: Array<GameItemOperation>) => {
-    for (const n of need) {
-      const { items } = findItemsInPackage(n.itemId);
-      const sum = items.reduce((s, i) => s + (i?.num || 1), 0);
-      if (sum < n.num) return false;
-    }
-    return true;
-  };
+  const hasEnoughItems = (need: GameItemOperation[]) =>
+    need.every(
+      ({ itemId, num }) =>
+        findItemsInPackage(itemId).items.reduce((s, i) => s + (i?.num || 1), 0) >= num
+    );
 
   return {
     hero,

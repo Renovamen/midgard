@@ -1,6 +1,6 @@
 import type { GameItem } from "~/types";
 
-export const MATERIAL_TABLE: Array<GameItem> = [
+export const MATERIAL_TABLE: GameItem[] = [
   {
     id: 3000001,
     name: "印着龙爪的信",
@@ -271,33 +271,20 @@ const BASE_RESUME_ITEMS_TABLE: Array<GameItem> = [
   }
 ];
 
-const generateResumeItems = (items: Array<GameItem>) => {
-  const allItems = [] as Array<GameItem>;
-
-  for (let grade = 0; grade <= 3; grade++) {
-    items.forEach((item) => {
-      const changeHp = item.equip?.changeHp || 0;
-
-      allItems.push({
-        id: item.id + 14 * grade,
-        name: item.name,
-        grade,
-        equipType: item.equipType,
-        equip: {
+export const RESUME_ITEMS_TABLE: GameItem[] = Array.from({ length: 4 }, (_, grade) =>
+  BASE_RESUME_ITEMS_TABLE.map((item) => ({
+    ...item,
+    id: item.id + 14 * grade,
+    grade,
+    equip: item.equip
+      ? {
           changeHp:
-            changeHp > 0
-              ? changeHp + 10 * grade
-              : Math.round(changeHp - grade * 0.2 * changeHp)
-        },
-        dsc: item.dsc,
-        link: item.link
-      });
-    });
-  }
-
-  return allItems;
-};
-
-export const RESUME_ITEMS_TABLE = generateResumeItems(BASE_RESUME_ITEMS_TABLE);
+            item.equip.changeHp > 0
+              ? item.equip.changeHp + 10 * grade
+              : Math.round(item.equip.changeHp * (1 - 0.2 * grade))
+        }
+      : undefined
+  }))
+).flat();
 
 export const ITEM_TABLE = MATERIAL_TABLE.concat(RESUME_ITEMS_TABLE);

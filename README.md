@@ -1,6 +1,6 @@
-# An Interesting Resume
+# Midgard - An Interactive Resume
 
-Hey adventurer! ~~A cool~~ An evil dragon just tore up my curriculum vitae. So why not help me with retrieving my CV fragments widely scattered across the world back!
+Hey adventurer! ~~A cool~~ An evil dragon has torn my resume to pieces, scattering the fragments all over the world. Why not join me in the adventurous quest to retrieve them?
 
 Powered by [Vue 3](https://v3.vuejs.org/) + [Vite](https://vitejs.dev/) + [Pinia](https://pinia.vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [UnoCSS](https://github.com/unocss/unocss).
 

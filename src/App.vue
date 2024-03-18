@@ -1,6 +1,5 @@
 <template>
   <div
-    id="router-view"
     class="m-auto"
     :style="{
       height: `${UI.HEIGHT}px`,

@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import type { MapEvent, DungeonOptions } from "~/types";
 import { GameMap } from ".";
 import { BLOCK_TYPES, DIALOG_DATA, getDataById } from "./data";
@@ -79,12 +78,12 @@ export class Dungeon {
     return events;
   };
 
-  // 随机选择空地图块
   randomBlankBlocks = (size: number) => {
-    return _.sampleSize(
-      this.map.data.flat().filter((b) => b.type === BLOCK_TYPES.ROAD && !b.event),
-      size
-    );
+    const blocks = this.map.data
+      .flat()
+      .filter((b) => b.type === BLOCK_TYPES.ROAD && !b.event)
+      .sort(() => 0.5 - Math.random());
+    return blocks.slice(0, Math.min(size, blocks.length));
   };
 }
 

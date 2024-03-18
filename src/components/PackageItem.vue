@@ -2,7 +2,7 @@
   <div
     v-item-tip="item"
     v-drag-drop="{ type, index }"
-    class="relative h-11 w-11 bg-item inline-block align-top text-white cursor-pointer rounded-sm overflow-hidden hover:shadow-inbox"
+    class="relative size-11 bg-item inline-block align-top text-white cursor-pointer rounded-sm overflow-hidden hover:shadow-inbox"
   >
     <template v-if="item">
       <div class="name" :style="{ color: ITEM_LEVELS[item.grade || 0] }">

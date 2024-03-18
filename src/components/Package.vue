@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div overflow-scroll grid grid-cols-10 gap-y-1>
+    <div overflow-scroll grid="~ cols-10 gap-y-1">
       <PackageItem
         v-for="(item, index) in hero.package"
         :key="index"
